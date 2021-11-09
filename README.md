@@ -10,8 +10,8 @@ The web application is going to be a MVC application which will rely on Microsof
 
 
 ## Team Members
-- Petar Zafirovski
-- Marija Milkovska
-- Aleksandar Stankovski
-- Iva Jadrovska
-- Sara Misajlovska
+- Petar Zafirovski 1915137
+- Marija Milkovska 191212
+- Aleksandar Stankovski 191208
+- Iva Jadrovska 191515
+- Sara Misajlovska 191517
