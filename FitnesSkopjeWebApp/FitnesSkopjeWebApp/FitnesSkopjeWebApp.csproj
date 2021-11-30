@@ -181,6 +181,10 @@
     <Compile Include="Migrations\202111091443313_DataModel.Designer.cs">
       <DependentUpon>202111091443313_DataModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111301557121_DB_Models.cs" />
+    <Compile Include="Migrations\202111301557121_DB_Models.Designer.cs">
+      <DependentUpon>202111301557121_DB_Models.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Favourite.cs" />
@@ -271,6 +275,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111091443313_DataModel.resx">
       <DependentUpon>202111091443313_DataModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111301557121_DB_Models.resx">
+      <DependentUpon>202111301557121_DB_Models.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
