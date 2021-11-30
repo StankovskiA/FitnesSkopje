@@ -21,6 +21,9 @@ namespace FitnesSkopjeWebApp.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Gym> Gyms { get; set; }
+        public DbSet<User> AppUsers { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Favourite> Favourites { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
