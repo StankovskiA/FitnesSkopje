@@ -106,3 +106,7 @@ C:\Users\Sara\Documents\GitHub\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebAp
 C:\Users\Sara\Documents\GitHub\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.csproj.CopyComplete
 C:\Users\Sara\Documents\GitHub\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.dll
 C:\Users\Sara\Documents\GitHub\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.pdb
+C:\Users\Sara\Documents\GitHub\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.Migrations.Data.resources
+C:\Users\Sara\Documents\GitHub\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.Migrations.DataModel.resources
+C:\Users\Sara\Documents\GitHub\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.Migrations.DB_Models.resources
+C:\Users\Sara\Documents\GitHub\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.csproj.GenerateResource.cache
