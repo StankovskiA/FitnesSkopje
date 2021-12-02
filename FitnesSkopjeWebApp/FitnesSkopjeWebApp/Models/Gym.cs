@@ -15,5 +15,7 @@ namespace FitnesSkopjeWebApp.Models
         public string Number { get; set; }
         public string WorkingTime { get; set; }
         public string Areas { get; set; }
+        public double? Latitude { get; set; }
+        public double? Longitude { get; set; }
     }
 }
