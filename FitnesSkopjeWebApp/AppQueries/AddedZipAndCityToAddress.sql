@@ -8,7 +8,7 @@ set Address = concat(Address, ', 1000 Ñêîï¼å');
 
 
 update Gyms
-set Address = replace(Address, '??????', 'Skopje');
+set Address = replace(Address, ', 1000 Skopje', '');
 
 
 
