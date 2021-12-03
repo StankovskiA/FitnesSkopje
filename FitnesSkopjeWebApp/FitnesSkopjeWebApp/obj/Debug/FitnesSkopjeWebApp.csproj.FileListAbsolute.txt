@@ -223,3 +223,4 @@ C:\Users\zafir\OneDrive\Desktop\Software design and architecture\FitnesSkopje\Fi
 C:\Users\zafir\OneDrive\Desktop\Software design and architecture\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.dll
 C:\Users\zafir\OneDrive\Desktop\Software design and architecture\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.pdb
 C:\Users\zafir\OneDrive\Desktop\Software design and architecture\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.Migrations.Coordinates.resources
+C:\Users\Sara\Documents\GitHub\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.Migrations.Coordinates.resources
