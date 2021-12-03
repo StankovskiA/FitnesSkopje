@@ -193,6 +193,10 @@
     <Compile Include="Migrations\202112022126168_Coordinates.Designer.cs">
       <DependentUpon>202112022126168_Coordinates.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202112032225391_virtualUserGymInReviews.cs" />
+    <Compile Include="Migrations\202112032225391_virtualUserGymInReviews.Designer.cs">
+      <DependentUpon>202112032225391_virtualUserGymInReviews.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Favourite.cs" />
@@ -516,6 +520,7 @@
     <Content Include="Views\Reviews\Details.cshtml" />
     <Content Include="Views\Reviews\Edit.cshtml" />
     <Content Include="Views\Reviews\Index.cshtml" />
+    <Content Include="Views\Reviews\UserReviews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -545,6 +550,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202112022126168_Coordinates.resx">
       <DependentUpon>202112022126168_Coordinates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112032225391_virtualUserGymInReviews.resx">
+      <DependentUpon>202112032225391_virtualUserGymInReviews.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

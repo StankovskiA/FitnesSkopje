@@ -15,9 +15,18 @@ namespace FitnesSkopjeWebApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Reviews
+        
         public ActionResult Index()
         {
             return View(db.Reviews.ToList());
+        }
+
+        [Authorize]
+        public ActionResult UserReviews()
+        {
+            string curentUserEmail = User.Identity.Name;
+
+            return View(db.Reviews.Where(u => u.user.email.Equals(curentUserEmail)).ToList());
         }
 
         // GET: Reviews/Details/5
