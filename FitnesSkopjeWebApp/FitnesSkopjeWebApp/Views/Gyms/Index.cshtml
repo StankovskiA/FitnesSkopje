@@ -37,7 +37,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr onclick="Redirect(@item.Id)">
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -62,7 +62,8 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @* on row click details are shown *@
+                    @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>
             </tr>
@@ -86,8 +87,19 @@
                 $(this).children(".map").hide();
             });
 
+
         });
+
+        function Redirect(itemId) {
+            location.pathname = "Gyms/Details/" + itemId
+        };
     </script>
+
+    <style>
+        tbody tr:hover {
+            background-color:lightblue;
+        }
+    </style>
 
     @*<script>
         $(document).ready(function () {
