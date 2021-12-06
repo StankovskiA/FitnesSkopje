@@ -83,11 +83,11 @@
 
                             if (Model.favourites.Where(a => a.gymId == item.Id && a.userId == ViewBag.userId).FirstOrDefault() == null)
                             {
-                                <button type="submit"> <img width="25" height="25" src="@Url.Content("~/Images/full_heart.png")" /></button>
+                                <button type="submit" class="btn btn-link"> <img width="25" height="25" src="@Url.Content("~/Images/empty_heart.png")" /></button>
                             }
                             if (Model.favourites.Where(a => a.gymId == item.Id && a.userId == ViewBag.userId).FirstOrDefault() != null)
                             {
-                                <button type="submit"> <img width="25" height="25" src="@Url.Content("~/Images/empty_heart.png")" /></button>
+                                <button type="submit" class="btn btn-link"> <img width="25" height="25" src="@Url.Content("~/Images/full_heart.png")" /></button>
                             }
                         }
                     </td>
