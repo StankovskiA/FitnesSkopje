@@ -4,6 +4,15 @@
     ViewBag.Title = "Index";
 }
 
+<style>
+    .item{
+        cursor:pointer;
+    }
+    a{
+        display:inline;
+    }
+</style>
+
 <h2>Index</h2>
 
 <p>
@@ -61,10 +70,18 @@
 
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @* on row click details are shown *@
-                    @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a href="@Url.Action("Edit", "Gyms", new { id = item.Id })">
+                            <img width="20" height="20" src="@Url.Content("~/Images/edit.png")" />
+                        </a>
+                        @* on row click details are shown *@
+                        @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+                        <a href="@Url.Action("Delete", "Gyms", new { id = item.Id })">
+                            <img width="20" height="20" src="@Url.Content("~/Images/delete.png")" />
+                        </a>
+                    }
+
                 </td>
             </tr>
         }
@@ -87,7 +104,7 @@
                 $(this).children(".map").hide();
             });
 
-
+            
         });
 
         function Redirect(itemId) {

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FitnesSkopjeWebApp.Models;
+using System.Collections.Generic;
 
 namespace FitnesSkopjeWebApp.Controllers
 {
@@ -17,6 +18,7 @@ namespace FitnesSkopjeWebApp.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -139,6 +141,10 @@ namespace FitnesSkopjeWebApp.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            var selectListItems = new List<SelectListItem>();
+            selectListItems.Add(new SelectListItem() { Value = "1", Text = "User" });
+            selectListItems.Add(new SelectListItem() { Value = "2", Text = "Admin" });
+            ViewBag.Roles = selectListItems;
             return View();
         }
 
@@ -151,17 +157,33 @@ namespace FitnesSkopjeWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+               
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+                    var roleName = db.Roles.Find(model.Role.ToString()).Name;
+                    await UserManager.AddToRoleAsync(user.Id, roleName);
+
+                    db.AppUsers.Add(new User()
+                    {
+                        firstName=model.FirstName,
+                        lastName=model.LastName,
+                        email=model.Email,
+                        phoneNumber=model.PhoneNumber,
+                        roleId=model.Role,
+                        username=user.UserName
+
+                    });
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     return RedirectToAction("Index", "Home");
                 }

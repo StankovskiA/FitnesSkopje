@@ -197,6 +197,10 @@
     <Compile Include="Migrations\202112032225391_virtualUserGymInReviews.Designer.cs">
       <DependentUpon>202112032225391_virtualUserGymInReviews.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202112052156524_update.cs" />
+    <Compile Include="Migrations\202112052156524_update.Designer.cs">
+      <DependentUpon>202112052156524_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Favourite.cs" />
@@ -374,6 +378,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\delete.png" />
+    <Content Include="Images\details.png" />
+    <Content Include="Images\edit.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\DataTables\css\semanticui.scss" />
@@ -553,6 +560,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202112032225391_virtualUserGymInReviews.resx">
       <DependentUpon>202112032225391_virtualUserGymInReviews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112052156524_update.resx">
+      <DependentUpon>202112052156524_update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

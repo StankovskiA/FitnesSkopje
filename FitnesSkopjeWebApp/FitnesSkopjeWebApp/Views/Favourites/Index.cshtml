@@ -33,9 +33,15 @@
                     @Html.DisplayFor(modelItem => item.gymId)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                    <a href="@Url.Action("Edit", "Favourites", new { id = item.id })">
+                        <img width="20" height="20" src="@Url.Content("~/Images/edit.png")" />
+                    </a>
+                    <a href="@Url.Action("Edit", "Favourites",new { id = item.id })">
+                        <img width="20" height="20" src="@Url.Content("~/Images/details.png")" />
+                    </a>
+                    <a href="@Url.Action("Edit", "Favourites", new { id = item.id })">
+                        <img width="20" height="20" src="@Url.Content("~/Images/delete.png")" />
+                    </a>
                 </td>
             </tr>
         }

@@ -46,5 +46,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script>
+        $(document).ready(function () { $("input").attr("autocomplete", "off"); }); 
+    </script>
 </body>
 </html>
