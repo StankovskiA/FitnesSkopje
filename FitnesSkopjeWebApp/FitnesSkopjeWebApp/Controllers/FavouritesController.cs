@@ -10,6 +10,7 @@ using FitnesSkopjeWebApp.Models;
 
 namespace FitnesSkopjeWebApp.Controllers
 {
+    [Authorize(Roles ="Admin,User")]
     public class FavouritesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -19,6 +20,16 @@ namespace FitnesSkopjeWebApp.Controllers
         {
             return View(db.Favourites.ToList());
         }
+
+        [Authorize]
+        public ActionResult UserFavourites()
+        {
+            string curentUserEmail = User.Identity.Name;
+            var id = db.AppUsers.Where(t => t.email == curentUserEmail).FirstOrDefault().id;
+            ViewBag.User = db.AppUsers.Where(t => t.email == curentUserEmail).FirstOrDefault().firstName + " " + db.AppUsers.Where(t => t.email == curentUserEmail).FirstOrDefault().lastName;           
+            return View((db.Gyms.ToList(),db.Favourites.Where(u => u.userId==id).ToList()));
+        }
+
 
         // GET: Favourites/Details/5
         public ActionResult Details(int? id)
@@ -46,20 +57,32 @@ namespace FitnesSkopjeWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,userId,gymId")] Favourite favourite)
+        public ActionResult Create([Bind(Include = "id,userId,gymId")] Favourite favourite,string gym_id)
         {
             if (ModelState.IsValid)
             {
                 var userEmail = User.Identity.Name;
-                var gymId = Request.Form["gymId"];
-
-                db.Favourites.Add(new Favourite()
+                var gymId = int.Parse(Request.Form["gymId"]);
+                var gymName = Request.Form["gymName"];
+                var userId = db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault().id;
+                if (db.Favourites.Where(t => t.userId == userId && t.gymId ==gymId).FirstOrDefault() == null)
                 {
-                   userId = db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault().id,
-                    gymId = int.Parse(gymId)
-                });
-                db.SaveChanges();
-                return RedirectToAction("Index","Gyms");
+                    db.Favourites.Add(new Favourite()
+                    {
+                        userId = db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault().id,
+                        gymId = gymId,
+                        gymName=gymName
+                    });
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Gyms");
+                }
+                else
+                {
+                    Favourite favouriteGym = db.Favourites.Where(t => t.userId == userId && t.gymId == gymId).First();
+                    db.Favourites.Remove(favouriteGym);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Gyms");
+                }
             }
 
             return View(favourite);
@@ -119,7 +142,7 @@ namespace FitnesSkopjeWebApp.Controllers
             Favourite favourite = db.Favourites.Find(id);
             db.Favourites.Remove(favourite);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("UserFavourites");
         }
 
         protected override void Dispose(bool disposing)

@@ -10,6 +10,7 @@ using FitnesSkopjeWebApp.Models;
 
 namespace FitnesSkopjeWebApp.Controllers
 {
+    [Authorize(Roles = "Admin,User")]
     public class ReviewsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

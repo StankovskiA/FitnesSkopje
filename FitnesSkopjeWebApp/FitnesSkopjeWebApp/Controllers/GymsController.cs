@@ -10,7 +10,7 @@ using FitnesSkopjeWebApp.Models;
 
 namespace FitnesSkopjeWebApp.Controllers
 {
-    //[Authorize(Roles ="Admin")]
+    [Authorize(Roles ="Admin,User")]
     public class GymsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -18,7 +18,13 @@ namespace FitnesSkopjeWebApp.Controllers
         // GET: Gyms
         public ActionResult Index()
         {
-            return View(db.Gyms.ToList());
+            var userEmail = User.Identity.Name;
+            if (db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault() != null)
+            {
+                  ViewBag.userId = db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault().id;
+            };
+          
+            return View((db.Gyms.ToList(),db.Favourites.ToList()));
         }
 
         // GET: Gyms/Details/5
@@ -38,6 +44,7 @@ namespace FitnesSkopjeWebApp.Controllers
         }
 
         // GET: Gyms/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -92,6 +99,7 @@ namespace FitnesSkopjeWebApp.Controllers
         }
 
         // GET: Gyms/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

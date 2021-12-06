@@ -227,3 +227,4 @@ C:\Users\Sara\Documents\GitHub\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebAp
 C:\Users\Sara\Documents\GitHub\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.Migrations.virtualUserGymInReviews.resources
 C:\Users\zafir\OneDrive\Desktop\Software design and architecture\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.Migrations.virtualUserGymInReviews.resources
 C:\Users\zafir\OneDrive\Desktop\Software design and architecture\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.Migrations.update.resources
+C:\Users\zafir\OneDrive\Desktop\Software design and architecture\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.Migrations.Fav_GymName.resources

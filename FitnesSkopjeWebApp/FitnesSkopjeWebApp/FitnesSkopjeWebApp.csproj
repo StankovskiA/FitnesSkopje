@@ -201,6 +201,10 @@
     <Compile Include="Migrations\202112052156524_update.Designer.cs">
       <DependentUpon>202112052156524_update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202112061902275_Fav_GymName.cs" />
+    <Compile Include="Migrations\202112061902275_Fav_GymName.Designer.cs">
+      <DependentUpon>202112061902275_Fav_GymName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Favourite.cs" />
@@ -381,6 +385,8 @@
     <Content Include="Images\delete.png" />
     <Content Include="Images\details.png" />
     <Content Include="Images\edit.png" />
+    <Content Include="Images\empty_heart.png" />
+    <Content Include="Images\full_heart.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\DataTables\css\semanticui.scss" />
@@ -530,6 +536,7 @@
     <Content Include="Views\Reviews\Edit.cshtml" />
     <Content Include="Views\Reviews\Index.cshtml" />
     <Content Include="Views\Reviews\UserReviews.cshtml" />
+    <Content Include="Views\Favourites\UserFavourites.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -565,6 +572,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202112052156524_update.resx">
       <DependentUpon>202112052156524_update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112061902275_Fav_GymName.resx">
+      <DependentUpon>202112061902275_Fav_GymName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
