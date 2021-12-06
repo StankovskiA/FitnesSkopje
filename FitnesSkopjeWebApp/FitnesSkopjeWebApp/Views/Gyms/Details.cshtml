@@ -4,10 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.GymName - Details</h2>
 
 <div>
-    <h4>Gym</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -53,11 +52,17 @@
             Map
         </dt>
         <dd>
-
             <div id="map" style="width: 300px; height: 300px;"></div>
         </dd>
-
     </dl>
+    <div id="updateDiv">
+        @Ajax.ActionLink("Add review", "Create", "Reviews", new { id = Model.Id }, new AjaxOptions
+            {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "updateDiv"
+            }, new { @class = "nav-link" })
+    </div>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
@@ -65,6 +70,7 @@
 </p>
 
 @section Scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />

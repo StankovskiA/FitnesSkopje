@@ -70,6 +70,16 @@
 
                 </td>
                 <td>
+                    @using (Html.BeginForm("Create", "Favourites", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="gymId" id="gym_Id" value="@item.Id" />
+
+
+                        <button type="submit"> Srcni ja </button>
+                    }
+                </td>
+                <td>
                     @if (User.IsInRole("Admin"))
                     {
                         <a href="@Url.Action("Edit", "Gyms", new { id = item.Id })">

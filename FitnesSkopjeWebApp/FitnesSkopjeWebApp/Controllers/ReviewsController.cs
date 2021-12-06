@@ -45,9 +45,10 @@ namespace FitnesSkopjeWebApp.Controllers
         }
 
         // GET: Reviews/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            return View();
+            ViewBag.GymId = id;
+            return PartialView();
         }
 
         // POST: Reviews/Create
@@ -59,9 +60,17 @@ namespace FitnesSkopjeWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Reviews.Add(review);
+                var userEmail = User.Identity.Name;
+                var gymId = Request.Form["gymId"];
+                db.Reviews.Add(new Review()
+                {
+                    userId=db.AppUsers.Where(t=>t.email==userEmail).FirstOrDefault().id,
+                    gymId=int.Parse(gymId),
+                    rating=review.rating,
+                    comment=review.comment
+                });
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("UserReviews");
             }
 
             return View(review);

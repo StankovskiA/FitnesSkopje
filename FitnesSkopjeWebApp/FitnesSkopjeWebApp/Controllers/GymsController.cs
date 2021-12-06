@@ -33,6 +33,7 @@ namespace FitnesSkopjeWebApp.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.GymName = db.Gyms.Find(id).Name;
             return View(gym);
         }
 

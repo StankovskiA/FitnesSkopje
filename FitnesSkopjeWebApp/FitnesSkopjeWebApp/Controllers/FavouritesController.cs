@@ -50,9 +50,16 @@ namespace FitnesSkopjeWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Favourites.Add(favourite);
+                var userEmail = User.Identity.Name;
+                var gymId = Request.Form["gymId"];
+
+                db.Favourites.Add(new Favourite()
+                {
+                   userId = db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault().id,
+                    gymId = int.Parse(gymId)
+                });
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Gyms");
             }
 
             return View(favourite);
