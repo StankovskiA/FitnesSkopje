@@ -205,6 +205,18 @@
     <Compile Include="Migrations\202112061902275_Fav_GymName.Designer.cs">
       <DependentUpon>202112061902275_Fav_GymName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202112161714235_extra_properties.cs" />
+    <Compile Include="Migrations\202112161714235_extra_properties.Designer.cs">
+      <DependentUpon>202112161714235_extra_properties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112161716309_extra_properties1.cs" />
+    <Compile Include="Migrations\202112161716309_extra_properties1.Designer.cs">
+      <DependentUpon>202112161716309_extra_properties1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112161731143_sundayWorkTime.cs" />
+    <Compile Include="Migrations\202112161731143_sundayWorkTime.Designer.cs">
+      <DependentUpon>202112161731143_sundayWorkTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Favourite.cs" />
@@ -575,6 +587,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202112061902275_Fav_GymName.resx">
       <DependentUpon>202112061902275_Fav_GymName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112161714235_extra_properties.resx">
+      <DependentUpon>202112161714235_extra_properties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112161716309_extra_properties1.resx">
+      <DependentUpon>202112161716309_extra_properties1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112161731143_sundayWorkTime.resx">
+      <DependentUpon>202112161731143_sundayWorkTime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
