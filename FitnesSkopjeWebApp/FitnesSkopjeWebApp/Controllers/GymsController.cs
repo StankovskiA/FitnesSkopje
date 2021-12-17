@@ -125,8 +125,32 @@ namespace FitnesSkopjeWebApp.Controllers
             return RedirectToAction("Index");
         }
 
+<<<<<<< Updated upstream
         //Get reviews
         public List<Review> GetReviews(int? id)
+=======
+        public IQueryable<Gym> GetGyms()
+        {
+            return db.Gyms;
+        }
+
+        //Get reviews
+        public List<Review> GetReviews(int? id)
+        {
+            if (id != null)
+            {
+                int gymId = (int)id;
+                return db.Reviews
+                .Where(r => r.gymId.Equals(gymId))
+                .ToList();
+            }
+
+            return null;
+
+        }
+
+        public IQueryable<Gym> GetApplicationsSearch(SearchApplicationModels search)
+>>>>>>> Stashed changes
         {
             if (id != null)
             {
