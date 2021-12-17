@@ -69,8 +69,6 @@
             UpdateTargetId = "updateDiv"
             }, new { @class = "nav-link" })
     </div>
-    @if (Model.reviews.Count() > 0)
-    {
     <div>
         <table class="table">
             <thead>
@@ -113,7 +111,6 @@
             </tbody>
         </table>
     </div>
-    }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.gym.Id }) |
