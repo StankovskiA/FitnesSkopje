@@ -70,6 +70,8 @@
             }, new { @class = "nav-link" })
     </div>
     <div>
+       @if (Model.reviews.Count() > 0)
+       {
         <table class="table">
             <thead>
                 <tr>
@@ -110,6 +112,7 @@
                 }
             </tbody>
         </table>
+       }
     </div>
 </div>
 <p>

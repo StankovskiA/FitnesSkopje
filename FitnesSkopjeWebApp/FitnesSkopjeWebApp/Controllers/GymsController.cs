@@ -82,7 +82,7 @@ namespace FitnesSkopjeWebApp.Controllers
                 return HttpNotFound();
             }
             ViewBag.GymName = db.Gyms.Find(id).Name;
-            return View(gym);
+            return View((gym, GetReviews(id)));
         }
 
         // GET: Gyms/Create
@@ -183,6 +183,19 @@ namespace FitnesSkopjeWebApp.Controllers
                 projectIQ = projectIQ.Where(t => t.Name.Contains(search.SearchText) || t.Areas.Contains(search.SearchText) || t.Address.Contains(search.SearchText));
 
             return projectIQ;
+        }
+        public List<Review> GetReviews(int? id)
+        {
+            if (id != null)
+            {
+                int gymId = (int)id;
+                return db.Reviews
+                .Where(r => r.gymId.Equals(gymId))
+                .ToList();
+            }
+
+            return null;
+
         }
 
         //private void GetViewBagForSearch()
