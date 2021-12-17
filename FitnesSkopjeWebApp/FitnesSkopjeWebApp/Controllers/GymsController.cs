@@ -10,7 +10,7 @@ using FitnesSkopjeWebApp.Models;
 
 namespace FitnesSkopjeWebApp.Controllers
 {
-   [Authorize(Roles = "Admin,User")]
+    [Authorize(Roles = "Admin,User")]
     public class GymsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -21,10 +21,10 @@ namespace FitnesSkopjeWebApp.Controllers
             var userEmail = User.Identity.Name;
             if (db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault() != null)
             {
-                  ViewBag.userId = db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault().id;
+                ViewBag.userId = db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault().id;
             };
-          
-            return View((db.Gyms.ToList(),db.Favourites.ToList()));
+
+            return View((db.Gyms.ToList(), db.Favourites.ToList()));
         }
 
         // GET: Gyms/Details/5
@@ -40,7 +40,7 @@ namespace FitnesSkopjeWebApp.Controllers
                 return HttpNotFound();
             }
             ViewBag.GymName = db.Gyms.Find(id).Name;
-            return View((gym, GetReviews(id)));
+            return View((gym, GetReviews(id), IsGymOpened(id)));
         }
 
         // GET: Gyms/Create
@@ -137,8 +137,55 @@ namespace FitnesSkopjeWebApp.Controllers
             }
 
             return null;
+        }
+
+        //Check Working Hours
+        public String IsGymOpened(int? id)
+        {
+            if (id == null)
+            {
+                throw new Exception("Null gym id");
+            }
+
+            var gymId = (int)id;
+            var today = DateTime.Now.DayOfWeek;
+
+            if (today == DayOfWeek.Sunday)
+            {
+                var working_time = db.Gyms.Where(gym => gym.Id.Equals(gymId)).First().workingTimeSunday;
+                return checkTime(working_time);
+            }
+            else
+            {
+                var working_time = db.Gyms.Where(gym => gym.Id.Equals(gymId)).First().workingTimeWeek;
+                return checkTime(working_time);
+            }
 
         }
+        public String checkTime(string working_time)
+        {
+            //08:00-22:00 
+            var parts = working_time.Split('-');
+
+            //08:00
+            int openingHour = Int32.Parse(parts[0].Split(':')[0]);
+            //22:00
+            int closingHour = Int32.Parse(parts[1].Split(':')[0]);
+
+            //vrakja vo 24h format
+            var currentHour = DateTime.Now.Hour;
+
+            if (currentHour >= openingHour && 
+                currentHour <= closingHour)
+            {
+                 return "Теретаната е отворена!";
+            }
+            else
+                 return "Теретаната не е отворена!";
+
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
