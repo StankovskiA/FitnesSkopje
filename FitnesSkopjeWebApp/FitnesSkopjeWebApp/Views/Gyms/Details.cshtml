@@ -1,5 +1,4 @@
-﻿@model FitnesSkopjeWebApp.Models.Gym
-
+﻿@model (FitnesSkopjeWebApp.Models.Gym gym, List<FitnesSkopjeWebApp.Models.Review> reviews)
 @{
     ViewBag.Title = "Details";
 }
@@ -10,43 +9,43 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.gym.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.gym.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayNameFor(model => model.gym.Address)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Address)
+            @Html.DisplayFor(model => model.gym.Address)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Number)
+            @Html.DisplayNameFor(model => model.gym.Number)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Number)
+            @Html.DisplayFor(model => model.gym.Number)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.WorkingTime)
+            @Html.DisplayNameFor(model => model.gym.WorkingTime)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.WorkingTime)
+            @Html.DisplayFor(model => model.gym.WorkingTime)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Areas)
+            @Html.DisplayNameFor(model => model.gym.Areas)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Areas)
+            @Html.DisplayFor(model => model.gym.Areas)
         </dd>
         <dt>
             Map
@@ -56,16 +55,58 @@
         </dd>
     </dl>
     <div id="updateDiv">
-        @Ajax.ActionLink("Add review", "Create", "Reviews", new { id = Model.Id }, new AjaxOptions
+        @Ajax.ActionLink("Add review", "Create", "Reviews", new { id = Model.gym.Id }, new AjaxOptions
             {
             HttpMethod = "GET",
             InsertionMode = InsertionMode.Replace,
             UpdateTargetId = "updateDiv"
             }, new { @class = "nav-link" })
     </div>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.reviews.First().user.username)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.gym.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.reviews.First().rating)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.reviews.First().comment)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.reviews)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.user.username)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.gym.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.rating)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.comment)
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.gym.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
 
@@ -77,8 +118,8 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 
     <script>
-    var latitude =@Model.Latitude;
-    var longitute =@Model.Longitude;
+    var latitude =@Model.gym.Latitude;
+    var longitute =@Model.gym.Longitude;
     var map = L.map('map').setView([latitude, longitute], 16);
 
     var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -91,7 +132,7 @@
     }).addTo(map);
 
         var marker = L.marker([41.990900, 21.439920]).addTo(map)
-            .bindPopup('<b>@Model.Name</b><br />').openPopup();
+            .bindPopup('<b>@Model.gym.Name</b><br />').openPopup();
 
     var circle = L.circle([41.990900, 21.439920], {
         color: '#4F729D',
