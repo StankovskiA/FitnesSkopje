@@ -174,6 +174,7 @@ namespace FitnesSkopjeWebApp.Controllers
                         lastName=model.LastName,
                         email=model.Email,
                         phoneNumber=model.PhoneNumber,
+                        address=model.Address,
                         roleId=model.Role,
                         username=user.UserName
 

@@ -74,6 +74,10 @@ namespace FitnesSkopjeWebApp.Models
         public string LastName { get; set; }
 
         [Required]
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+
+        [Required]
         [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
         [Required]
