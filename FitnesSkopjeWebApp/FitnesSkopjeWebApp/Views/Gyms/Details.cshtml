@@ -1,10 +1,12 @@
-﻿@model (FitnesSkopjeWebApp.Models.Gym gym, List<FitnesSkopjeWebApp.Models.Review> reviews)
+﻿@model(FitnesSkopjeWebApp.Models.Gym gym, List < FitnesSkopjeWebApp.Models.Review > reviews, String isOpened)
+
 @{
     ViewBag.Title = "Details";
 }
 
 <h2>@ViewBag.GymName - Details</h2>
 
+@*Show gym details*@ 
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -55,13 +57,33 @@
             @Html.DisplayFor(model => model.gym.Areas)
         </dd>
         <dt>
+            -
+        </dt>
+        <dd>
+            @if (Model.isOpened.Length == 22)
+            {
+                <p style="color:forestgreen">@Model.isOpened </p>
+            }
+            else
+            {
+                <p style="color:orangered"> @Model.isOpened </p>
+            }
+
+        </dd>
+        <dt>
             Map
         </dt>
         <dd>
             <div id="map" style="width: 300px; height: 300px;"></div>
         </dd>
     </dl>
-    <div id="updateDiv">
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.gym.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+    @*Add new review*@
+    <div class="button" id="updateDiv">
         @Ajax.ActionLink("Add review", "Create", "Reviews", new { id = Model.gym.Id }, new AjaxOptions
             {
             HttpMethod = "GET",
@@ -69,6 +91,7 @@
             UpdateTargetId = "updateDiv"
             }, new { @class = "nav-link" })
     </div>
+    @*Display Reviews*@
     <div>
         <table class="table">
             <thead>
@@ -112,10 +135,7 @@
         </table>
     </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.gym.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
 
 @section Scripts{
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
