@@ -233,6 +233,3 @@ C:\Users\Sara\Documents\GitHub\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebAp
 C:\Users\zafir\OneDrive\Desktop\Software design and architecture\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.Migrations.extra_properties.resources
 C:\Users\zafir\OneDrive\Desktop\Software design and architecture\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.Migrations.extra_properties1.resources
 C:\Users\zafir\OneDrive\Desktop\Software design and architecture\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.Migrations.sundayWorkTime.resources
-C:\Users\Sara\Documents\GitHub\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.Migrations.extra_properties.resources
-C:\Users\Sara\Documents\GitHub\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.Migrations.extra_properties1.resources
-C:\Users\Sara\Documents\GitHub\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp\obj\Debug\FitnesSkopjeWebApp.Migrations.sundayWorkTime.resources
