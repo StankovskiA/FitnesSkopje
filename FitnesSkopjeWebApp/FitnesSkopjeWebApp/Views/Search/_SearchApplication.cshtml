@@ -1,0 +1,47 @@
+﻿@model FitnesSkopjeWebApp.ViewModels.SearchApplicationModels
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm(Model.ControllerAction, Model.ControllerName, FormMethod.Post))
+{
+    <div class="card vehicles-search">
+        @*<div class="card-header">
+            Пребарај
+        </div>*@
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        @*@Html.DisplayNameFor(model => model.GymId)*@
+                        @*@Html.DropDownListFor(model => model.GymId, new SelectList(ViewBag.application_types, "Value", "Text"), htmlAttributes: new { @class = "form-control clearsel" })*@
+                        <h4>Пребарај</h4>
+                        @Html.HiddenFor(model => model.GymId)
+                    </div>
+
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        @*@Html.DisplayNameFor(model => model.SearchText)*@
+                        @Html.EditorFor(model => model.SearchText, new { htmlAttributes = new { @class = "form-control clearinput" } })
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-footer d-flex text-reset justify-content-end">
+                @*<input type="button" value="Избриши филтри" onclick="ClearSearchValues();" class="btn btn-default btn-light clearsearch mr10" />*@
+                <a href="@Url.Action("Index","Gyms")"  onclick="ClearSearchValues();" class="btn btn-default btn-light clearsearch mr10">Избриши филтри</a>
+                <input type="submit" value="Прикажи" class="btn btn-default btn-primary" />
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function ClearSearchValues() {
+            $(".clearinput").val("");
+            $(".clearsel").val("-1");
+        }
+    </script>
+
+}
+

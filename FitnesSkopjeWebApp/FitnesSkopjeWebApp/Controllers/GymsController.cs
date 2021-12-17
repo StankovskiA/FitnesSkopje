@@ -6,7 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using FitnesSkopjeWebApp.Helper;
 using FitnesSkopjeWebApp.Models;
+using FitnesSkopjeWebApp.ViewModels;
+using PagedList;
 
 namespace FitnesSkopjeWebApp.Controllers
 {
@@ -14,6 +17,7 @@ namespace FitnesSkopjeWebApp.Controllers
     public class GymsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
 
         // GET: Gyms
         public ActionResult Index()
@@ -23,8 +27,46 @@ namespace FitnesSkopjeWebApp.Controllers
             {
                   ViewBag.userId = db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault().id;
             };
-          
-            return View((db.Gyms.ToList(),db.Favourites.ToList()));
+
+            ViewBag.gymTypes= db.Gym_Types.ToList();
+            SearchApplicationModels search = new SearchApplicationModels();
+            var gyms = GetApplicationsSearch(search).ToList();
+            return View((gyms, db.Favourites.ToList(),search));
+        }
+
+        [HttpPost]
+        public ActionResult Index(SearchApplicationModels search)
+        {
+            var gymTypeId = Request.Form["checkboxListItem"];
+            if (gymTypeId != null)
+            {
+
+            var gymTypeName = db.Gym_Types.Find(int.Parse(gymTypeId)).Type;
+
+            var lstApps = GetApplicationsSearch(search).Where(a => a.Areas.Contains(gymTypeName)).ToList();
+
+            var userEmail = User.Identity.Name;
+            if (db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault() != null)
+            {
+                ViewBag.userId = db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault().id;
+            };
+                ViewBag.gymTypes = db.Gym_Types.ToList();
+                ViewBag.SelectedCheckboxItem = int.Parse(gymTypeId);
+                return View((lstApps, db.Favourites.ToList(), search));
+            }
+
+            else
+            {
+                var lstApps = GetApplicationsSearch(search).ToList();
+
+                var userEmail = User.Identity.Name;
+                if (db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault() != null)
+                {
+                    ViewBag.userId = db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault().id;
+                };
+                ViewBag.gymTypes = db.Gym_Types.ToList();
+                return View((lstApps, db.Favourites.ToList(), search));
+            }
         }
 
         // GET: Gyms/Details/5
@@ -40,7 +82,7 @@ namespace FitnesSkopjeWebApp.Controllers
                 return HttpNotFound();
             }
             ViewBag.GymName = db.Gyms.Find(id).Name;
-            return View((gym, GetReviews(id)));
+            return View(gym);
         }
 
         // GET: Gyms/Create
@@ -125,20 +167,33 @@ namespace FitnesSkopjeWebApp.Controllers
             return RedirectToAction("Index");
         }
 
-        //Get reviews
-        public List<Review> GetReviews(int? id)
+        public IQueryable<Gym> GetGyms()
         {
-            if (id != null)
-            {
-                int gymId = (int)id;
-                return db.Reviews
-                .Where(r => r.gymId.Equals(gymId))
-                .ToList();
-            }
-
-            return null;
-
+            return db.Gyms;
         }
+
+        public IQueryable<Gym> GetApplicationsSearch(SearchApplicationModels search)
+        {
+            var projectIQ = GetGyms();
+
+            if (search.GymId > 0)
+                projectIQ = projectIQ.Where(t => t.Id == search.GymId);
+
+            if (search.SearchText != null && search.SearchText?.Trim() != "")
+                projectIQ = projectIQ.Where(t => t.Name.Contains(search.SearchText) || t.Areas.Contains(search.SearchText) || t.Address.Contains(search.SearchText));
+
+            return projectIQ;
+        }
+
+        //private void GetViewBagForSearch()
+        //{
+        //    List<SelectListItem> items = new List<SelectListItem>();
+        //    foreach (var at in Cacher.ApplicationTypes)
+        //        items.Add(new SelectListItem() { Text = at.name, Value = at.application_type_id.ToString() });
+
+        //    ViewBag.application_types = items;
+        //}
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
