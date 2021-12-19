@@ -67,11 +67,11 @@
         <dd>
             @if (Model.isOpened.Length == 22)
             {
-                <p style="color:forestgreen">@Model.isOpened </p>
+                <p class="isOpen" style="color:forestgreen">@Model.isOpened </p>
             }
             else
             {
-                <p style="color:orangered"> @Model.isOpened </p>
+                <p class="isOpen" style="color:orangered"> @Model.isOpened </p>
             }
 
         </dd>
@@ -177,6 +177,11 @@
         radius: 50
     }).addTo(map);
 
+        function blink_text() {
+            $('.isOpen').fadeOut(500);
+            $('.isOpen').fadeIn(500);
+        }
+        setInterval(blink_text, 1000);
 
     function onMapClick(e) {
         popup
