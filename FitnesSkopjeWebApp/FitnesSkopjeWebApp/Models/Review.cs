@@ -16,8 +16,13 @@ namespace FitnesSkopjeWebApp.Models
         public int userId { get; set; }
         //fk
         public int gymId { get; set; }
+
+        [Display(Name = "Оценка")]
         public int rating { get; set; }
+
+        [Display(Name = "Коментар")]
         public string comment { get; set; }
+
         public virtual Gym gym { get; set; }
         public virtual User user { get; set; }
     }

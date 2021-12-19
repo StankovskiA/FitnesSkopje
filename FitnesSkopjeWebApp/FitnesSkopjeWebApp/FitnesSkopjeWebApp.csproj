@@ -180,6 +180,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Enums\EnumHelpers.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

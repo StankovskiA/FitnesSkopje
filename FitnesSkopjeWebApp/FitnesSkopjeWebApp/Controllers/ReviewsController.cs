@@ -71,7 +71,7 @@ namespace FitnesSkopjeWebApp.Controllers
                     comment=review.comment
                 });
                 db.SaveChanges();
-                return RedirectToAction("UserReviews");
+                return RedirectToAction("Details","Gyms",new { id = review.gymId });
             }
 
             return View(review);

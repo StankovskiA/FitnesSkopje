@@ -21,15 +21,15 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Gyms", "Index", "Gyms")</li>
+                    <li>@Html.ActionLink("Теретани", "Index", "Gyms")</li>
 
                     @if (User.IsInRole("User"))
                     {
-                        <li>@Html.ActionLink("My Favourites", "UserFavourites", "Favourites")</li>
-                        <li>@Html.ActionLink("My Reviews", "UserReviews", "Reviews")</li>
+                        <li>@Html.ActionLink("Омилени теретани", "UserFavourites", "Favourites")</li>
+                        <li>@Html.ActionLink("Прегледи", "UserReviews", "Reviews")</li>
                     }
 
-                    <li>@Html.ActionLink("Contact us", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Контактирајте не", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
