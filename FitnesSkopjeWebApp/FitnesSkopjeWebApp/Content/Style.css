@@ -1,19 +1,24 @@
 ﻿body {
 }
 
-.navbar {
+#navigation {
     background-color: white;
     width: 100%;
 }
 
-.logo{
-    width: 80%;
-    height: 80%;
+.teg{
+    width: 50%;
+    height: 50%;
+    inset-inline: auto;
 }
 
-.nav navbar-nav ul li{
-    color: rebeccapurple;
+.logo {
+    width: 90%;
+    height: 90%;
+    margin-top: 2%;
 }
+
+
 
 .jumbotron h1{
     font-size: 300%;
@@ -43,4 +48,18 @@
 
 .navbar-inverse{
     border: 1px solid rgba(255,255,255,.0);
+    background-color: lightgray;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: rgba(162, 9, 89, 1);
+}
+
+.items-nav a {
+    text-decoration: none;
+    color: p
+}
+
+a:hover{
+    color: dimgrey;
 }

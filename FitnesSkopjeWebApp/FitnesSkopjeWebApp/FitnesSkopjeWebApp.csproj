@@ -398,6 +398,7 @@
     <Content Include="Content\DataTables\css\select.semanticui.min.css" />
     <Content Include="Content\DataTables\images\details_close.png" />
     <Content Include="Content\DataTables\images\details_open.png" />
+    <Content Include="Content\DataTables\images\pic2.png" />
     <Content Include="Content\DataTables\images\sort_asc.png" />
     <Content Include="Content\DataTables\images\sort_asc_disabled.png" />
     <Content Include="Content\DataTables\images\sort_both.png" />
@@ -417,6 +418,10 @@
     <Content Include="Images\full_heart.png" />
     <Content Include="Images\hp1.png" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\logo1-_transp_.png" />
+    <Content Include="Images\logo2.png" />
+    <Content Include="Images\pic2.png" />
+    <Content Include="Images\teg1.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\DataTables\css\semanticui.scss" />

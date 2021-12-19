@@ -9,7 +9,7 @@
     <link href="~/Content/Style.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div id="navigation" class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -18,23 +18,48 @@
                     <span class="icon-bar"></span>
                 </button>
                 @*@Html.ActionLink("FitnesSkopje", "Index", "Home", new { area= " " }, new { @class = "navbar-brand" })*@
-            <div >
-                <a href='@Url.Action("Index", "Home")'>
-                    <img class="logo" src="~/Images/logo.png" />
-                </a>
-            </div>
+                @*<div>
+                    <a href='@Url.Action("Index", "Home")'>
+                        <img class="teg" src="~/Images/teg1.png" />
+                    </a>
+                </div>*@
+                <div>
+                    <a href='@Url.Action("Index", "Home")'>
+                        <img class="logo" src="~/Images/logo1-_transp_.png" />
+                    </a>
+                </div>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Gyms", "Index", "Gyms")</li>
+                    <li class="items-nav">
+                        <a href='@Url.Action("Index", "Gyms")'>
+                            Gyms
+                        </a>
+                    </li>
 
                     @if (User.IsInRole("User"))
                     {
-                        <li>@Html.ActionLink("My Favourites", "UserFavourites", "Favourites")</li>
-                        <li>@Html.ActionLink("My Reviews", "UserReviews", "Reviews")</li>
+                        @*<li>@Html.ActionLink("My Favourites", "UserFavourites", "Favourites")</li>
+                        <li>@Html.ActionLink("My Reviews", "UserReviews", "Reviews")</li>*@
+
+                        <li class="items-nav">
+                            <a  href='@Url.Action("UserFavourites", "Favourites")'>
+                                My Favourites
+                            </a>
+                        </li>
+                        <li class="items-nav">
+                            <a href='@Url.Action("UserReviews", "Reviews")'>
+                                My reviews
+                            </a>
+                        </li>
                     }
 
-                    <li>@Html.ActionLink("Contact us", "Contact", "Home")</li>
+                    @*<li>@Html.ActionLink("Contact us", "Contact", "Home")</li>*@
+                    <li class="items-nav">
+                        <a  href='@Url.Action("Contact", "Home")'>
+                            Contact us
+                        </a>
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -44,7 +69,7 @@
         @RenderBody()
         <hr />
         <footer>
-            @*<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
+            <p>&copy; @DateTime.Now.Year - My Gym Application</p>
         </footer>
     </div>
 
