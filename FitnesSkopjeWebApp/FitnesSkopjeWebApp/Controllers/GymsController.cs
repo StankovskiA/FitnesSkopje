@@ -84,7 +84,7 @@ namespace FitnesSkopjeWebApp.Controllers
                 return HttpNotFound();
             }
             ViewBag.GymName = db.Gyms.Find(id).Name;
-            return View((gym, GetReviews(id), IsGymOpened(id)));
+            return View((gym, GetReviews(id), IsGymOpened(id), Coordinates.GetLocationProperty(id)));
         }
 
         // GET: Gyms/Create
@@ -235,6 +235,10 @@ namespace FitnesSkopjeWebApp.Controllers
 
         public String checkTime(string working_time)
         {
+            if (working_time.Equals(""))
+            {
+                return "Теретаната не е отворена!";
+            }
             //08:00-22:00 
             var parts = working_time.Split('-');
 
