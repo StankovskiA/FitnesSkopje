@@ -24,7 +24,7 @@
 @Html.Partial("~/Views/Search/_SearchApplication.cshtml", Model.search)
 
 @if (Model.gyms.Count > 0)
-{
+{       
     <div class="row">
         <div class="col-sm-4" style="margin-top:50px">
             @using (Html.BeginForm("Index", "Gyms", FormMethod.Post,new { id="checkboxForm"}))
@@ -48,103 +48,106 @@
             }
         </div>
         <div class="col-sm-8">
-    <table id="gyms" class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.gyms.First().Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.gyms.First().Address)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.gyms.First().Number)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.gyms.First().workingTimeWeek)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.gyms.First().workingTimeSunday)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.gyms.First().Areas)
-                </th>
-                <th>
-                    Map
-                </th>
-                <th>
-                    Add to favourites
-                </th>
-                <th></th>
-            </tr>
-        </thead>
+            <br />
+            <br />
+            
+            <table id="gyms" class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.gyms.First().Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.gyms.First().Address)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.gyms.First().Number)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.gyms.First().workingTimeWeek)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.gyms.First().workingTimeSunday)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.gyms.First().Areas)
+                        </th>
+                        <th>
+                            Map
+                        </th>
+                        <th>
+                            Add to favourites
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
 
-        <tbody>
-            @foreach (var item in Model.gyms)
-            {
-                <tr onclick="Redirect(@item.Id)">
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Address)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Number)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.workingTimeWeek)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.workingTimeSunday)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Areas)
-                    </td>
-                    <td id="gymMap">
-                        <div class="item" data-gym-latitude="@item.Latitude" data-gym-longitude="@item.Longitude">
-                            See map
-                            <iframe style="display:none" class="map" width="200" height="200" src="https://maps.google.com/maps?q=@item.Latitude,@item.Longitude&hl=es;z=17&amp;output=embed"></iframe>
-                        </div>
+                <tbody>
+                    @foreach (var item in Model.gyms)
+                    {
+                        <tr onclick="Redirect(@item.Id)">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Number)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.workingTimeWeek)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.workingTimeSunday)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Areas)
+                            </td>
+                            <td id="gymMap">
+                                <div class="item" data-gym-latitude="@item.Latitude" data-gym-longitude="@item.Longitude">
+                                    See map
+                                    <iframe style="display:none" class="map" width="200" height="200" src="https://maps.google.com/maps?q=@item.Latitude,@item.Longitude&hl=es;z=17&amp;output=embed"></iframe>
+                                </div>
 
-                    </td>
-                    <td>
-                        @using (Html.BeginForm("Create", "Favourites", FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-                            <input type="hidden" name="gymId" id="gym_Id" value="@item.Id" />
-                            <input type="hidden" name="gymName" id="gym_Name" value="@item.Name" />
+                            </td>
+                            <td>
+                                @using (Html.BeginForm("Create", "Favourites", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="gymId" id="gym_Id" value="@item.Id" />
+                                    <input type="hidden" name="gymName" id="gym_Name" value="@item.Name" />
 
-                            if (Model.favourites.Where(a => a.gymId == item.Id && a.userId == ViewBag.userId).FirstOrDefault() == null)
-                            {
-                                <button type="submit" class="btn btn-link"> <img width="25" height="25" src="@Url.Content("~/Images/empty_heart.png")" /></button>
-                            }
-                            if (Model.favourites.Where(a => a.gymId == item.Id && a.userId == ViewBag.userId).FirstOrDefault() != null)
-                            {
-                                <button type="submit" class="btn btn-link"> <img width="25" height="25" src="@Url.Content("~/Images/full_heart.png")" /></button>
-                            }
-                        }
-                    </td>
-                    <td>
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <a href="@Url.Action("Edit", "Gyms", new { id = item.Id })">
-                                <img width="20" height="20" src="@Url.Content("~/Images/edit.png")" />
-                            </a>
-                            @* on row click details are shown *@
-                            @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
-                            <a href="@Url.Action("Delete", "Gyms", new { id = item.Id })">
-                                <img width="20" height="20" src="@Url.Content("~/Images/delete.png")" />
-                            </a>
-                        }
+                                    if (Model.favourites.Where(a => a.gymId == item.Id && a.userId == ViewBag.userId).FirstOrDefault() == null)
+                                    {
+                                        <button type="submit" class="btn btn-link"> <img width="25" height="25" src="@Url.Content("~/Images/empty_heart.png")" /></button>
+                                    }
+                                    if (Model.favourites.Where(a => a.gymId == item.Id && a.userId == ViewBag.userId).FirstOrDefault() != null)
+                                    {
+                                        <button type="submit" class="btn btn-link"> <img width="25" height="25" src="@Url.Content("~/Images/full_heart.png")" /></button>
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a href="@Url.Action("Edit", "Gyms", new { id = item.Id })">
+                                        <img width="20" height="20" src="@Url.Content("~/Images/edit.png")" />
+                                    </a>
+                                    @* on row click details are shown *@
+                                    @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+                                    <a href="@Url.Action("Delete", "Gyms", new { id = item.Id })">
+                                        <img width="20" height="20" src="@Url.Content("~/Images/delete.png")" />
+                                    </a>
+                                }
 
-                    </td>
-                </tr>
-            }
-        </tbody>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
 
-    </table>
-            </div>
+            </table>
+        </div>
         </div>
 
 

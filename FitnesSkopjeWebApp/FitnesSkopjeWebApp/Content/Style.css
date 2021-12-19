@@ -2,7 +2,7 @@
 }
 
 #navigation {
-    background-color: white;
+    background-color: lightgray;
     width: 100%;
 }
 
@@ -51,15 +51,53 @@
     background-color: lightgray;
 }
 
-.navbar-inverse .navbar-nav > li > a {
-    color: rgba(162, 9, 89, 1);
+    .navbar-inverse .navbar-nav > li > a {
+        color: rgba(162, 9, 89, 1);
+       
+    }
+
+h4, .h4 {
+    font-family: 'Times New Roman';
 }
 
-.items-nav a {
-    text-decoration: none;
-    color: p
+.table{
+    max-width: 60%;
+    max-height: 60%;
+    align-self:center;
+}
+.table thead {
+    /*background-color: rgba(90, 73, 90, .8);*/
+    /*background-color: rgba(15, 47, 230, 1);*/
+    background-color: grey;
 }
 
-a:hover{
-    color: dimgrey;
+h2{
+    color: rgba(41,61,144,1);
 }
+
+.table tbody {
+    background-color: whitesmoke;
+}
+th{
+ text-align: center;
+}
+th {
+    border-bottom: 1px solid groove;
+    border-block-color: gray;
+    border-radius: 15px 15px 15px 15px;
+   
+}
+
+td {
+    color: rgba(41,61,144,1);
+    border-radius: 10px 10px 10px 10px;
+}
+/*kako da go napraam kako container pogolemo??
+*/
+/*.table-container {
+    background-color: lightgray;
+    border-radius: 25px 25px 25px 25px;*/
+   /* width: 150%;
+    height: 150%;*/
+   
+/*}*/

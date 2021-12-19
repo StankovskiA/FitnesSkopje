@@ -3,58 +3,69 @@
 @{
     ViewBag.Title = "UserReviews";
 }
+<br />
+<br />
+<h2>My Reviews</h2>
 
-<h2>UserReviews</h2>
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<br />
+<br />
+<br />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table id="userReviews"class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.gym.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.rating)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.comment)
-            </th>
-            <th></th>
-        </tr>
-
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.gym.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.rating)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.comment)
-                </td>
-                <td>
-                    <a href="@Url.Action("Edit", "Reviews", new { id = item.id })" style="margin-right:5px">
-                        <img width="20" height="20" src="@Url.Content("~/Images/edit.png")" />
-                    </a> 
-                    <a href="@Url.Action("Details", "Reviews", new { id = item.id })" style="margin-right:5px">
-                        <img width="20" height="20" src="@Url.Content("~/Images/details.png")" />
-                    </a> 
-                    <a href="@Url.Action("Delete", "Reviews", new { id = item.id })">
-                        <img width="20" height="20" src="@Url.Content("~/Images/delete.png")" />
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
+<div class="table-container">
+    <div>
 
 
-</table>
+        <table id="userReviews" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.gym.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.rating)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.comment)
+                    </th>
+                    <th></th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.gym.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.rating)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.comment)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit", "Reviews", new { id = item.id })" style="margin-right:5px">
+                                <img width="20" height="20" src="@Url.Content("~/Images/edit.png")" />
+                            </a>
+                            <a href="@Url.Action("Details", "Reviews", new { id = item.id })" style="margin-right:5px">
+                                <img width="20" height="20" src="@Url.Content("~/Images/details.png")" />
+                            </a>
+                            <a href="@Url.Action("Delete", "Reviews", new { id = item.id })">
+                                <img width="20" height="20" src="@Url.Content("~/Images/delete.png")" />
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+
+        </table>
+    </div>
+</div>
 
 @section Scripts{
     <script>
@@ -65,5 +76,5 @@
             });
         });
     </script>
-    
-    }
+
+}
