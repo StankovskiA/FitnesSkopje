@@ -1,13 +1,13 @@
-﻿@model(FitnesSkopjeWebApp.Models.Gym gym, List < FitnesSkopjeWebApp.Models.Review > reviews, String isOpened)
-
+﻿@model(FitnesSkopjeWebApp.Models.Gym gym, List<FitnesSkopjeWebApp.Models.Review> reviews, String isOpened)
+@*, Double distance*@
 @{
     ViewBag.Title = "Details";
 }
 
 <h2>@ViewBag.GymName - Details</h2>
 
-@*Show gym details*@ 
-<div>
+@*Show gym details*@
+<div onload="distance()">
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -48,7 +48,12 @@
         <dd>
             @Html.DisplayFor(model => model.gym.workingTimeSunday)
         </dd>
-
+        <dt>
+            Растојание
+        </dt>
+        <dd id="showDist">
+            
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.gym.Areas)
         </dt>
@@ -93,49 +98,49 @@
     </div>
     @*Display Reviews*@
     <div>
-       @if (Model.reviews.Count() > 0)
-       {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.reviews.First().user.username)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.gym.Name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.reviews.First().rating)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.reviews.First().comment)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.reviews)
-                {
+        @if (Model.reviews.Count() > 0)
+        {
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.user.username)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.gym.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.rating)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.comment)
-                        </td>
-                        <td>
-                        </td>
+                        <th>
+                            @Html.DisplayNameFor(model => model.reviews.First().user.username)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.gym.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.reviews.First().rating)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.reviews.First().comment)
+                        </th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
-       }
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.reviews)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.user.username)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.gym.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.rating)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.comment)
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
     </div>
 </div>
 
@@ -180,6 +185,35 @@
     }
 
     map.on('click', onMapClick);
+
+        /*Za distance*/
+        function distance(lon1, lat1, lon2, lat2) {
+            var R = 6371; // Radius of the earth in km
+            var dLat = (lat2 - lat1).toRad();  // Javascript functions in radians
+            var dLon = (lon2 - lon1).toRad();
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            var d = R * c; // Distance in km
+            return d;
+        }
+
+        /** Converts numeric degrees to radians */
+        if (typeof (Number.prototype.toRad) === "undefined") {
+            Number.prototype.toRad = function () {
+                return this * Math.PI / 180;
+            }
+        }
+
+        window.navigator.geolocation.getCurrentPosition(function (pos) {
+            console.log(pos);
+            console.log(
+                distance(pos.coords.longitude, pos.coords.latitude, @Model.gym.Longitude, @Model.gym.Latitude) 
+            );
+            document.getElementById("showDist").innerHTML = "≈" + distance(pos.coords.longitude, pos.coords.latitude, @Model.gym.Longitude, @Model.gym.Latitude).toFixed(2) + " км";
+        });
+
 
     </script>
 }
