@@ -1,0 +1,46 @@
+﻿body {
+}
+
+.navbar {
+    background-color: white;
+    width: 100%;
+}
+
+.logo{
+    width: 80%;
+    height: 80%;
+}
+
+.nav navbar-nav ul li{
+    color: rebeccapurple;
+}
+
+.jumbotron h1{
+    font-size: 300%;
+    text-align: center;
+}
+
+.jumbotron{
+   flex: 50%;
+   width: auto;
+   background-color: white;
+   position: relative;
+   margin-top: 10%;
+   
+}
+
+.pic1 {
+    flex: 50%;
+    max-height: 100%;
+    max-width: 100%;
+    position: relative;
+}
+
+.container2in1{
+   display: flex;
+   position: relative;
+}
+
+.navbar-inverse{
+    border: 1px solid rgba(255,255,255,.0);
+}
