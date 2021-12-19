@@ -84,7 +84,7 @@ namespace FitnesSkopjeWebApp.Controllers
                 return HttpNotFound();
             }
             ViewBag.GymName = db.Gyms.Find(id).Name;
-            return View((gym, GetReviews(id), IsGymOpened(id), Coordinates.GetLocationProperty(id)));
+            return View((gym, GetReviews(id), IsGymOpened(id)));
         }
 
         // GET: Gyms/Create
