@@ -1,10 +1,10 @@
-﻿@model (List<FitnesSkopjeWebApp.Models.Gym> gyms, List<FitnesSkopjeWebApp.Models.Favourite> favourites,FitnesSkopjeWebApp.ViewModels.SearchApplicationModels search)
+﻿@model (List<FitnesSkopjeWebApp.Models.Gym> gyms, List<FitnesSkopjeWebApp.Models.Favourite> favourites, FitnesSkopjeWebApp.ViewModels.SearchApplicationModels search)
 
 
 @{
     ViewBag.Title = "Index";
 }
-
+<link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <style>
     .item {
         cursor: pointer;
@@ -27,7 +27,7 @@
 {
     <div class="row">
         <div class="col-sm-4" style="margin-top:50px">
-            @using (Html.BeginForm("Index", "Gyms", FormMethod.Post,new { id="checkboxForm"}))
+            @using (Html.BeginForm("Index", "Gyms", FormMethod.Post, new { id = "checkboxForm" }))
             {
                 @Html.AntiForgeryToken()
                 <h4>Филтер по дејности</h4>
@@ -44,108 +44,108 @@
                         }
                     }
                 </ul>
-                <input id="clearFilterButton" type="submit" class="btn btn-default btn-light clearsearch mr10" value="Избриши филтри"/>
+                <input id="clearFilterButton" type="submit" class="btn btn-default btn-light clearsearch mr10" value="Избриши филтри" />
             }
         </div>
         <div class="col-sm-8">
-    <table id="gyms" class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.gyms.First().Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.gyms.First().Address)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.gyms.First().Number)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.gyms.First().workingTimeWeek)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.gyms.First().workingTimeSunday)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.gyms.First().Areas)
-                </th>
-                <th>
-                    Локација
-                </th>
-                <th>
-                    Додај во омилени
-                </th>
-                <th></th>
-            </tr>
-        </thead>
+            <table id="gyms" class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.gyms.First().Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.gyms.First().Address)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.gyms.First().Number)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.gyms.First().workingTimeWeek)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.gyms.First().workingTimeSunday)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.gyms.First().Areas)
+                        </th>
+                        <th>
+                            Локација
+                        </th>
+                        <th>
+                            Додај во омилени
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
 
-        <tbody>
-            @foreach (var item in Model.gyms)
-            {
-                <tr onclick="Redirect(@item.Id)">
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Address)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Number)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.workingTimeWeek)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.workingTimeSunday)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Areas)
-                    </td>
-                    <td id="gymMap">
-                        <div class="item" data-gym-latitude="@item.Latitude" data-gym-longitude="@item.Longitude">
-                            Мапа
-                            <iframe style="display:none" class="map" width="200" height="200" src="https://maps.google.com/maps?q=@item.Latitude,@item.Longitude&hl=es;z=17&amp;output=embed"></iframe>
-                        </div>
+                <tbody>
+                    @foreach (var item in Model.gyms)
+                    {
+                        <tr onclick="Redirect(@item.Id)">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Number)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.workingTimeWeek)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.workingTimeSunday)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Areas)
+                            </td>
+                            <td id="gymMap">
+                                <div class="item" data-gym-latitude="@item.Latitude" data-gym-longitude="@item.Longitude">
+                                    Мапа
+                                    <iframe style="display:none" class="map" width="160" height="160" src="https://maps.google.com/maps?q=@item.Latitude,@item.Longitude&hl=es;z=17&amp;output=embed"></iframe>
+                                </div>
 
-                    </td>
-                    <td>
-                        @using (Html.BeginForm("Create", "Favourites", FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-                            <input type="hidden" name="gymId" id="gym_Id" value="@item.Id" />
-                            <input type="hidden" name="gymName" id="gym_Name" value="@item.Name" />
+                            </td>
+                            <td>
+                                @using (Html.BeginForm("Create", "Favourites", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="gymId" id="gym_Id" value="@item.Id" />
+                                    <input type="hidden" name="gymName" id="gym_Name" value="@item.Name" />
 
-                            if (Model.favourites.Where(a => a.gymId == item.Id && a.userId == ViewBag.userId).FirstOrDefault() == null)
-                            {
-                                <button type="submit" class="btn btn-link"> <img width="25" height="25" src="@Url.Content("~/Images/empty_heart.png")" /></button>
-                            }
-                            if (Model.favourites.Where(a => a.gymId == item.Id && a.userId == ViewBag.userId).FirstOrDefault() != null)
-                            {
-                                <button type="submit" class="btn btn-link"> <img width="25" height="25" src="@Url.Content("~/Images/full_heart.png")" /></button>
-                            }
-                        }
-                    </td>
-                    <td>
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <a href="@Url.Action("Edit", "Gyms", new { id = item.Id })">
-                                <img width="20" height="20" src="@Url.Content("~/Images/edit.png")" />
-                            </a>
-                            @* on row click details are shown *@
-                            @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
-                            <a href="@Url.Action("Delete", "Gyms", new { id = item.Id })">
-                                <img width="20" height="20" src="@Url.Content("~/Images/delete.png")" />
-                            </a>
-                        }
+                                    if (Model.favourites.Where(a => a.gymId == item.Id && a.userId == ViewBag.userId).FirstOrDefault() == null)
+                                    {
+                                        <button type="submit" class="btn btn-link"> <img width="25" height="25" src="@Url.Content("~/Images/empty_heart.png")" /></button>
+                                    }
+                                    if (Model.favourites.Where(a => a.gymId == item.Id && a.userId == ViewBag.userId).FirstOrDefault() != null)
+                                    {
+                                        <button type="submit" class="btn btn-link"> <img width="25" height="25" src="@Url.Content("~/Images/full_heart.png")" /></button>
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a href="@Url.Action("Edit", "Gyms", new { id = item.Id })">
+                                        <img width="20" height="20" src="@Url.Content("~/Images/edit.png")" />
+                                    </a>
+                                    @* on row click details are shown *@
+                                    @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+                                    <a href="@Url.Action("Delete", "Gyms", new { id = item.Id })">
+                                        <img width="20" height="20" src="@Url.Content("~/Images/delete.png")" />
+                                    </a>
+                                }
 
-                    </td>
-                </tr>
-            }
-        </tbody>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
 
-    </table>
-            </div>
+            </table>
         </div>
+    </div>
 
 
 }
@@ -153,15 +153,32 @@ else
 {
     <p>No gyms with the selected parameters</p>
 }
+
 @section Scripts{
     <script src="~/Scripts/pagination.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function () {
 
-            //$("#gyms").DataTable({
-            //    pageLength: 5,
-            //    lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']]
-            //});
+            $(".item").mouseover(function () {
+                $(this).children(".map").show();
+            }).mouseout(function () {
+                $(this).children(".map").hide();
+            });
+
+
+            $("#gyms").DataTable({
+                pageLength: 5,
+                lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
+                "paging": true,
+                "ordering": false,
+                "info": false,
+                "searching": false,
+                "bLengthChange": false,
+                "pagingType": "full_numbers"
+            });
+
 
             $("input:radio").on("click", function () {
                 if ($(this).is(":checked")) {
@@ -172,13 +189,7 @@ else
             $("#clearFilterButton").on("click", function () {
                 $('input[name="checkboxListItem"]').prop('checked', false);
             })
-          
 
-            $(".item").mouseover(function () {
-                $(this).children(".map").show();
-            }).mouseout(function () {
-                $(this).children(".map").hide();
-            });
 
 
         });
@@ -186,7 +197,7 @@ else
         function Redirect(itemId) {
             location.pathname = "Gyms/Details/" + itemId
         };
-        //----------------------------------------------------
+            //----------------------------------------------------
 
     </script>
 
