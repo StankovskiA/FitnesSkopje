@@ -1,5 +1,5 @@
 ﻿@model(FitnesSkopjeWebApp.Models.Gym gym, List<FitnesSkopjeWebApp.Models.Review> reviews, String isOpened)
-@*, Double distance*@
+
 @{
     ViewBag.Title = "Details";
 }
@@ -52,7 +52,7 @@
             Растојание
         </dt>
         <dd id="showDist">
-            
+
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.gym.Areas)
@@ -153,6 +153,7 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 
     <script>
+    /*Pocetok za mapa*/
     var latitude =@Model.gym.Latitude;
     var longitute =@Model.gym.Longitude;
     var map = L.map('map').setView([latitude, longitute], 16);
@@ -184,9 +185,10 @@
             .openOn(map);
     }
 
-    map.on('click', onMapClick);
+        map.on('click', onMapClick);
+        /*Kraj za mapa*/
 
-        /*Za distance*/
+        /*Pocetok za distance*/
         function distance(lon1, lat1, lon2, lat2) {
             var R = 6371; // Radius of the earth in km
             var dLat = (lat2 - lat1).toRad();  // Javascript functions in radians
@@ -209,11 +211,11 @@
         window.navigator.geolocation.getCurrentPosition(function (pos) {
             console.log(pos);
             console.log(
-                distance(pos.coords.longitude, pos.coords.latitude, @Model.gym.Longitude, @Model.gym.Latitude) 
+                distance(pos.coords.longitude, pos.coords.latitude, @Model.gym.Longitude, @Model.gym.Latitude)
             );
             document.getElementById("showDist").innerHTML = "≈" + distance(pos.coords.longitude, pos.coords.latitude, @Model.gym.Longitude, @Model.gym.Latitude).toFixed(2) + " км";
         });
-
+        /*Kraj za distance*/
 
     </script>
 }
