@@ -3,123 +3,124 @@
     ViewBag.Title = "Details";
 }
 
-<h2>@ViewBag.GymName - Details</h2>
+<div id="detailsContainter">
+    <h2 id="detailsName">@ViewBag.GymName</h2>
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.gym.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.gym.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.gym.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.gym.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.gym.Number)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.gym.Number)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.gym.workingTimeWeek)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.gym.workingTimeWeek)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.gym.workingTimeSunday)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.gym.workingTimeSunday)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.gym.Areas)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.gym.Areas)
-        </dd>
-        <dt>
-            Map
-        </dt>
-        <dd>
-            <div id="map" style="width: 300px; height: 300px;"></div>
-        </dd>
-    </dl>
-    <div id="updateDiv">
-        @Ajax.ActionLink("Add review", "Create", "Reviews", new { id = Model.gym.Id }, new AjaxOptions
-            {
-            HttpMethod = "GET",
-            InsertionMode = InsertionMode.Replace,
-            UpdateTargetId = "updateDiv"
-            }, new { @class = "nav-link" })
-    </div>
     <div>
-       @if (Model.reviews.Count() > 0)
-       {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.reviews.First().user.username)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.gym.Name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.reviews.First().rating)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.reviews.First().comment)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.reviews)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.user.username)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.gym.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.rating)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.comment)
-                        </td>
-                        <td>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-       }
-    </div>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.gym.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.gym.Name)
+            </dt>
 
+            <dd>
+                @Html.DisplayFor(model => model.gym.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.gym.Address)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.gym.Address)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.gym.Number)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.gym.Number)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.gym.workingTimeWeek)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.gym.workingTimeWeek)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.gym.workingTimeSunday)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.gym.workingTimeSunday)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.gym.Areas)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.gym.Areas)
+            </dd>
+            <dt>
+                Map
+            </dt>
+            <dd>
+                <div id="map" style="width: 300px; height: 300px;"></div>
+            </dd>
+        </dl>
+        <div id="updateDiv">
+            @Ajax.ActionLink("Add review", "Create", "Reviews", new { id = Model.gym.Id }, new AjaxOptions
+                {
+                HttpMethod = "GET",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "updateDiv"
+                }, new { @class = "nav-link" })
+        </div>
+        <div>
+            @if (Model.reviews.Count() > 0)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.reviews.First().user.username)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.gym.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.reviews.First().rating)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.reviews.First().comment)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.reviews)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.user.username)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.gym.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.rating)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.comment)
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.gym.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>
 @section Scripts{
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />

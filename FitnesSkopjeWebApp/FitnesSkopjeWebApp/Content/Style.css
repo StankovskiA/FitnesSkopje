@@ -88,6 +88,41 @@ th {
    
 }
 
+.navbar-inverse .navbar-nav > li > a:hover {
+    color: rgba(41,61,144,1);
+}
+
+#clearFilterButton {
+    background-color: rgb(89 152 26 / 0.89);
+    color: white;
+}
+
+#clearFilterButton:hover {
+    background-color: #59981A;
+}
+
+.btn-primary {
+    background-color: rgba(41,61,144,1);
+}
+
+.btn-primary:hover {
+    background-color: rgb(35 52 122);
+}
+
+#detailsContainer {
+    color: dimgrey;
+    width: 1000px;
+    height: 700px;
+    border: 1px solid black;
+}
+
+#detailsName {
+    color: rgba(41,61,144,1);
+}
+
+.dl-horizontal {
+    
+}
 td {
     color: rgba(41,61,144,1);
     border-radius: 10px 10px 10px 10px;

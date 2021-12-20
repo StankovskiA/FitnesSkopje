@@ -69,6 +69,16 @@ namespace FitnesSkopjeWebApp.Controllers
             }
         }
 
+        //Json za autocomplete
+        public JsonResult GetGyms(string term)
+        {
+            List<String> gyms;
+
+            gyms = db.Gyms.Where(x => x.Name.Contains(term)).Select(y => y.Name).ToList();
+
+            return Json(gyms, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Gyms/Details/5
         public ActionResult Details(int? id)
         {

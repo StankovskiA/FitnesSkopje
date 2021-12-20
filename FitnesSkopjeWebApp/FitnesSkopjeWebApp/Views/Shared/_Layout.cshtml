@@ -6,6 +6,8 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/themes/base/css")
+
     <link href="~/Content/Style.css" rel="stylesheet" />
 </head>
 <body>
@@ -19,10 +21,10 @@
                 </button>
                 @*@Html.ActionLink("FitnesSkopje", "Index", "Home", new { area= " " }, new { @class = "navbar-brand" })*@
                 @*<div>
-                    <a href='@Url.Action("Index", "Home")'>
-                        <img class="teg" src="~/Images/teg1.png" />
-                    </a>
-                </div>*@
+                        <a href='@Url.Action("Index", "Home")'>
+                            <img class="teg" src="~/Images/teg1.png" />
+                        </a>
+                    </div>*@
                 <div>
                     <a href='@Url.Action("Index", "Home")'>
                         <img class="logo" src="~/Images/logo1-_transp_.png" />
@@ -40,10 +42,10 @@
                     @if (User.IsInRole("User"))
                     {
                         @*<li>@Html.ActionLink("My Favourites", "UserFavourites", "Favourites")</li>
-                        <li>@Html.ActionLink("My Reviews", "UserReviews", "Reviews")</li>*@
+                            <li>@Html.ActionLink("My Reviews", "UserReviews", "Reviews")</li>*@
 
                         <li class="items-nav">
-                            <a  href='@Url.Action("UserFavourites", "Favourites")'>
+                            <a href='@Url.Action("UserFavourites", "Favourites")'>
                                 My Favourites
                             </a>
                         </li>
@@ -56,7 +58,7 @@
 
                     @*<li>@Html.ActionLink("Contact us", "Contact", "Home")</li>*@
                     <li class="items-nav">
-                        <a  href='@Url.Action("Contact", "Home")'>
+                        <a href='@Url.Action("Contact", "Home")'>
                             Contact us
                         </a>
                     </li>
@@ -73,11 +75,12 @@
         </footer>
     </div>
 
+    @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     <script>
-        $(document).ready(function () { $("input").attr("autocomplete", "off"); }); 
+        $(document).ready(function () { $("input").attr("autocomplete", "off"); });
     </script>
 </body>
 </html>
