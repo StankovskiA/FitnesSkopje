@@ -64,9 +64,13 @@ h4, .h4 {
     max-width: 60%;
     max-height: 60%;
     align-self:center;
-    padding: 4%;
-    
+    padding: 6%; 
 }
+#tablefav {
+    align-self: center;
+    padding: 6%;
+}
+
 .table thead {
     /*background-color: rgba(90, 73, 90, .8);*/
     /*background-color: rgba(15, 47, 230, 1);*/
@@ -138,3 +142,4 @@ td {
     height: 100%;
    
 }
+

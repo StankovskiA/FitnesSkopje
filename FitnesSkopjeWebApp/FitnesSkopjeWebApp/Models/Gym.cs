@@ -9,6 +9,7 @@ namespace FitnesSkopjeWebApp.Models
     public class Gym
     {
         [Key]
+
         public int Id { get; set; }
 
         [Display(Name="Теретана")]

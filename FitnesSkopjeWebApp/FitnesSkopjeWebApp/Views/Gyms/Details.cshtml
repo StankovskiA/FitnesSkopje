@@ -115,7 +115,10 @@
                         <th>
                             @Html.DisplayNameFor(model => model.reviews.First().comment)
                         </th>
-                        <th></th>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <th></th>
+                        }
                     </tr>
                 </thead>
                 <tbody>
@@ -134,8 +137,11 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.comment)
                             </td>
-                            <td>
-                            </td>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <td>
+                                </td>
+                            }
                         </tr>
                     }
                 </tbody>

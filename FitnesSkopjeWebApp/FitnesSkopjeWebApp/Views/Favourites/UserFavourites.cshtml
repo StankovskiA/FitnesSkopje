@@ -5,20 +5,20 @@
 }
 <br />
 <br />
-<h2>@ViewBag.User favourite gyms</h2>
+<h2>@ViewBag.User омилени теретани</h2>
 <br />
 <br />
 <br />
 <div class="table-container">
     <div>
-        <table class="table">
+        <table id="tablefav" class="table">
             <thead>
                 <tr>
                     @*<th>
                         @Html.DisplayNameFor(model => model.userId)
                     </th>*@
                     <th>
-                        @Html.DisplayNameFor(model => model.favourites.First().gymId)
+                        @Html.DisplayNameFor(model => model.favourites.First().gymName)
                     </th>
                     @*<th></th>*@
                 </tr>
