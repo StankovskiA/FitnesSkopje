@@ -64,6 +64,8 @@ h4, .h4 {
     max-width: 60%;
     max-height: 60%;
     align-self:center;
+    padding: 4%;
+    
 }
 .table thead {
     /*background-color: rgba(90, 73, 90, .8);*/
@@ -129,10 +131,10 @@ td {
 }
 /*kako da go napraam kako container pogolemo??
 */
-/*.table-container {
+.table-container {
     background-color: lightgray;
-    border-radius: 25px 25px 25px 25px;*/
-   /* width: 150%;
-    height: 150%;*/
+    border-radius: 15px 15px 15px 15px;
+    width: 100%;
+    height: 100%;
    
-/*}*/
+}
