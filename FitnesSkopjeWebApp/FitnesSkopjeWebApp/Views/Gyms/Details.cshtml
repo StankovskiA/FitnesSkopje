@@ -1,126 +1,153 @@
-﻿@model (FitnesSkopjeWebApp.Models.Gym gym, List<FitnesSkopjeWebApp.Models.Review> reviews)
+﻿@model(FitnesSkopjeWebApp.Models.Gym gym, List<FitnesSkopjeWebApp.Models.Review> reviews, String isOpened)
+
 @{
     ViewBag.Title = "Details";
 }
 
-<div id="detailsContainter">
-    <h2 id="detailsName">@ViewBag.GymName</h2>
+<h2>@ViewBag.GymName</h2>
 
-    <div>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.gym.Name)
-            </dt>
+@*Show gym details*@
+<div onload="distance()">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.gym.Name)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.gym.Name)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.gym.Name)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.gym.Address)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.gym.Address)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.gym.Address)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.gym.Address)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.gym.Number)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.gym.Number)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.gym.Number)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.gym.Number)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.gym.workingTimeWeek)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.gym.workingTimeWeek)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.gym.workingTimeWeek)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.gym.workingTimeSunday)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.gym.workingTimeWeek)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.gym.workingTimeSunday)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.gym.workingTimeSunday)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.gym.workingTimeSunday)
+        </dd>
+        <dt>
+            Растојание
+        </dt>
+        <dd id="showDist">
 
-            <dt>
-                @Html.DisplayNameFor(model => model.gym.Areas)
-            </dt>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.gym.Areas)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.gym.Areas)
-            </dd>
-            <dt>
-                Map
-            </dt>
-            <dd>
-                <div id="map" style="width: 300px; height: 300px;"></div>
-            </dd>
-        </dl>
-        <div id="updateDiv">
-            @Ajax.ActionLink("Add review", "Create", "Reviews", new { id = Model.gym.Id }, new AjaxOptions
-                {
-                HttpMethod = "GET",
-                InsertionMode = InsertionMode.Replace,
-                UpdateTargetId = "updateDiv"
-                }, new { @class = "nav-link" })
-        </div>
-        <div>
-            @if (Model.reviews.Count() > 0)
+        <dd>
+            @Html.DisplayFor(model => model.gym.Areas)
+        </dd>
+        <dt>
+            -
+        </dt>
+        <dd>
+            @if (Model.isOpened.Length == 22)
             {
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.reviews.First().user.username)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.gym.Name)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.reviews.First().rating)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.reviews.First().comment)
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.reviews)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.user.username)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.gym.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.rating)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.comment)
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                <p class="isOpen" style="color:forestgreen">@Model.isOpened </p>
             }
-        </div>
+            else
+            {
+                <p class="isOpen" style="color:orangered"> @Model.isOpened </p>
+            }
+
+        </dd>
+        <dt>
+            Map
+        </dt>
+        <dd>
+            <div id="map" style="width: 300px; height: 300px;"></div>
+        </dd>
+    </dl>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.gym.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+    @*Add new review*@
+    <div class="button" id="updateDiv">
+        @Ajax.ActionLink("Add review", "Create", "Reviews", new { id = Model.gym.Id }, new AjaxOptions
+            {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "updateDiv"
+            }, new { @class = "nav-link" })
+    </div>
+    @*Display Reviews*@
+    <div>
+        @if (Model.reviews.Count() > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.reviews.First().user.username)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.gym.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.reviews.First().rating)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.reviews.First().comment)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.reviews)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.user.username)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.gym.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.rating)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.comment)
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
     </div>
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.gym.Id }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
 </div>
+
 @section Scripts{
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
@@ -129,6 +156,7 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 
     <script>
+    /*Pocetok za mapa*/
     var latitude =@Model.gym.Latitude;
     var longitute =@Model.gym.Longitude;
     var map = L.map('map').setView([latitude, longitute], 16);
@@ -152,6 +180,11 @@
         radius: 50
     }).addTo(map);
 
+        function blink_text() {
+            $('.isOpen').fadeOut(500);
+            $('.isOpen').fadeIn(500);
+        }
+        setInterval(blink_text, 1000);
 
     function onMapClick(e) {
         popup
@@ -160,7 +193,37 @@
             .openOn(map);
     }
 
-    map.on('click', onMapClick);
+        map.on('click', onMapClick);
+        /*Kraj za mapa*/
+
+        /*Pocetok za distance*/
+        function distance(lon1, lat1, lon2, lat2) {
+            var R = 6371; // Radius of the earth in km
+            var dLat = (lat2 - lat1).toRad();  // Javascript functions in radians
+            var dLon = (lon2 - lon1).toRad();
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            var d = R * c; // Distance in km
+            return d;
+        }
+
+        /** Converts numeric degrees to radians */
+        if (typeof (Number.prototype.toRad) === "undefined") {
+            Number.prototype.toRad = function () {
+                return this * Math.PI / 180;
+            }
+        }
+
+        window.navigator.geolocation.getCurrentPosition(function (pos) {
+            console.log(pos);
+            console.log(
+                distance(pos.coords.longitude, pos.coords.latitude, @Model.gym.Longitude, @Model.gym.Latitude)
+            );
+            document.getElementById("showDist").innerHTML = "≈" + distance(pos.coords.longitude, pos.coords.latitude, @Model.gym.Longitude, @Model.gym.Latitude).toFixed(2) + " км";
+        });
+        /*Kraj za distance*/
 
     </script>
 }

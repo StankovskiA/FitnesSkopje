@@ -13,6 +13,8 @@ namespace FitnesSkopjeWebApp.Models
         public int id { get; set; }
         public int userId { get; set; }
         public int gymId { get; set; }
+        
+        [Display(Name ="Теретана")]
         public string gymName { get; set; }
     }
 }

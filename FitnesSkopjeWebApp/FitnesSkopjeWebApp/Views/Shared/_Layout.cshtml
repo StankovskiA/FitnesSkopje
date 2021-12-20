@@ -33,35 +33,15 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="items-nav">
-                        <a href='@Url.Action("Index", "Gyms")'>
-                            Gyms
-                        </a>
-                    </li>
+                    <li>@Html.ActionLink("Теретани", "Index", "Gyms")</li>
 
                     @if (User.IsInRole("User"))
                     {
-                        @*<li>@Html.ActionLink("My Favourites", "UserFavourites", "Favourites")</li>
-                            <li>@Html.ActionLink("My Reviews", "UserReviews", "Reviews")</li>*@
-
-                        <li class="items-nav">
-                            <a href='@Url.Action("UserFavourites", "Favourites")'>
-                                My Favourites
-                            </a>
-                        </li>
-                        <li class="items-nav">
-                            <a href='@Url.Action("UserReviews", "Reviews")'>
-                                My reviews
-                            </a>
-                        </li>
+                        <li>@Html.ActionLink("Омилени теретани", "UserFavourites", "Favourites")</li>
+                        <li>@Html.ActionLink("Прегледи", "UserReviews", "Reviews")</li>
                     }
 
-                    @*<li>@Html.ActionLink("Contact us", "Contact", "Home")</li>*@
-                    <li class="items-nav">
-                        <a href='@Url.Action("Contact", "Home")'>
-                            Contact us
-                        </a>
-                    </li>
+                    <li>@Html.ActionLink("Контактирајте не", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

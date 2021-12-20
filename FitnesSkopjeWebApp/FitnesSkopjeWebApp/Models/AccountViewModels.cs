@@ -50,54 +50,54 @@ namespace FitnesSkopjeWebApp.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "Е-маил")]
         [EmailAddress]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Лозинка")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Зачувај ме?")]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name ="First name")]
+        [Display(Name ="Име")]
         public string FirstName { get; set; }
 
         [Required]
-        [Display(Name = "Last name")]
+        [Display(Name = "Презиме")]
         public string LastName { get; set; }
 
         [Required]
-        [Display(Name = "Address")]
+        [Display(Name = "Адреса")]
         public string Address { get; set; }
 
         [Required]
-        [Display(Name = "Phone number")]
+        [Display(Name = "Телефонски број")]
         public string PhoneNumber { get; set; }
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Е-маил")]
         public string Email { get; set; }
         
-        [NotMapped]
-        [Display(Name = "Role")]
-        public string Role { get; set; }
+        //[NotMapped]
+        //[Display(Name = "Role")]
+        //public string Role { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Лозинка")]
         public string Password { get; set; }       
 
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Повтори лозинка")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }

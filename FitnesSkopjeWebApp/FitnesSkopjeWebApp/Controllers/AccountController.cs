@@ -165,8 +165,11 @@ namespace FitnesSkopjeWebApp.Controllers
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    var roleName = db.Roles.Find(model.Role.ToString()).Name;
-                    await UserManager.AddToRoleAsync(user.Id, roleName);
+                   /* var roleName = db.Roles.Find(model.Role.ToString()).Name;*/
+                    await UserManager.AddToRoleAsync(user.Id, "User");
+
+                    int userRoleInt = (int)Enums.EnumHelpers.EnumUserRoles.User;
+                    string role = userRoleInt.ToString();
 
                     db.AppUsers.Add(new User()
                     {
@@ -175,9 +178,8 @@ namespace FitnesSkopjeWebApp.Controllers
                         email=model.Email,
                         phoneNumber=model.PhoneNumber,
                         address=model.Address,
-                        roleId=model.Role,
-                        username=user.UserName
-
+                        roleId= role,
+                        username =user.UserName
                     });
 
                     db.SaveChanges();

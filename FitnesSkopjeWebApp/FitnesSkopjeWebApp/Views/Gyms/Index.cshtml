@@ -1,10 +1,10 @@
-﻿@model (List<FitnesSkopjeWebApp.Models.Gym> gyms, List<FitnesSkopjeWebApp.Models.Favourite> favourites,FitnesSkopjeWebApp.ViewModels.SearchApplicationModels search)
+﻿@model (List<FitnesSkopjeWebApp.Models.Gym> gyms, List<FitnesSkopjeWebApp.Models.Favourite> favourites, FitnesSkopjeWebApp.ViewModels.SearchApplicationModels search)
 
 
 @{
     ViewBag.Title = "Index";
 }
-
+<link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <style>
     .item {
         cursor: pointer;
@@ -29,7 +29,7 @@
 {       
     <div class="row">
         <div class="col-sm-4" style="margin-top:50px">
-            @using (Html.BeginForm("Index", "Gyms", FormMethod.Post,new { id="checkboxForm"}))
+            @using (Html.BeginForm("Index", "Gyms", FormMethod.Post, new { id = "checkboxForm" }))
             {
                 @Html.AntiForgeryToken()
                 <h4>Филтер по дејности</h4>
@@ -46,7 +46,7 @@
                         }
                     }
                 </ul>
-                <input id="clearFilterButton" type="submit" class="btn btn-default btn-light clearsearch mr10" value="Избриши филтри"/>
+                <input id="clearFilterButton" type="submit" class="btn btn-default btn-light clearsearch mr10" value="Избриши филтри" />
             }
         </div>
         <div class="col-sm-8">
@@ -75,10 +75,10 @@
                             @Html.DisplayNameFor(model => model.gyms.First().Areas)
                         </th>
                         <th>
-                            Map
+                            Локација
                         </th>
                         <th>
-                            Add to favourites
+                            Додај во омилени
                         </th>
                         <th></th>
                     </tr>
@@ -108,8 +108,8 @@
                             </td>
                             <td id="gymMap">
                                 <div class="item" data-gym-latitude="@item.Latitude" data-gym-longitude="@item.Longitude">
-                                    See map
-                                    <iframe style="display:none" class="map" width="200" height="200" src="https://maps.google.com/maps?q=@item.Latitude,@item.Longitude&hl=es;z=17&amp;output=embed"></iframe>
+                                    Мапа
+                                    <iframe style="display:none" class="map" width="160" height="160" src="https://maps.google.com/maps?q=@item.Latitude,@item.Longitude&hl=es;z=17&amp;output=embed"></iframe>
                                 </div>
 
                             </td>
@@ -151,6 +151,7 @@
             </table>
         </div>
         </div>
+    </div>
 
 
 }
@@ -158,15 +159,32 @@ else
 {
     <p>No gyms with the selected parameters</p>
 }
+
 @section Scripts{
     <script src="~/Scripts/pagination.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function () {
 
-            //$("#gyms").DataTable({
-            //    pageLength: 5,
-            //    lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']]
-            //});
+            $(".item").mouseover(function () {
+                $(this).children(".map").show();
+            }).mouseout(function () {
+                $(this).children(".map").hide();
+            });
+
+
+            $("#gyms").DataTable({
+                pageLength: 5,
+                lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
+                "paging": true,
+                "ordering": false,
+                "info": false,
+                "searching": false,
+                "bLengthChange": false,
+                "pagingType": "full_numbers"
+            });
+
 
             $("input:radio").on("click", function () {
                 if ($(this).is(":checked")) {
@@ -177,13 +195,7 @@ else
             $("#clearFilterButton").on("click", function () {
                 $('input[name="checkboxListItem"]').prop('checked', false);
             })
-          
 
-            $(".item").mouseover(function () {
-                $(this).children(".map").show();
-            }).mouseout(function () {
-                $(this).children(".map").hide();
-            });
 
 
         });
@@ -191,7 +203,7 @@ else
         function Redirect(itemId) {
             location.pathname = "Gyms/Details/" + itemId
         };
-        //----------------------------------------------------
+            //----------------------------------------------------
 
     </script>
 
