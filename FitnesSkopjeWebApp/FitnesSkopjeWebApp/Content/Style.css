@@ -1,7 +1,4 @@
-﻿body {
-}
-
-#navigation {
+﻿#navigation {
     background-color: lightgray;
     width: 100%;
 }
@@ -17,8 +14,6 @@
     height: 90%;
     margin-top: 2%;
 }
-
-
 
 .jumbotron h1{
     font-size: 300%;
@@ -51,10 +46,9 @@
     background-color: lightgray;
 }
 
-    .navbar-inverse .navbar-nav > li > a {
-        color: rgba(162, 9, 89, 1);
-       
-    }
+.navbar-inverse .navbar-nav > li > a {
+    color: rgba(162, 9, 89, 1);
+}
 
 h4, .h4 {
     font-family: 'Times New Roman';
@@ -79,14 +73,17 @@ h4, .h4 {
 
 h2{
     color: rgba(41,61,144,1);
+    /*font-weight: bold;*/
 }
 
 .table tbody {
     background-color: whitesmoke;
 }
+
 th{
  text-align: center;
 }
+
 th {
     border-bottom: 1px solid groove;
     border-block-color: gray;
@@ -101,6 +98,7 @@ th {
 #clearFilterButton {
     background-color: rgb(89 152 26 / 0.89);
     color: white;
+    margin-left: 35px;
 }
 
 #clearFilterButton:hover {
@@ -126,21 +124,30 @@ th {
     color: rgba(41,61,144,1);
 }
 
-.dl-horizontal {
-    
-}
 td {
     color: rgba(41,61,144,1);
     border-radius: 10px 10px 10px 10px;
 }
-/*kako da go napraam kako container pogolemo??
-*/
-.table-container {
+
+#tableContainerLogin {
     background-color: lightgray;
     border-radius: 15px 15px 15px 15px;
-    width: 100%;
+    width: 153%;
     height: 100%;
-   
+}
+
+#tableContainerRegister, #tableContainerReviews, #tableContainerFavorites {
+    background-color: lightgray;
+    border-radius: 15px 15px 15px 15px;
+    width: 101%;
+    height: 100%;
+}
+
+#tableContainerGymsIndex {
+    background-color: lightgray;
+    border-radius: 15px 15px 15px 15px;
+    width: 110%;
+    height: 100%;
 }
 
 .registration{
@@ -149,3 +156,46 @@ td {
     padding-left: 30%;
 }
 
+/*.card-body {
+    background-color: lightgray;
+    margin-left: -2%;
+}*/
+
+#filterDejnosti {
+    background-color: lightgray;
+    width: 30%;
+    height: 30%;
+    border-radius: 15px 15px 15px 15px;
+}
+
+#filterTitle {
+    margin-left: 35px;
+}
+
+#filterDejnosti:nth-child(n) {
+    padding-right: 10px;
+}
+
+#gyms tbody tr td:first-child:hover {
+    color: rgb(37 95 215);
+    text-decoration-line: underline;
+    cursor: pointer;
+}
+
+#registrationButton {
+    background-color: rgba(41,61,144,1);
+    color: white;
+}
+
+#loginButton {
+    background-color: rgba(41,61,144,1);
+    color: white;
+}
+
+#loginButton:hover, #registrationButton:hover {
+    background-color: rgb(35 52 122);
+}
+
+#txtLogin {
+    padding-left: 17%;
+}
