@@ -15,14 +15,23 @@
     margin-top: 2%;
 }
 
-.jumbotron h1{
-    font-size: 300%;
+
+.stylehome {
+    font-size: 140%;
     text-align: center;
+    color: rgba(41,61,144,1);
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.naslov{
+    font-size: 220%;
 }
 
 .jumbotron{
    flex: 50%;
-   width: auto;
+   width: 130%;
+   height: 130%;
    background-color: white;
    position: relative;
    margin-top: 10%;
@@ -60,10 +69,10 @@ h4, .h4 {
     align-self:center;
     padding: 6%; 
 }
-#tablefav {
-    align-self: center;
+#tablefav{
     padding: 6%;
 }
+
 
 .table thead {
     /*background-color: rgba(90, 73, 90, .8);*/
