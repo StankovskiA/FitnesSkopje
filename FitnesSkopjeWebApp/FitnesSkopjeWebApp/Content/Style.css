@@ -1,6 +1,7 @@
 ﻿#navigation {
     background-color: lightgray;
     width: 100%;
+    height: 6%;
 }
 
 .teg{
@@ -40,9 +41,10 @@
 
 .pic1 {
     flex: 50%;
-    max-height: 100%;
-    max-width: 100%;
+    max-height: 120%;
+    max-width: 120%;
     position: relative;
+    margin-top: 8%;
 }
 
 .container2in1{
@@ -138,6 +140,17 @@ td {
     border-radius: 10px 10px 10px 10px;
 }
 
+#tableRevDetails {
+    background-color: #e4e4e4;
+    border-radius: 15px 15px 15px 15px;
+    width: 102%;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2%;
+}
+
 #tableContainerLogin {
     background-color: lightgray;
     border-radius: 15px 15px 15px 15px;
@@ -175,6 +188,7 @@ td {
     width: 30%;
     height: 30%;
     border-radius: 15px 15px 15px 15px;
+    margin-top: 45px;
 }
 
 #filterTitle {
@@ -207,4 +221,119 @@ td {
 
 #txtLogin {
     padding-left: 17%;
+}
+
+#tablefav thead tr th {
+    width: 100%;
+}
+
+/*za options vo Reviews za cetvrtata kolona
+    #optionsRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+*/
+
+#containerDetails {
+    background-color: red;
+}
+
+#details.dl-horizontal {
+    background-color: #e4e4e4;
+    height: 140%;
+    width: 102%;
+    border-radius: 15px 15px 15px 15px;
+    padding-bottom: 10%;
+    padding-left: 14%;
+    padding-top: 8%;
+}
+
+#detailsLeft {
+    float: left;
+    width: 50%;
+}
+
+#detailsLeft dt, #details dt:last-of-type {
+    text-align: left;
+}
+
+#map {
+    border: 1px solid black;
+}
+
+#updateDiv {
+    width: 120px;
+    height: 40px;
+    border-radius: 8px 8px 8px 8px;
+    background-color: rgba(41,61,144,1);
+    margin-bottom: 2%;
+    text-align: center;
+    padding-top: 0.8%;
+    border: 1px solid rgb(37 95 215);
+}
+
+#updateDiv:hover {
+    background-color: rgb(35 52 122);
+}
+
+#updateDiv .nav-link {
+    color: white;
+}
+
+#updateDiv .nav-link:hover {
+    color: white;
+    text-decoration-line: none;
+}
+
+#tableRev thead {
+    width: 150%;
+}
+
+#editButtonDetails {
+    margin-top: 1.5%;
+    background-color: rgb(89 152 26 / 0.89);
+    color: white;
+    width: 70px;
+    height: 38px;
+    border: 1px solid #59981A;
+    border-radius: 6px 6px 6px 6px;
+}
+
+#editButtonDetails a {
+    color: white;
+}
+
+#editButtonDetails:hover {
+    background-color: #59981A;
+    border: none;
+}
+
+#editButtonDetails a:hover {
+    text-decoration-line: none;
+    color: white;
+}
+
+#backButtonDetails {
+    margin-top: 1.5%;
+    background-color: rgba(41,61,144,1);
+    color: white;
+    width: 130px;
+    height: 38px;
+    border: 1px solid rgb(37 95 215);
+    border-radius: 8px 8px 8px 8px;
+}
+
+#backButtonDetails a {
+    color: white;
+}
+
+#backButtonDetails:hover {
+    background-color: rgb(35 52 122);
+    border: none;
+}
+
+#backButtonDetails a:hover {
+    text-decoration-line: none;
+    color: white;
 }
