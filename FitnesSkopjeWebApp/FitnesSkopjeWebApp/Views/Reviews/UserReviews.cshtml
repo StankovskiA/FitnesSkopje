@@ -10,14 +10,9 @@
 @*<p>
         @Html.ActionLink("Create New", "Create")
     </p>*@
-<br />
-<br />
-<br />
-
+<hr />
 <div class="table-container" id="tableContainerReviews">
     <div>
-
-
         <table id="userReviews" class="table">
             <thead>
                 <tr>
@@ -37,7 +32,7 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    <tr id="trReviews">
                         <td>
                             @Html.DisplayFor(modelItem => item.gym.Name)
                         </td>
