@@ -65,22 +65,22 @@ namespace FitnesSkopjeWebApp.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Полето е задолжително!")]
         [Display(Name ="Име")]
         public string FirstName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Полето е задолжително!")]
         [Display(Name = "Презиме")]
         public string LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Полето е задолжително!")]
         [Display(Name = "Адреса")]
         public string Address { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Полето е задолжително!")]
         [Display(Name = "Телефонски број")]
         public string PhoneNumber { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Полето е задолжително!")]
         [EmailAddress]
         [Display(Name = "Е-маил")]
         public string Email { get; set; }
@@ -89,7 +89,7 @@ namespace FitnesSkopjeWebApp.Models
         //[Display(Name = "Role")]
         //public string Role { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Полето е задолжително!")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Лозинка")]
@@ -98,7 +98,7 @@ namespace FitnesSkopjeWebApp.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Повтори лозинка")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Лозинките не се совпаѓаат!")]
         public string ConfirmPassword { get; set; }
     }
 
