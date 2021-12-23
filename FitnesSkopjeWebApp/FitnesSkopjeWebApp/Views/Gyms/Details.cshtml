@@ -90,7 +90,7 @@
 
 @*Add new review*@
 <div class="button" id="updateDiv">
-    @Ajax.ActionLink("Add review", "Create", "Reviews", new { id = Model.gym.Id }, new AjaxOptions
+    @Ajax.ActionLink("Додади преглед", "Create", "Reviews", new { id = Model.gym.Id }, new AjaxOptions
         {
         HttpMethod = "GET",
         InsertionMode = InsertionMode.Replace,
@@ -150,8 +150,8 @@
     }
 </div>
 <p>
-    <button id="editButtonDetails">@Html.ActionLink("Edit", "Edit", new { id = Model.gym.Id })</button>
-    <button id="backButtonDetails">@Html.ActionLink("Back to List", "Index")</button>
+    <button id="editButtonDetails">@Html.ActionLink("Промени", "Edit", new { id = Model.gym.Id })</button>
+    <button id="backButtonDetails">@Html.ActionLink("Назад", "Index")</button>
 </p>
 </div>
 

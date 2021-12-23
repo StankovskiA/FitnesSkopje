@@ -17,6 +17,27 @@
 }
 
 
+.filterbutton{
+    padding: 2%;
+}
+
+.header{
+    cursor: pointer;
+}
+
+
+
+.card {
+    margin-left: 80%;
+    margin-top: 3%;
+}
+
+.filtercontainer .filtercontent {
+    display: none;
+    padding: 5px;
+}
+
+
 .stylehome {
     font-size: 140%;
     text-align: center;
@@ -41,8 +62,8 @@
 
 .pic1 {
     flex: 50%;
-    max-height: 120%;
-    max-width: 120%;
+    max-height: 100%;
+    max-width: 100%;
     position: relative;
     margin-top: 8%;
 }
@@ -72,7 +93,11 @@ h4, .h4 {
     padding: 6%; 
 }
 #tablefav{
-    padding: 6%;
+    margin-left: 20%;
+}
+
+table{
+    border-collapse: unset;
 }
 
 
@@ -105,6 +130,15 @@ th {
 .navbar-inverse .navbar-nav > li > a:hover {
     color: rgba(41,61,144,1);
 }
+
+.btn-default {
+    color: white;
+    background-color: rgb(89 152 26 / 0.89);
+    border-color: rgb(89 152 26 / 0.89);
+}
+/*.editcontainer{
+    background-color: lightgray;
+}*/
 
 #clearFilterButton {
     background-color: rgb(89 152 26 / 0.89);
@@ -183,13 +217,13 @@ td {
     margin-left: -2%;
 }*/
 
-#filterDejnosti {
+/*#filterDejnosti {
     background-color: lightgray;
     width: 30%;
     height: 30%;
     border-radius: 15px 15px 15px 15px;
     margin-top: 45px;
-}
+}*/
 
 #filterTitle {
     margin-left: 35px;
@@ -299,6 +333,7 @@ td {
     border: 1px solid #59981A;
     border-radius: 6px 6px 6px 6px;
 }
+
 
 #editButtonDetails a {
     color: white;
