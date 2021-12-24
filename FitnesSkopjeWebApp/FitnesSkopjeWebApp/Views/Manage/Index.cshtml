@@ -2,27 +2,27 @@
 @{
     ViewBag.Title = "Manage";
 }
-
-<h2></h2>
+<br /><br />
+<h2>Поставки за профил</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <h4>Променете ги поставките за вашиот профил</h4>
+    
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal" style="background-color: #e9e9e9; border-radius: 15px 15px 15px 15px; width: 102%">
         <dt>Лозинка:</dt>
         <dd>
-            [
+            
             @if (Model.HasPassword)
             {
-                @Html.ActionLink("Сменете лозинка", "ChangePassword")
+                @Html.ActionLink("Променете лозинка тука", "ChangePassword")
             }
             else
             {
                 @Html.ActionLink("Create", "SetPassword")
             }
-            ]
         </dd>
+
         <dt>Надворешни најави:</dt>
         <dd>
             @Model.Logins.Count [

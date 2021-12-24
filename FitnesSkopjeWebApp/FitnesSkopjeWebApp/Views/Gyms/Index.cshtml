@@ -29,7 +29,7 @@
 @if (Model.gyms.Count > 0)
 {     
 
-<div class="row">
+<div class="row" >
     <div class="filtercontainer">
         <div class="header">
             <span class="filterbutton">Прикажи филтри</span>
@@ -59,7 +59,7 @@
             }
         </div>
     </div>
-        <div class="col-sm-8">
+        <div class="col-sm-12">
             <br />
             <br />
             <div class="table-container" id="tableContainerGymsIndex">
@@ -101,7 +101,7 @@
                         @foreach (var item in Model.gyms)
                         {
                             <tr onclick="Redirect(@item.Id)">
-                                <td title="hehe">
+                                <td>
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>
                                 @*<td>

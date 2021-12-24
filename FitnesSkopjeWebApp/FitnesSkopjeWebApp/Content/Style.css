@@ -16,7 +16,6 @@
     margin-top: 2%;
 }
 
-
 .filterbutton{
     padding: 2%;
 }
@@ -24,8 +23,6 @@
 .header{
     cursor: pointer;
 }
-
-
 
 .card {
     margin-left: 80%;
@@ -102,8 +99,6 @@ table{
 
 
 .table thead {
-    /*background-color: rgba(90, 73, 90, .8);*/
-    /*background-color: rgba(15, 47, 230, 1);*/
     background-color: grey;
 }
 
@@ -136,9 +131,6 @@ th {
     background-color: rgb(89 152 26 / 0.89);
     border-color: rgb(89 152 26 / 0.89);
 }
-/*.editcontainer{
-    background-color: lightgray;
-}*/
 
 #clearFilterButton {
     background-color: rgb(89 152 26 / 0.89);
@@ -206,24 +198,11 @@ td {
     height: 100%;
 }
 
-.registration{
+.registration {
     padding: 5%;
     align-self: center;
     padding-left: 30%;
 }
-
-/*.card-body {
-    background-color: lightgray;
-    margin-left: -2%;
-}*/
-
-/*#filterDejnosti {
-    background-color: lightgray;
-    width: 30%;
-    height: 30%;
-    border-radius: 15px 15px 15px 15px;
-    margin-top: 45px;
-}*/
 
 #filterTitle {
     margin-left: 35px;
@@ -260,14 +239,6 @@ td {
 #tablefav thead tr th {
     width: 100%;
 }
-
-/*za options vo Reviews za cetvrtata kolona
-    #optionsRow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-*/
 
 #containerDetails {
     background-color: red;
@@ -334,8 +305,7 @@ td {
     border-radius: 6px 6px 6px 6px;
 }
 
-
-#editButtonDetails a {
+#editButtonDetails a, #backButtonDetails a {
     color: white;
 }
 
@@ -344,7 +314,7 @@ td {
     border: none;
 }
 
-#editButtonDetails a:hover {
+#editButtonDetails a:hover, #backButtonDetails a:hover {
     text-decoration-line: none;
     color: white;
 }
@@ -359,16 +329,40 @@ td {
     border-radius: 8px 8px 8px 8px;
 }
 
-#backButtonDetails a {
-    color: white;
-}
-
 #backButtonDetails:hover {
     background-color: rgb(35 52 122);
     border: none;
 }
 
-#backButtonDetails a:hover {
-    text-decoration-line: none;
-    color: white;
+.rating {
+    width: 180px;
 }
+
+.rating__star {
+    cursor: pointer;
+    color: #dabd18b2;
+}
+
+.rating__result {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(-10px) translateX(-5px);
+    z-index: -9;
+    font: 3em Arial, Helvetica, sans-serif;
+    color: #ebebeb8e;
+    pointer-events: none;
+}
+
+/*div.col-sm-4.filtercontent:before {
+    display: none;
+}*/
+
+div.col-sm-4.filtercontent {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    background-color: rgb(211 211 211 / 0.90);
+    border-radius: 15px 15px 15px 15px;
+}
+
