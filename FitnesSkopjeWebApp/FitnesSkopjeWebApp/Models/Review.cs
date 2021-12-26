@@ -24,6 +24,7 @@ namespace FitnesSkopjeWebApp.Models
         public string comment { get; set; }
 
         public virtual Gym gym { get; set; }
+        
         public virtual User user { get; set; }
     }
 }

@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Delete";
 }
-<br />
+<br /><br />
 <h2>Избриши</h2>
 <hr />
 <h3>Дали сте сигурни дека сакате да го избришете вашиот коментар?</h3>
@@ -43,15 +43,16 @@
             @Html.DisplayFor(model => model.comment)
         </dd>
         <br />
+        <input type="submit" value="Избриши" class="btn btn-default" href="javascript:history.back()" / style="margin-left: 8%"/>
     </dl>
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
+        <br />
         <div class="form-actions no color">
-            <input type="submit" value="Избриши" class="btn btn-default" href="javascript:history.back()"//>
-            <a class="btn btn-default" href="javascript:history.back()" style="background-color: rgba(41,61,144,1); border: 1px px solid rgb(37 95 215)">Назад</a>
+            <a class="btn btn-primary" href="javascript:history.back()">Назад</a>
         </div>
     }
 </div>
