@@ -16,9 +16,9 @@
     margin-top: 2%;
 }
 
-.filterbutton{
+/*.filterbutton{
     padding: 2%;
-}
+}*/
 
 .header{
     cursor: pointer;
@@ -359,10 +359,10 @@ td {
 }*/
 
 div.col-sm-4.filtercontent {
-    display: block;
     position: absolute;
     z-index: 1;
     background-color: rgb(211 211 211 / 0.90);
     border-radius: 15px 15px 15px 15px;
 }
+
 
