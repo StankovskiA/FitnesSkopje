@@ -43,16 +43,16 @@
             @Html.DisplayFor(model => model.comment)
         </dd>
         <br />
-        <input type="submit" value="Избриши" class="btn btn-default" href="javascript:history.back()" / style="margin-left: 8%"/>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Избриши" class="btn btn-danger" />
+                <a class="btn btn-primary" href="javascript:history.back()">Назад</a>
+            </div>
+        }
+
     </dl>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <br />
-        <div class="form-actions no color">
-            <a class="btn btn-primary" href="javascript:history.back()">Назад</a>
-        </div>
-    }
 </div>

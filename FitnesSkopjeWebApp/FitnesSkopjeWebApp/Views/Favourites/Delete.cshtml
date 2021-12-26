@@ -6,7 +6,7 @@
 <br /><br />
 <h2>Избриши</h2>
 <hr />
-<h3>Дали сте сигурни дека сакате да ја избришете оваа теретана?</h3>
+<h3>Дали сте сигурни дека сакате да ја избришете оваа теретана од омилени теретани?</h3>
 
 <div>
     @*<h4>Омилени теретани</h4>*@
@@ -27,16 +27,17 @@
         <dd>
             @Html.DisplayFor(model => model.gymName)
         </dd>
-        <input type="submit" value="Избриши" class="btn btn-default" style="margin-left: 8%; margin-top: 0.7%" /> <br />
+        <br />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Избриши" class="btn btn-danger" />
+                <a class="btn btn-primary" href="javascript:history.back()">Назад</a>
+            </div>
+        }
+
     </dl>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            
-            <a class="btn btn-primary" href="javascript:history.back()" style="margin-top: 1%">Назад</a>
-        </div>
-    }
 </div>
