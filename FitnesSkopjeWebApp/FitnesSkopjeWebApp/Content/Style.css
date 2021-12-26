@@ -16,12 +16,11 @@
     margin-top: 2%;
 }
 
-/*.filterbutton{
-    padding: 2%;
-}*/
 
-.header{
+.header {
     cursor: pointer;
+    margin-left: 1.5%;
+    margin-top: -4.8%;
 }
 
 .card {
@@ -361,8 +360,14 @@ td {
 div.col-sm-4.filtercontent {
     position: absolute;
     z-index: 1;
-    background-color: rgb(211 211 211 / 0.90);
+    /*background-color: rgb(211 211 211 / 0.90);*/
+    background-color: white;
     border-radius: 15px 15px 15px 15px;
+    margin-left: 1%;
+    margin-top: -1.2%;
+    border: solid 2px;
+    border-color: rgb(211 211 211 / 0.90);
+    ;
 }
 
 
