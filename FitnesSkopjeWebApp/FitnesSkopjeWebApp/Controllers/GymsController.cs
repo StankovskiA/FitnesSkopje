@@ -68,7 +68,7 @@ namespace FitnesSkopjeWebApp.Controllers
                 return View((lstApps, db.Favourites.ToList(), search));
             }
 
-            return View((db.Gyms.ToList(), db.Favourites.ToList()));
+            //return View((db.Gyms.ToList(), db.Favourites.ToList()));
         }
 
         //Json za autocomplete
@@ -93,7 +93,17 @@ namespace FitnesSkopjeWebApp.Controllers
             {
                 return HttpNotFound();
             }
+
             ViewBag.GymName = db.Gyms.Find(id).Name;
+
+            var userEmail = User.Identity.Name;
+            var userId = db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault().id;
+            var isReviewed = db.Reviews.Where(a => a.gymId == id && a.userId == userId).FirstOrDefault();
+            ViewBag.IsReviewed = isReviewed;
+            if (isReviewed != null)
+            {
+                ViewBag.gymReview = isReviewed.id;
+            }
             return View((gym, GetReviews(id), IsGymOpened(id)));
         }
 

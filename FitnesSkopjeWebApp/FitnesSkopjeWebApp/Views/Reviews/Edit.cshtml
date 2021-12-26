@@ -17,7 +17,7 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.id)
 
-    <div class="form-group">
+    <div style="display:none" class="form-group">
             @Html.LabelFor(model => model.userId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.userId, new { htmlAttributes = new { @class = "form-control" } })
@@ -25,7 +25,7 @@
             </div>
         </div>
 
-    <div class="form-group">
+    <div  style="display:none" class="form-group">
         @Html.LabelFor(model => model.gymId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.gymId, new { htmlAttributes = new { @class = "form-control" } })
@@ -58,7 +58,7 @@
 }
 
 <div>
-    <a class="btn btn-default" href="javascript:history.back()">Назад</a>
+    <a class="btn btn-info" href="javascript:history.back()">Назад</a>
 </div>
 
 @section Scripts {

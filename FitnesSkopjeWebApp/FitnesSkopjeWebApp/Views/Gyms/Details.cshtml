@@ -53,7 +53,7 @@
                 @Html.DisplayFor(model => model.gym.workingTimeSunday)
             </dd>
             <dt>
-                Растојание
+                Растојание 
             </dt>
             <dd id="showDist">
 
@@ -89,14 +89,24 @@
         </dl>
 
 @*Add new review*@
-<div class="button" id="updateDiv">
+@*<div class="button" id="updateDiv">
     @Ajax.ActionLink("Додади преглед", "Create", "Reviews", new { id = Model.gym.Id }, new AjaxOptions
         {
         HttpMethod = "GET",
         InsertionMode = InsertionMode.Replace,
         UpdateTargetId = "updateDiv"
         }, new { @class = "nav-link" })
-</div>
+</div>*@
+<p>
+    @if (ViewBag.IsReviewed == null)
+    {
+        <a class="btn btn-primary" href="@Url.Action("Create","Reviews",new { id=Model.gym.Id})">Додади преглед</a>
+    }
+    @if (ViewBag.IsReviewed != null)
+    {
+        <a class="btn btn-primary" href="@Url.Action("Edit","Reviews",new { id=ViewBag.gymReview })">Промени постоечки преглед</a>
+    }
+</p>
 @*Display Reviews*@
 <div class="table-container" id="tableRevDetails">
     @if (Model.reviews.Count() > 0)

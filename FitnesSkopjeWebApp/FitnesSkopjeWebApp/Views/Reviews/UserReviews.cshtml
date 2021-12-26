@@ -25,7 +25,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.comment)
                     </th>
-                    <th></th>
+                    @*<th></th>*@
                 </tr>
 
             </thead>
@@ -36,10 +36,10 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.gym.Name)
                         </td>
-                        <td>
+                        <td style="text-align:center">
                             @Html.DisplayFor(modelItem => item.rating)
                         </td>
-                        <td>
+                        <td style="text-align:center">
                             @Html.DisplayFor(modelItem => item.comment)
                         </td>
                         <td>
