@@ -1,0 +1,58 @@
+﻿@model FitnesSkopjeWebApp.Models.Review
+
+@{
+    ViewBag.Title = "Delete";
+}
+<br /><br />
+<h2>Избриши</h2>
+<hr />
+<h3>Дали сте сигурни дека сакате да го избришете вашиот коментар?</h3>
+<br />
+<div>
+    @*<h4>Review</h4>*@
+    <dl class="dl-horizontal">
+        @*<dt>
+            @Html.DisplayNameFor(model => model.userId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userId)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gym.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gym.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comment)
+        </dd>
+        <br />
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Избриши" class="btn btn-danger" />
+                <a class="btn btn-primary" href="javascript:history.back()">Назад</a>
+            </div>
+        }
+
+    </dl>
+</div>

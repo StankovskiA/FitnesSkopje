@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "type": "mssql.onprem",
+      "connectionId": "DefaultConnection",
+      "secretStore": "AzureAppSettings"
+    },
+    "mssql2": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/fitnesskopjewebappdbserver/databases/FitnesSkopjeWebApp_db",
+      "type": "mssql.azure",
+      "connectionId": "(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\aspnet-FitnesSkopjeWebApp-20211109102850.mdf;InitialCatalog=aspnet-FitnesSkopjeWebApp-20211109102850;IntegratedSecurity=True",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}

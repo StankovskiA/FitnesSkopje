@@ -1,0 +1,50 @@
+﻿@model (List<FitnesSkopjeWebApp.Models.Gym> gyms, List<FitnesSkopjeWebApp.Models.Favourite> favourites)
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@ViewBag.User favourite gyms</h2>
+
+<table>
+    <thead>
+        <tr>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.userId)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.favourites.First().gymId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.favourites)
+        {
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.userId)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem=>item.gymName)
+                </td>
+                <td>
+                    @*<a href="@Url.Action("Edit", "Favourites", new { id = item.id })">
+                            <img width="20" height="20" src="@Url.Content("~/Images/edit.png")" />
+                        </a>
+                        <a href="@Url.Action("Details", "Favourites",new { id = item.id })">
+                            <img width="20" height="20" src="@Url.Content("~/Images/details.png")" />
+                        </a>*@
+
+                    <a href="@Url.Action("Delete", "Favourites", new { id = item.id })">
+                        <img width="20" height="20" src="@Url.Content("~/Images/delete.png")" />
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+

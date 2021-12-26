@@ -1,0 +1,43 @@
+﻿@model FitnesSkopjeWebApp.Models.Favourite
+
+@{
+    ViewBag.Title = "Delete";
+}
+<br /><br />
+<h2>Избриши</h2>
+<hr />
+<h3>Дали сте сигурни дека сакате да ја избришете оваа теретана од омилени теретани?</h3>
+
+<div>
+    @*<h4>Омилени теретани</h4>*@
+    <br />
+    <dl class="dl-horizontal">
+        @*<dt>
+            @Html.DisplayNameFor(model => model.userId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userId)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gymName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gymName)
+        </dd>
+        <br />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Избриши" class="btn btn-danger" />
+                <a class="btn btn-primary" href="javascript:history.back()">Назад</a>
+            </div>
+        }
+
+    </dl>
+
+</div>
