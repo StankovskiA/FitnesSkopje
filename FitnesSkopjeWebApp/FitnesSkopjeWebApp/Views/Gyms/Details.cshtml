@@ -3,147 +3,167 @@
 @{
     ViewBag.Title = "Details";
 }
+<br />
+<br />
+<h2>@ViewBag.GymName</h2>
 
-<h2>@ViewBag.GymName - Details</h2>
+<link href="~/Content/Style.css" rel="stylesheet" />
 
 @*Show gym details*@
 <div onload="distance()">
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.gym.Name)
-        </dt>
+    <dl class="dl-horizontal" id="details">
+            <div id="detailsLeft">
+            <dt>
+                @Html.DisplayNameFor(model => model.gym.Name)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.gym.Name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.gym.Name)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.gym.Address)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.gym.Address)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.gym.Address)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.gym.Address)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.gym.Number)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.gym.Number)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.gym.Number)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.gym.Number)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.gym.workingTimeWeek)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.gym.workingTimeWeek)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.gym.workingTimeWeek)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.gym.workingTimeSunday)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.gym.workingTimeWeek)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.gym.workingTimeSunday)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.gym.workingTimeSunday)
-        </dd>
-        <dt>
-            Растојание
-        </dt>
-        <dd id="showDist">
+            <dd>
+                @Html.DisplayFor(model => model.gym.workingTimeSunday)
+            </dd>
+            <dt>
+                Растојание 
+            </dt>
+            <dd id="showDist">
 
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.gym.Areas)
-        </dt>
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.gym.Areas)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.gym.Areas)
-        </dd>
-        <dt>
-            -
-        </dt>
-        <dd>
-            @if (Model.isOpened.Length == 22)
-            {
-                <p class="isOpen" style="color:forestgreen">@Model.isOpened </p>
-            }
-            else
-            {
-                <p class="isOpen" style="color:orangered"> @Model.isOpened </p>
-            }
+            <dd>
+                @Html.DisplayFor(model => model.gym.Areas)
+            </dd>
+            <dt>
+                @*-*@
+            </dt>
+            <dd>
+                @if (Model.isOpened.Length == 22)
+                {
+                    <p class="isOpen" style="color:forestgreen">@Model.isOpened </p>
+                }
+                else
+                {
+                    <p class="isOpen" style="color:orangered"> @Model.isOpened </p>
+                }
 
-        </dd>
-        <dt>
-            Map
-        </dt>
-        <dd>
-            <div id="map" style="width: 300px; height: 300px;"></div>
-        </dd>
-    </dl>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.gym.Id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-
-    @*Add new review*@
-    <div class="button" id="updateDiv">
-        @Ajax.ActionLink("Add review", "Create", "Reviews", new { id = Model.gym.Id }, new AjaxOptions
-            {
-            HttpMethod = "GET",
-            InsertionMode = InsertionMode.Replace,
-            UpdateTargetId = "updateDiv"
-            }, new { @class = "nav-link" })
+            </dd>
     </div>
-    @*Display Reviews*@
-    <div>
-        @if (Model.reviews.Count() > 0)
+            @*<dt>
+                    Map
+                </dt>*@
+    <dd>
+        <div id="map" style="width: 300px; height: 300px;"></div>
+    </dd>
+        </dl>
+
+@*Add new review*@
+@*<div class="button" id="updateDiv">
+    @Ajax.ActionLink("Додади преглед", "Create", "Reviews", new { id = Model.gym.Id }, new AjaxOptions
         {
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.reviews.First().user.username)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.gym.Name)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.reviews.First().rating)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.reviews.First().comment)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.reviews)
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "updateDiv"
+        }, new { @class = "nav-link" })
+</div>*@
+<p>
+    @if (ViewBag.IsReviewed == null)
+    {
+        <a class="btn btn-primary" href="@Url.Action("Create","Reviews",new { id=Model.gym.Id})">Додади преглед</a>
+    }
+    @if (ViewBag.IsReviewed != null)
+    {
+        <a class="btn btn-primary" href="@Url.Action("Edit","Reviews",new { id=ViewBag.gymReview })">Промени постоечки преглед</a>
+    }
+</p>
+@*Display Reviews*@
+<div class="table-container" id="tableRevDetails">
+    @if (Model.reviews.Count() > 0)
+    {
+        <table class="table" id="tableRev">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.reviews.First().user.username)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.gym.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.reviews.First().rating)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.reviews.First().comment)
+                    </th>
+                    @if (User.IsInRole("Admin"))
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.user.username)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.gym.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.rating)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.comment)
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
+                        <th></th>
                     }
-                </tbody>
-            </table>
-        }
-    </div>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.reviews)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.user.username)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.gym.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.rating)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.comment)
+                        </td>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 </div>
-
+<p>
+    <button id="editButtonDetails">@Html.ActionLink("Промени", "Edit", new { id = Model.gym.Id })</button>
+    <button id="backButtonDetails">@Html.ActionLink("Назад", "Index")</button>
+</p>
+</div>
 
 @section Scripts{
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>

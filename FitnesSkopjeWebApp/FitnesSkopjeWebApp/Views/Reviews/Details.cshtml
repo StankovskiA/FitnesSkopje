@@ -3,27 +3,26 @@
 @{
     ViewBag.Title = "Details";
 }
-
-<h2>Details</h2>
-
+<br /><br />
+<h2>Детали</h2>
 <div>
-    <h4>Review</h4>
+    @*<h4>Review</h4>*@
     <hr />
     <dl class="dl-horizontal">
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.userId)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.userId)
-        </dd>
-
+        </dd>*@
+        <br />
         <dt>
-            @Html.DisplayNameFor(model => model.gymId)
+            @Html.DisplayNameFor(model => model.gym.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.gymId)
+            @Html.DisplayFor(model => model.gym.Name)
         </dd>
 
         <dt>
@@ -41,10 +40,12 @@
         <dd>
             @Html.DisplayFor(model => model.comment)
         </dd>
-
+        <br />
+        <a class="btn btn-default" href="@Url.Action("Edit", "Reviews", new { id = Model.id })" style="margin-left: 8%">Измени</a>
+        <br /><br />
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a class="btn btn-primary" href="javascript:history.back()">Назад</a>
 </p>
+    

@@ -49,7 +49,7 @@ namespace FitnesSkopjeWebApp.Controllers
         public ActionResult Create(int id)
         {
             ViewBag.GymId = id;
-            return PartialView();
+            return View();
         }
 
         // POST: Reviews/Create
@@ -61,13 +61,15 @@ namespace FitnesSkopjeWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                var rating = Request.Form["hiddenRatingNumber"];
                 var userEmail = User.Identity.Name;
                 var gymId = Request.Form["gymId"];
                 db.Reviews.Add(new Review()
                 {
                     userId=db.AppUsers.Where(t=>t.email==userEmail).FirstOrDefault().id,
                     gymId=int.Parse(gymId),
-                    rating=review.rating,
+                    rating=int.Parse(rating),
                     comment=review.comment
                 });
                 db.SaveChanges();
@@ -103,7 +105,7 @@ namespace FitnesSkopjeWebApp.Controllers
             {
                 db.Entry(review).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("UserReviews");
             }
             return View(review);
         }
@@ -131,7 +133,7 @@ namespace FitnesSkopjeWebApp.Controllers
             Review review = db.Reviews.Find(id);
             db.Reviews.Remove(review);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("UserReviews");
         }
 
         protected override void Dispose(bool disposing)
