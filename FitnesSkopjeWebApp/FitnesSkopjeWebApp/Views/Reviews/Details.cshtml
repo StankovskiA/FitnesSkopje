@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Details";
 }
-<br />
+<br /><br />
 <h2>Детали</h2>
 <div>
     @*<h4>Review</h4>*@
@@ -41,9 +41,11 @@
             @Html.DisplayFor(model => model.comment)
         </dd>
         <br />
+        <a class="btn btn-default" href="@Url.Action("Edit", "Reviews", new { id = Model.id })" style="margin-left: 8%">Измени</a>
+        <br /><br />
     </dl>
 </div>
 <p>
-    <button class="btn btn-default" id="edit1">@Html.ActionLink("Edit", "Edit", new { id = Model.id }) </button> 
-    <a class="btn btn-default" href="javascript:history.back()" style="background-color: rgba(41,61,144,1); border: 1px px solid rgb(37 95 215)">Назад</a>
+    <a class="btn btn-primary" href="javascript:history.back()">Назад</a>
 </p>
+    

@@ -3,10 +3,11 @@
 @{
     ViewBag.Title = "Delete";
 }
-<br />
+<br /><br />
 <h2>Избриши</h2>
 <hr />
 <h3>Дали сте сигурни дека сакате да ја избришете оваа теретана?</h3>
+
 <div>
     @*<h4>Омилени теретани</h4>*@
     <br />
@@ -26,7 +27,7 @@
         <dd>
             @Html.DisplayFor(model => model.gymName)
         </dd>
-        <br />
+        <input type="submit" value="Избриши" class="btn btn-default" style="margin-left: 8%; margin-top: 0.7%" /> <br />
     </dl>
 
     @using (Html.BeginForm())
@@ -34,8 +35,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Избриши" class="btn btn-default" />
-            <a class="btn btn-default" href="javascript:history.back()" style="background-color: rgba(41,61,144,1); border: 1px px solid rgb(37 95 215)">Назад</a>
+            
+            <a class="btn btn-primary" href="javascript:history.back()" style="margin-top: 1%">Назад</a>
         </div>
     }
 </div>
