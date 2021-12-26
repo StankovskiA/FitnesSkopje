@@ -213,7 +213,7 @@ td {
 
 #gyms tbody tr td:first-child:hover {
     color: rgb(37 95 215);
-    text-decoration-line: underline;
+    
     cursor: pointer;
 }
 
@@ -367,6 +367,11 @@ div.col-sm-4.filtercontent {
     margin-top: -1.2%;
     border: solid 2px;
     border-color: rgb(211 211 211 / 0.90);
-    ;
+    
+}
+
+
+tbody td p {
+    color: lightgray;
 }
 

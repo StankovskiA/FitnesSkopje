@@ -100,9 +100,10 @@
                     <tbody>
                         @foreach (var item in Model.gyms)
                         {
-                            <tr onclick="Redirect(@item.Id)">
+                            <tr  onclick="Redirect(@item.Id)">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Name)
+                                    <p>Кликни за детали</p>
                                 </td>
                                 @*<td>
                                         @Html.DisplayFor(modelItem => item.Address)
@@ -121,7 +122,7 @@
                                     </td>*@
                                 <td id="gymMap">
                                     <div style="text-align:center" class="item" data-gym-latitude="@item.Latitude" data-gym-longitude="@item.Longitude">
-                                        Мапа
+                                        Мапа <p>Погледни ја тука</p>
                                         <iframe style="display:none" class="map" width="160" height="160" src="https://maps.google.com/maps?q=@item.Latitude,@item.Longitude&hl=es;z=17&amp;output=embed"></iframe>
                                     </div>
 
@@ -135,11 +136,11 @@
 
                                         if (Model.favourites.Where(a => a.gymId == item.Id && a.userId == ViewBag.userId).FirstOrDefault() == null)
                                         {
-                                            <button type="submit" class="btn btn-link"> <img width="25" height="25" src="@Url.Content("~/Images/empty.png")" /></button>
+                                            <button type="submit" class="btn btn-link"> <img width="28" height="25" src="@Url.Content("~/Images/empty.png")" /></button>
                                         }
                                         if (Model.favourites.Where(a => a.gymId == item.Id && a.userId == ViewBag.userId).FirstOrDefault() != null)
                                         {
-                                            <button type="submit" class="btn btn-link"> <img width="25" height="25" src="@Url.Content("~/Images/full.png")" /></button>
+                                            <button type="submit" class="btn btn-link"> <img width="28" height="25" src="@Url.Content("~/Images/full.png")" /></button>
                                         }
                                     }
                                 </td>
