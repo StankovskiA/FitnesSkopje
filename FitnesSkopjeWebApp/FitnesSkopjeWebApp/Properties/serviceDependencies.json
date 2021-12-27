@@ -3,10 +3,6 @@
     "mssql1": {
       "type": "mssql",
       "connectionId": "DefaultConnection"
-    },
-    "mssql2": {
-      "type": "mssql",
-      "connectionId": "(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\aspnet-FitnesSkopjeWebApp-20211109102850.mdf;InitialCatalog=aspnet-FitnesSkopjeWebApp-20211109102850;IntegratedSecurity=True"
     }
   }
 }
