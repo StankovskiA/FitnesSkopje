@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -23,8 +24,9 @@ namespace FitnesSkopjeWebApp.Models
         [Display(Name = "Коментар")]
         public string comment { get; set; }
 
+        [JsonIgnore]
         public virtual Gym gym { get; set; }
-        
+        [JsonIgnore]
         public virtual User user { get; set; }
     }
 }

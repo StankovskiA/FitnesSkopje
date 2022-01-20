@@ -270,6 +270,11 @@ namespace FitnesSkopjeWebApp.Controllers
             //vrakja vo 24h format
             var currentHour = DateTime.Now.Hour;
 
+            //var currentTimeZone = TimeZone.CurrentTimeZone;
+            //var CEST = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
+            //var CSETime = TimeZoneInfo.ConvertTimeFromUtc(currentTimeZone.ToUniversalTime, CEST);
+
+
             if (currentHour >= openingHour && 
                 currentHour <= closingHour)
             {

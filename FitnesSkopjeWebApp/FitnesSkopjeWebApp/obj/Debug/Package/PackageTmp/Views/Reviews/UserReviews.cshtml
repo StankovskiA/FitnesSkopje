@@ -1,0 +1,81 @@
+﻿@model IEnumerable<FitnesSkopjeWebApp.Models.Review>
+
+@{
+    ViewBag.Title = "UserReviews";
+}
+<br />
+<br />
+<h2>Мои прегледи</h2>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<hr />
+<div class="table-container" id="tableContainerReviews">
+    <div>
+        <table id="userReviews" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.gym.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.rating)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.comment)
+                    </th>
+                    @*<th></th>*@
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr id="trReviews">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.gym.Name)
+                        </td>
+                        <td style="text-align:center">
+                            @Html.DisplayFor(modelItem => item.rating)
+                        </td>
+                        <td style="text-align:center">
+                            @Html.DisplayFor(modelItem => item.comment)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit", "Reviews", new { id = item.id })" style="margin-right:5px">
+                                <img width="20" height="20" src="@Url.Content("~/Images/edit.png")" title="Измени" />
+                            </a>
+                            <a href="@Url.Action("Details", "Reviews", new { id = item.id })" style="margin-right:5px">
+                                <img width="20" height="20" src="@Url.Content("~/Images/details.png")" title="Детали"/>
+                            </a>
+                            <a href="@Url.Action("Delete", "Reviews", new { id = item.id })">
+                                <img width="20" height="20" src="@Url.Content("~/Images/delete.png")" title="Избриши" />
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#userReviews").DataTable({
+                pageLength: 5,
+                lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
+                "paging": true,
+                "ordering": false,
+                "info": false,
+                "searching": false,
+                "bLengthChange": false,
+                "pagingType": "full_numbers"
+            });
+        });
+    </script>
+
+}

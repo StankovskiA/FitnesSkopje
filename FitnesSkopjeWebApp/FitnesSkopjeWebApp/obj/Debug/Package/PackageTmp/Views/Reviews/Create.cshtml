@@ -1,0 +1,98 @@
+﻿@model FitnesSkopjeWebApp.Models.Review
+
+@{
+//ViewBag.Title = "Create";
+}
+
+<link href="~/Content/Style.css" rel="stylesheet" />
+
+@using (Html.BeginForm("Create","Reviews",FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        <input type="hidden" name="gymId" id="gym_Id" value="@ViewBag.GymId" />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">            
+            @Html.Label("Оценка", new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+
+                <input id="idRating" type="hidden" name="hiddenRatingNumber"/>
+
+                @*Dzvezdicki za rejting ->*@
+                <div class="rating">
+                    <i class="rating__star far fa-star"></i>
+                    <i class="rating__star far fa-star"></i>
+                    <i class="rating__star far fa-star"></i>
+                    <i class="rating__star far fa-star"></i>
+                    <i class="rating__star far fa-star"></i>
+                </div>
+                <div class="rating__result"></div>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.comment, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.comment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.comment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Додади преглед" class="btn btn-default"/>
+                
+                <a href="@Url.Action("Details","Gyms",new { id = ViewBag.GymId })" class="btn btn-primary">Назад</a>
+                <a></a>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script src="https://kit.fontawesome.com/535a82fc04.js" crossorigin="anonymous"></script>
+
+    <script>
+        const ratingStars = [...document.getElementsByClassName("rating__star")];
+        const ratingResult = document.querySelector(".rating__result");
+
+        printRatingResult(ratingResult);
+
+        function executeRating(stars,result) {
+            const starClassActive = "rating__star fas fa-star";
+            const starClassInactive = "rating__star far fa-star";
+            const starsLength = stars.length;
+            let i;
+            stars.map((star) => {
+                star.onclick = () => {
+                    i = stars.indexOf(star);
+                    if (star.className === starClassInactive) {
+                        printRatingResult(result, i + 1);
+                        for (i; i >= 0; --i) stars[i].className = starClassActive;
+                    } else {
+                        printRatingResult(result, i);
+                        for (i; i < starsLength; ++i) stars[i].className = starClassInactive;
+                    }
+                };
+            });
+        }
+
+        
+
+        function printRatingResult(result, num = 0) {
+          /*  result.textContent = `${num}/5`;*/
+            $("#idRating").val(parseInt(num))
+            console.log($("#idRating").val())
+        }
+
+        executeRating(ratingStars, ratingResult);
+    </script>
+}
