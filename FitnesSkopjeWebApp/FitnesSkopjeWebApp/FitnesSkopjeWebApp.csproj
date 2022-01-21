@@ -253,6 +253,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Review.cs" />
+    <Compile Include="Models\TableJoinResult.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -639,6 +640,7 @@
     <Content Include="Views\Favourites\UserFavourites.cshtml" />
     <Content Include="Views\Search\_SearchApplication.cshtml" />
     <Content Include="Views\Account\LogInFitnessSkopje.cshtml" />
+    <Content Include="Views\Reviews\apiReviews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -23,6 +23,12 @@ namespace FitnesSkopjeWebApp.Controllers
         }
 
         [Authorize]
+        public ActionResult apiReviews()
+        {
+            return View();
+        }
+
+        [Authorize]
         public ActionResult UserReviews()
         {
             string curentUserEmail = User.Identity.Name;

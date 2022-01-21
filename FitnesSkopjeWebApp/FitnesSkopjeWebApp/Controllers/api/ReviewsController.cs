@@ -17,13 +17,13 @@ namespace FitnesSkopjeWebApp.Controllers.api
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/Reviews
-        public List<Review> GetReviews()
+        public  IQueryable<TableJoinResult> GetReviews()
         {
-            //var reviews = db.Reviews.ToList();
-            //return reviews;
-            string curentUserEmail = User.Identity.Name;
-
-            return db.Reviews.Where(u => u.user.email.Equals(curentUserEmail)).ToList();
+            string curentUserEmail = User.Identity.Name;            
+            return (IQueryable<TableJoinResult>)(from r in db.Reviews
+                    join g in db.Gyms on r.gymId equals g.Id
+                    where r.user.email==curentUserEmail
+                    select new TableJoinResult {gym=g,review=r});
         }
 
         // GET: api/Reviews/5
