@@ -1,0 +1,49 @@
+﻿
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Име на теретана")
+            </th>
+
+        </tr>
+    </thead>
+    <tbody id="myData"></tbody>
+</table>
+
+@section Scripts{
+    <script>
+
+
+        fetch('/api/Favourites')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                appendData(data);
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+
+        function appendData(data) {
+            var mainContainer = document.getElementById("myData");
+            var ListValue = "";
+
+            for (var i = 0; i < data.length; i++) {
+                var tr = document.createElement("tr");
+                var tdName = document.createElement("td");
+                var tdDelete = document.createElement("td");
+
+                tdName.innerHTML = data[i].gymName;
+                tdDelete.innerHTML = '<a href="@Url.Action("Delete", "Favourites")/' + data[i].id + '"> <img width="20" height="20" src="@Url.Content("~/Images/delete.png")" title="Избриши" />';
+
+                tr.appendChild(tdName);
+                tr.appendChild(tdDelete);
+                mainContainer.appendChild(tr);
+            }
+
+
+        }
+    </script>
+}
