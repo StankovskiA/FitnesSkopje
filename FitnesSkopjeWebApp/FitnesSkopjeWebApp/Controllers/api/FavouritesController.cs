@@ -20,8 +20,12 @@ namespace FitnesSkopjeWebApp.Controllers.api
         // GET: api/Favourites
         public IQueryable<Favourite> GetFavourites()
         {
-            return db.Favourites;
+            string curentUserEmail = User.Identity.Name;
+            var id = db.AppUsers.Where(t => t.email == curentUserEmail).FirstOrDefault().id;
+           
+            return db.Favourites.Where(u => u.userId == id);
         }
+
 
         // GET: api/Favourites/5
         [ResponseType(typeof(Favourite))]

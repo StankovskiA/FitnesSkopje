@@ -22,6 +22,12 @@ namespace FitnesSkopjeWebApp.Controllers
         }
 
         [Authorize]
+        public ActionResult apiFavourites()
+        {
+            return View();
+        }
+
+        [Authorize]
         public ActionResult UserFavourites()
         {
             string curentUserEmail = User.Identity.Name;
@@ -29,7 +35,6 @@ namespace FitnesSkopjeWebApp.Controllers
             ViewBag.User = db.AppUsers.Where(t => t.email == curentUserEmail).FirstOrDefault().firstName + " " + db.AppUsers.Where(t => t.email == curentUserEmail).FirstOrDefault().lastName;           
             return View((db.Gyms.ToList(),db.Favourites.Where(u => u.userId==id).ToList()));
         }
-
 
         // GET: Favourites/Details/5
         public ActionResult Details(int? id)

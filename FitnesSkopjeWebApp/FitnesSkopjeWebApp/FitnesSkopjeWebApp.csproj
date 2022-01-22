@@ -641,6 +641,7 @@
     <Content Include="Views\Search\_SearchApplication.cshtml" />
     <Content Include="Views\Account\LogInFitnessSkopje.cshtml" />
     <Content Include="Views\Reviews\apiReviews.cshtml" />
+    <Content Include="Views\Favourites\apiFavourites.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
