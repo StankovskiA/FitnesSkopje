@@ -17,6 +17,7 @@ namespace FitnesSkopjeWebApp.Controllers.api
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        //treba
         // GET: api/Favourites
         public IQueryable<Favourite> GetFavourites()
         {
@@ -26,7 +27,7 @@ namespace FitnesSkopjeWebApp.Controllers.api
             return db.Favourites.Where(u => u.userId == id);
         }
 
-
+        //visok
         // GET: api/Favourites/5
         [ResponseType(typeof(Favourite))]
         public IHttpActionResult GetFavourite(int id)
@@ -40,7 +41,7 @@ namespace FitnesSkopjeWebApp.Controllers.api
             return Ok(favourite);
         }
 
-
+        //ne znam 
         // PUT: api/Favourites/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutFavourite(int id, Favourite favourite)
@@ -76,6 +77,7 @@ namespace FitnesSkopjeWebApp.Controllers.api
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        //ne znam
         // POST: api/Favourites
         [ResponseType(typeof(Favourite))]
         public IHttpActionResult PostFavourite(Favourite favourite)
@@ -91,6 +93,7 @@ namespace FitnesSkopjeWebApp.Controllers.api
             return CreatedAtRoute("DefaultApi", new { id = favourite.id }, favourite);
         }
 
+        //treba
         // DELETE: api/Favourites/5
         [ResponseType(typeof(Favourite))]
         public IHttpActionResult DeleteFavourite(int id)
