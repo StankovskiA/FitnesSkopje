@@ -1,17 +1,29 @@
 ﻿@{
     ViewBag.Title = "Омилени теретани";
 }
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayName("Име на теретана")
-            </th>
+<link href="~/Content/Style.css" rel="stylesheet" />
 
-        </tr>
-    </thead>
-    <tbody id="myData"></tbody>
-</table>
+<br />
+<br />
+<h2>Омилени теретани</h2>
+<hr />
+
+<div class="table-container" id="tableContainerFavorites">
+    <div>
+        <table id="tablefav" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayName("Име на теретана")
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody id="myData"></tbody>
+        </table>
+    </div>
+</div>
+
 
 @section Scripts{
     <script>
