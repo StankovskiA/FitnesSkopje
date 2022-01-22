@@ -40,18 +40,6 @@ namespace FitnesSkopjeWebApp.Controllers.api
             return Ok(favourite);
         }
 
-        //  /api/UserFavourites
-        public IHttpActionResult UserFavourites()
-        {
-            string curentUserEmail = User.Identity.Name;
-
-            var id = db.AppUsers.Where(t => t.email == curentUserEmail).FirstOrDefault().id;
-            //ViewBag.User = db.AppUsers
-            //    .Where(t => t.email == curentUserEmail)
-            //    .FirstOrDefault().firstName + " " + db.AppUsers.Where(t => t.email == curentUserEmail).FirstOrDefault().lastName;
-
-            return Ok((db.Gyms.ToList(), db.Favourites.Where(u => u.userId == id).ToList()));
-        }
 
         // PUT: api/Favourites/5
         [ResponseType(typeof(void))]
