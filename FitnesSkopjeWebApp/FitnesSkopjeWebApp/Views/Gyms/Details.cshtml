@@ -55,7 +55,7 @@
             <dt>
                 Растојание 
             </dt>
-            <dd id="showDist">
+            <dd>
 
             </dd>
             <dt>
@@ -111,7 +111,7 @@
 <div class="table-container" id="tableRevDetails">
     @if (Model.reviews.Count() > 0)
     {
-        <table class="table" id="tableRev">
+        <table class="table">
             <thead>
                 <tr>
                     <th>
@@ -160,8 +160,9 @@
     }
 </div>
 <p>
-    <button id="editButtonDetails">@Html.ActionLink("Промени", "Edit", new { id = Model.gym.Id })</button>
-    <button id="backButtonDetails">@Html.ActionLink("Назад", "Index")</button>
+    <br>
+    <a href="@Url.Action("Edit","Gyms", new { id = Model.gym.Id } )" class="btn btn-default">Промени</a>
+    <a style="float: right; margin-right: -1.9%" href="@Url.Action("Index","Gyms")" class="btn btn-primary">Назад</a>
 </p>
 </div>
 

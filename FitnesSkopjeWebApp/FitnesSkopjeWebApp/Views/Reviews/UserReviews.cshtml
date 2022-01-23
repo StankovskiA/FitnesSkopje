@@ -11,7 +11,7 @@
         @Html.ActionLink("Create New", "Create")
     </p>*@
 <hr />
-<div class="table-container" id="tableContainerReviews">
+<div class="table-container">
     <div>
         <table id="userReviews" class="table">
             <thead>
@@ -47,7 +47,7 @@
                                 <img width="20" height="20" src="@Url.Content("~/Images/edit.png")" title="Измени" />
                             </a>
                             <a href="@Url.Action("Details", "Reviews", new { id = item.id })" style="margin-right:5px">
-                                <img width="20" height="20" src="@Url.Content("~/Images/details.png")" title="Детали"/>
+                                <img width="20" height="20" src="@Url.Content("~/Images/details.png")" title="Детали" />
                             </a>
                             <a href="@Url.Action("Delete", "Reviews", new { id = item.id })">
                                 <img width="20" height="20" src="@Url.Content("~/Images/delete.png")" title="Избриши" />
@@ -56,12 +56,14 @@
                     </tr>
                 }
             </tbody>
-
-
         </table>
     </div>
 </div>
-
+<br />
+<div>
+    <a href="@Url.Action("Index","Gyms")" class="btn btn-primary right-float">Назад</a>
+</div>
+<br /><br />
 @section Scripts{
     <script>
         $(document).ready(function () {

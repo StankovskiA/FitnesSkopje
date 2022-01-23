@@ -10,7 +10,6 @@
     .item {
         cursor: pointer;
     }
-
     a {
         display: inline;
     }
@@ -40,7 +39,7 @@
             @using (Html.BeginForm("Index", "Gyms", FormMethod.Post, new { id = "checkboxForm" }))
             {
                 @Html.AntiForgeryToken()
-                <h4 id="filterTitle">Филтер по дејности</h4>
+                <h4>Филтер по дејности</h4>
                 <ul>
                     @foreach (var item in ViewBag.gymTypes)
                     {
@@ -54,7 +53,7 @@
                         }
                     }
                 </ul>
-                <input id="clearFilterButton" type="submit" class="btn btn-default btn-light clearsearch mr10" value="Избриши филтри" />
+                <input  style="margin-left: 10%" type="submit" class="btn btn-default btn-light clearsearch mr10" value="Избриши филтри" />
                 <br /><label style="display: none"></label>
             }
         </div>
@@ -62,7 +61,7 @@
         <div class="col-sm-12">
             <br />
             <br />
-            <div class="table-container" id="tableContainerGymsIndex">
+            <div class="table-container">
                 <table id="gyms" class="table">
                     <thead>
                         <tr>
@@ -173,7 +172,7 @@
     }
     else
     {
-    <p>No gyms with the selected parameters</p>
+    <p>Нема резултати за ова пребарување!</p>
     }
 
     @section Scripts{
@@ -239,9 +238,9 @@
             };
             //----------------------------------------------------
 
-            $(function () {
-                $(document).tooltip();
-            });
+            //$(function () {
+            //    $(document).tooltip();
+            //});
         </script>
 
         <style>

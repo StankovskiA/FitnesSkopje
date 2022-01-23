@@ -6,11 +6,12 @@
 <br /><br />
 <h2>Избриши</h2>
 <hr />
-<h3>Дали сте сигурни дека сакате да го избришете вашиот коментар?</h3>
-<br />
+
 <div>
     @*<h4>Review</h4>*@
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal table-container">
+        <h3 style="padding-top: 3%; margin-left: 4%">Дали сте сигурни дека сакате да го избришете вашиот коментар?</h3>
+        <br />
         @*<dt>
             @Html.DisplayNameFor(model => model.userId)
         </dt>
@@ -49,10 +50,13 @@
             @Html.AntiForgeryToken()
 
             <div class="form-actions no-color">
-                <input type="submit" value="Избриши" class="btn btn-danger" />
-                <a class="btn btn-primary" href="javascript:history.back()">Назад</a>
+                <input type="submit" value="Избриши" class="btn btn-danger" style="margin-bottom: 3%; margin-left: 8%" />
             </div>
         }
-
     </dl>
+    <div class="form-actions no-color">
+        <a class="btn btn-primary right-float" href="javascript:history.back()">Назад</a>
+    </div>
+    <br />
+    <br />
 </div>

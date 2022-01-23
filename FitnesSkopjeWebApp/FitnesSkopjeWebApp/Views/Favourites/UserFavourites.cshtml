@@ -11,14 +11,14 @@
 <h2>Омилени теретани</h2>
 <hr />
 
-<div class="table-container" id="tableContainerFavorites">
+<div class="table-container">
     <div>
-        <table id="tablefav" class="table">
+        <table class="table" style="margin-left: 20%">
             <thead>
                 <tr>
                     @*<th>
-                        @Html.DisplayNameFor(model => model.userId)
-                    </th>*@
+                            @Html.DisplayNameFor(model => model.userId)
+                        </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.favourites.First().gymName)
                     </th>
@@ -31,18 +31,18 @@
                 {
                     <tr>
                         @*<td>
-                            @Html.DisplayFor(modelItem => item.userId)
-                        </td>*@
+                                @Html.DisplayFor(modelItem => item.userId)
+                            </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.gymName)
                         </td>
                         <td>
                             @*<a href="@Url.Action("Edit", "Favourites", new { id = item.id })">
-                                <img width="20" height="20" src="@Url.Content("~/Images/edit.png")" />
-                            </a>
-                            <a href="@Url.Action("Details", "Favourites",new { id = item.id })">
-                                <img width="20" height="20" src="@Url.Content("~/Images/details.png")" />
-                            </a>*@
+                                    <img width="20" height="20" src="@Url.Content("~/Images/edit.png")" />
+                                </a>
+                                <a href="@Url.Action("Details", "Favourites",new { id = item.id })">
+                                    <img width="20" height="20" src="@Url.Content("~/Images/details.png")" />
+                                </a>*@
                             <a href="@Url.Action("Delete", "Favourites", new { id = item.id })">
                                 <img width="20" height="20" src="@Url.Content("~/Images/delete.png")" />
                             </a>
@@ -50,8 +50,11 @@
                     </tr>
                 }
             </tbody>
-
-
         </table>
     </div>
 </div>
+<div>
+    <a href="@Url.Action("Index","Gyms")" class="btn btn-primary right-float">Назад</a>
+</div>
+<br />
+<br />
