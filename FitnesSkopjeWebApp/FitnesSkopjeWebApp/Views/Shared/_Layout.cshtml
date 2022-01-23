@@ -38,7 +38,7 @@
                     @if (User.IsInRole("User"))
                     {
                         <li>@Html.ActionLink("Омилени теретани", "UserFavourites", "Favourites")</li>
-                        <li>@Html.ActionLink("Прегледи", "UserReviews", "Reviews")</li>
+                        <li>@Html.ActionLink("Прегледи", "apiReviews", "Reviews")</li>
                     }
 
                     <li>@Html.ActionLink("Контактирајте не", "Contact", "Home")</li>

@@ -12,6 +12,11 @@ using FitnesSkopjeWebApp.Models;
 
 namespace FitnesSkopjeWebApp.Controllers.api
 {
+    public class review
+    {
+        public string gymId { get; set; }
+        public string comment { get; set; }
+    }
     public class ReviewsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -39,29 +44,24 @@ namespace FitnesSkopjeWebApp.Controllers.api
             return Ok(review);
         }
 
-        ////GEt /api/Reviews/UserReviews
-        //public List<Review> UserReviews()
-        //{
-        //    string curentUserEmail = User.Identity.Name;
 
-        //    return db.Reviews.Where(u => u.user.email.Equals(curentUserEmail)).ToList();
-        //}
-
-        // PUT: api/Reviews/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutReview(int id, Review review)
+        // UPDATE: api/Reviews
+        [ResponseType(typeof(Review))]
+        public IHttpActionResult PostReview(int? id,Review review)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != review.id)
+            if (id != null)
             {
-                return BadRequest();
+                Review reviewnew = db.Reviews.Find(id);
+                reviewnew.rating = review.rating;
+                reviewnew.comment = review.comment;
+                db.Entry(reviewnew).State = EntityState.Modified;
+              
             }
-
-            db.Entry(review).State = EntityState.Modified;
 
             try
             {
@@ -69,7 +69,7 @@ namespace FitnesSkopjeWebApp.Controllers.api
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ReviewExists(id))
+                if (!ReviewExists((int)id))
                 {
                     return NotFound();
                 }
@@ -78,28 +78,45 @@ namespace FitnesSkopjeWebApp.Controllers.api
                     throw;
                 }
             }
+            return RedirectToRoute("default", new { controller = "Reviews", action = "apiReviews" });
 
-            return StatusCode(HttpStatusCode.NoContent);
         }
 
-     
-        // POST: api/Reviews
-        [ResponseType(typeof(Review))]
-        public IHttpActionResult PostReview(Review review)
+        //CREATE : api/CreateReview
+        [Route("api/CreateReview")]
+        [HttpPost]
+        public IHttpActionResult CreateReview(review review)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Reviews.Add(review);
-            db.SaveChanges();
+            var userEmail = User.Identity.Name;
+            int rating =int.Parse(System.Web.HttpContext.Current.Request["hiddenRatingNumber"]);
+            db.Reviews.Add(new Review()
+            {
+                userId = db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault().id,
+                gymId = int.Parse(review.gymId),
+                rating = rating,
+                comment = review.comment
+            });
 
-            return CreatedAtRoute("DefaultApi", new { id = review.id }, review);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+
+            return RedirectToRoute("default", new { controller = "Gyms", action = "Details",id=review.gymId });
         }
+        
 
-        // DELETE: api/Reviews/5
-        [ResponseType(typeof(Review))]
+            // DELETE: api/Reviews/5
+            [ResponseType(typeof(Review))]
         public IHttpActionResult DeleteReview(int id)
         {
             Review review = db.Reviews.Find(id);
