@@ -16,7 +16,7 @@ namespace FitnesSkopjeWebApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Reviews
-        
+        //visok?
         public ActionResult Index()
         {
             return View(db.Reviews.ToList());

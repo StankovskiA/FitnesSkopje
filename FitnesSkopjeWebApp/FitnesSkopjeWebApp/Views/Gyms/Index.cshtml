@@ -18,47 +18,45 @@
 
 <link href="~/Content/Style.css" rel="stylesheet" />
 
-@*<h2>Index</h2>
-
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>*@
 
 @Html.Partial("~/Views/Search/_SearchApplication.cshtml", Model.search)
 
+
+
 @if (Model.gyms.Count > 0)
-{     
+{
 
-<div class="row" >
-    <div class="filtercontainer">
-        <div class="header btn btn-primary">
-            <div class="filterbutton" >Прикажи филтри</div>
-            
 
-        </div>
-        <div class="col-sm-4 filtercontent">
-            @using (Html.BeginForm("Index", "Gyms", FormMethod.Post, new { id = "checkboxForm" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4 id="filterTitle">Филтер по дејности</h4>
-                <ul>
-                    @foreach (var item in ViewBag.gymTypes)
-                    {
-                        if (item.Id == ViewBag.SelectedCheckboxItem)
+    <div class="row">
+        <div class="filtercontainer">
+            <div class="header btn btn-primary">
+                <div class="filterbutton">Прикажи филтри</div>
+
+
+            </div>
+            <div class="col-sm-4 filtercontent">
+                @using (Html.BeginForm("Index", "Gyms", FormMethod.Post, new { id = "checkboxForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <h4 id="filterTitle">Филтер по дејности</h4>
+                    <ul>
+                        @foreach (var item in ViewBag.gymTypes)
                         {
-                            <li style="list-style:none"><input type="radio" value="@item.Id" name="checkboxListItem" checked /><span style="padding-left:3px">@item.Type</span></li>
+                            if (item.Id == ViewBag.SelectedCheckboxItem)
+                            {
+                                <li style="list-style:none"><input type="radio" value="@item.Id" name="checkboxListItem" checked /><span style="padding-left:3px">@item.Type</span></li>
+                            }
+                            else
+                            {
+                                <li style="list-style:none"><input type="radio" value="@item.Id" name="checkboxListItem" /><span style="padding-left:3px">@item.Type</span></li>
+                            }
                         }
-                        else
-                        {
-                            <li style="list-style:none"><input type="radio" value="@item.Id" name="checkboxListItem" /><span style="padding-left:3px">@item.Type</span></li>
-                        }
-                    }
-                </ul>
-                <input id="clearFilterButton" type="submit" class="btn btn-default btn-light clearsearch mr10" value="Избриши филтри" />
-                <br /><label style="display: none"></label>
-            }
+                    </ul>
+                    <input id="clearFilterButton" type="submit" class="btn btn-default btn-light clearsearch mr10" value="Избриши филтри" />
+                    <br /><label style="display: none"></label>
+                }
+            </div>
         </div>
-    </div>
         <div class="col-sm-12">
             <br />
             <br />
@@ -69,30 +67,20 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.gyms.First().Name)
                             </th>
-                            @*<th>
-                                    @Html.DisplayNameFor(model => model.gyms.First().Address)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.gyms.First().Number)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.gyms.First().workingTimeWeek)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.gyms.First().workingTimeSunday)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.gyms.First().Areas)
-                                </th>*@
                             <th>
                                 Локација
                             </th>
-                            <th>
-                                Додај во омилени
-                            </th>
+                            @if (User.IsInRole("User"))
+                            {
+                                <th>
+                                    Додај во омилени
+                                </th>
+                            }
                             @if (User.IsInRole("Admin"))
                             {
-                                <th></th>
+                                <th>
+                                    Акции
+                                </th>
                             }
                         </tr>
                     </thead>
@@ -100,26 +88,13 @@
                     <tbody>
                         @foreach (var item in Model.gyms)
                         {
-                            <tr  onclick="Redirect(@item.Id)">
+                            <tr onclick="Redirect(@item.Id)">
+
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Name)
                                     <p>Кликни за детали</p>
                                 </td>
-                                @*<td>
-                                        @Html.DisplayFor(modelItem => item.Address)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Number)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.workingTimeWeek)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.workingTimeSunday)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Areas)
-                                    </td>*@
+                                
                                 <td id="gymMap">
                                     <div style="text-align:center" class="item" data-gym-latitude="@item.Latitude" data-gym-longitude="@item.Longitude">
                                         Мапа <p>Погледни ја тука</p>
@@ -127,145 +102,144 @@
                                     </div>
 
                                 </td>
-                                <td style="text-align:center">
-                                    @using (Html.BeginForm("Create", "Favourites", FormMethod.Post))
-                                    {
-                                        @Html.AntiForgeryToken()
-                                        <input type="hidden" name="gymId" id="gym_Id" value="@item.Id" />
-                                        <input type="hidden" name="gymName" id="gym_Name" value="@item.Name" />
 
-                                        if (Model.favourites.Where(a => a.gymId == item.Id && a.userId == ViewBag.userId).FirstOrDefault() == null)
+                                @if (User.IsInRole("User"))
+                                {
+                                    <td style="text-align:center">
+                                        @using (Html.BeginForm("Create", "Favourites", FormMethod.Post))
                                         {
-                                            <button type="submit" class="btn btn-link"> <img width="28" height="25" src="@Url.Content("~/Images/empty.png")" /></button>
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="gymId" id="gym_Id" value="@item.Id" />
+                                            <input type="hidden" name="gymName" id="gym_Name" value="@item.Name" />
+
+                                            if (Model.favourites.Where(a => a.gymId == item.Id && a.userId == ViewBag.userId).FirstOrDefault() == null)
+                                            {
+                                                <button type="submit" class="btn btn-link"> <img width="28" height="25" src="@Url.Content("~/Images/empty.png")" /></button>
+                                            }
+                                            if (Model.favourites.Where(a => a.gymId == item.Id && a.userId == ViewBag.userId).FirstOrDefault() != null)
+                                            {
+                                                <button type="submit" class="btn btn-link"> <img width="28" height="25" src="@Url.Content("~/Images/full.png")" /></button>
+                                            }
                                         }
-                                        if (Model.favourites.Where(a => a.gymId == item.Id && a.userId == ViewBag.userId).FirstOrDefault() != null)
-                                        {
-                                            <button type="submit" class="btn btn-link"> <img width="28" height="25" src="@Url.Content("~/Images/full.png")" /></button>
-                                        }
-                                    }
-                                </td>
+                                    </td>
+                                }
                                 @if (User.IsInRole("Admin"))
                                 {
-                                    <td>
+                                    <td class="row">
+                                        <div class="col-md-4 col-md-offset-2">
+                                            <a href="@Url.Action("Edit", "Gyms", new { id = item.Id })">
+                                                <img width="20" height="20" src="@Url.Content("~/Images/edit.png")" />
+                                            </a>
+                                        </div>
 
-                                        <a href="@Url.Action("Edit", "Gyms", new { id = item.Id })">
-                                            <img width="20" height="20" src="@Url.Content("~/Images/edit.png")" />
-                                        </a>
-                                        @* on row click details are shown *@
-                                        @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
-                                        <a href="@Url.Action("Delete", "Gyms", new { id = item.Id })">
-                                            <img width="20" height="20" src="@Url.Content("~/Images/delete.png")" />
-                                        </a>
+                                        <div class="col-md-4">
+                                            <a href="@Url.Action("Delete", "Gyms", new { id = item.Id })">
+                                                <img width="20" height="20" src="@Url.Content("~/Images/delete.png")" />
+                                            </a>
+                                        </div>
+
                                     </td>
                                 }
                             </tr>
                         }
-                    </tbody>
 
-                </table>
+                    </tbody>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td class="row">
+
+                                    <p class="btn btn-primary col-md-offset-2" id="backButtonDetails">
+                                        @Html.ActionLink("Додади нова", "Create")
+                                    </p>
+                                    
+                                </td>
+                            </tr>
+
+                        </tfoot>
+                    }
+                    </table>
             </div>
         </div>
     </div>
-
-
-
-
-    }
-    else
-    {
+}
+else
+{
     <p>No gyms with the selected parameters</p>
-    }
+}
 
-    @section Scripts{
-        <script src="~/Scripts/pagination.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-        <script>
-            $(document).ready(function () {
+@section Scripts{
+    <script src="~/Scripts/pagination.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
 
-                $(".header").click(function () {
+            $(".header").click(function () {
 
 
-                    $header = $(this);
-                    //getting the next element
-                    $filtercontent = $header.next();
-                    //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
-                    $filtercontent.slideToggle(500, function () {
-                        //execute this after slideToggle is done
-                        //change text of header based on visibility of content div
-                        $header.text(function () {
-                            //change text based on condition
-                            return $filtercontent.is(":visible") ? "Затвори филтри" : "Прикажи филтри";
-                        });
+                $header = $(this);
+                
+                $filtercontent = $header.next();
+                
+                $filtercontent.slideToggle(500, function () {
+                    
+                    $header.text(function () {
+                        
+                        return $filtercontent.is(":visible") ? "Затвори филтри" : "Прикажи филтри";
                     });
-
                 });
-
-                $(".item").mouseover(function () {
-                    $(this).children(".map").show();
-                }).mouseout(function () {
-                    $(this).children(".map").hide();
-                });
-
-
-                $("#gyms").DataTable({
-                    pageLength: 5,
-                    lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
-                    "paging": true,
-                    "ordering": false,
-                    "info": false,
-                    "searching": false,
-                    "bLengthChange": false,
-                    "pagingType": "full_numbers"
-                });
-
-
-                $("input:radio").on("click", function () {
-                    if ($(this).is(":checked")) {
-                        $("#checkboxForm").submit()
-                    }
-                })
-
-                $("#clearFilterButton").on("click", function () {
-                    $('input[name="checkboxListItem"]').prop('checked', false);
-                })
-
-
 
             });
 
-            function Redirect(itemId) {
-                location.pathname = "Gyms/Details/" + itemId
-            };
-            //----------------------------------------------------
-
-            $(function () {
-                $(document).tooltip();
+            $(".item").mouseover(function () {
+                $(this).children(".map").show();
+            }).mouseout(function () {
+                $(this).children(".map").hide();
             });
-        </script>
 
-        <style>
-            tbody tr:hover {
-                background-color: lightblue;
-            }
-        </style>
 
-        @*<script>
-            $(document).ready(function () {
-                //$("#gymMap #item").hover(function () {
-                //    var lattitude = $(this).attr("data-gym-latitude");
-                //    var longitude = $(this).attr("data-gym-longitude");
-                //    console.log(lattitude, longitude);
-                //})
+            $("#gyms").DataTable({
+                pageLength: 5,
+                lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
+                "paging": true,
+                "ordering": false,
+                "info": false,
+                "searching": false,
+                "bLengthChange": false,
+                "pagingType": "full_numbers"
+            });
 
-                $(".item").mouseover(function () {
-                    $(this).children(".map").show();
-                }).mouseout(function () {
-                    $(this).children(".map").hide();
-                });
 
-            });*@
-        @*</script>*@
-        @* <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
+            $("input:radio").on("click", function () {
+                if ($(this).is(":checked")) {
+                    $("#checkboxForm").submit()
+                }
+            })
 
-    }
+            $("#clearFilterButton").on("click", function () {
+                $('input[name="checkboxListItem"]').prop('checked', false);
+            })
+
+        });
+
+        function Redirect(itemId) {
+            location.pathname = "Gyms/Details/" + itemId
+        };
+       
+
+        $(function () {
+            $(document).tooltip();
+        });
+    </script>
+
+    <style>
+        tbody tr:hover {
+            background-color: lightblue;
+        }
+    </style>
+
+}

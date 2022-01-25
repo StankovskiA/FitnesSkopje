@@ -28,36 +28,24 @@ namespace FitnesSkopjeWebApp.Controllers
                 ViewBag.userId = db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault().id;
             };
 
-            ViewBag.gymTypes= db.Gym_Types.ToList();
+            ViewBag.gymTypes = db.Gym_Types.ToList();
             SearchApplicationModels search = new SearchApplicationModels();
             var gyms = GetApplicationsSearch(search).ToList();
-            return View((gyms, db.Favourites.ToList(),search));
+            return View((gyms, db.Favourites.ToList(), search));
         }
 
         [HttpPost]
         public ActionResult Index(SearchApplicationModels search)
         {
             var gymTypeId = Request.Form["checkboxListItem"];
+            var lstApps = new List<Gym>();
+
             if (gymTypeId != null)
             {
 
-            var gymTypeName = db.Gym_Types.Find(int.Parse(gymTypeId)).Type;
+                var gymTypeName = db.Gym_Types.Find(int.Parse(gymTypeId)).Type;
 
-            var lstApps = GetApplicationsSearch(search).Where(a => a.Areas.Contains(gymTypeName)).ToList();
-
-            var userEmail = User.Identity.Name;
-            if (db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault() != null)
-            {
-                ViewBag.userId = db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault().id;
-            };
-                ViewBag.gymTypes = db.Gym_Types.ToList();
-                ViewBag.SelectedCheckboxItem = int.Parse(gymTypeId);
-                return View((lstApps, db.Favourites.ToList(), search));
-            }
-
-            else
-            {
-                var lstApps = GetApplicationsSearch(search).ToList();
+                lstApps = GetApplicationsSearch(search).Where(a => a.Areas.Contains(gymTypeName)).ToList();
 
                 var userEmail = User.Identity.Name;
                 if (db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault() != null)
@@ -65,13 +53,24 @@ namespace FitnesSkopjeWebApp.Controllers
                     ViewBag.userId = db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault().id;
                 };
                 ViewBag.gymTypes = db.Gym_Types.ToList();
-                return View((lstApps, db.Favourites.ToList(), search));
+                ViewBag.SelectedCheckboxItem = int.Parse(gymTypeId);
             }
+            else
+            {
+                lstApps = GetApplicationsSearch(search).ToList();
 
-            //return View((db.Gyms.ToList(), db.Favourites.ToList()));
+                var userEmail = User.Identity.Name;
+                if (db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault() != null)
+                {
+                    ViewBag.userId = db.AppUsers.Where(t => t.email == userEmail).FirstOrDefault().id;
+                };
+                ViewBag.gymTypes = db.Gym_Types.ToList();
+
+            }
+            return View((lstApps, db.Favourites.ToList(), search));
         }
 
-        //Json za autocomplete
+        //Json for autocomplete
         public JsonResult GetGyms(string term)
         {
             List<String> gyms;
@@ -115,8 +114,6 @@ namespace FitnesSkopjeWebApp.Controllers
         }
 
         // POST: Gyms/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Address,Number,WorkingTime,Areas")] Gym gym)
@@ -147,8 +144,6 @@ namespace FitnesSkopjeWebApp.Controllers
         }
 
         // POST: Gyms/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Address,Number,WorkingTime,Areas")] Gym gym)
@@ -219,7 +214,6 @@ namespace FitnesSkopjeWebApp.Controllers
             return null;
         }
 
-        //Check Working Hours
         public String IsGymOpened(int? id)
         {
             if (id == null)
@@ -229,31 +223,24 @@ namespace FitnesSkopjeWebApp.Controllers
 
             var gymId = (int)id;
             var today = DateTime.Now.DayOfWeek;
+            var working_time = " ";
 
             if (today == DayOfWeek.Sunday)
             {
-                var working_time = db.Gyms.Where(gym => gym.Id.Equals(gymId)).First().workingTimeSunday;
-                return checkTime(working_time);
+                working_time = db.Gyms.Where(gym => gym.Id.Equals(gymId)).First().workingTimeSunday;
+
             }
             else
             {
-                var working_time = db.Gyms.Where(gym => gym.Id.Equals(gymId)).First().workingTimeWeek;
-                return checkTime(working_time);
+                working_time = db.Gyms.Where(gym => gym.Id.Equals(gymId)).First().workingTimeWeek;
+
             }
+            return CheckTime(working_time);
 
         }
 
 
-        //private void GetViewBagForSearch()
-        //{
-        //    List<SelectListItem> items = new List<SelectListItem>();
-        //    foreach (var at in Cacher.ApplicationTypes)
-        //        items.Add(new SelectListItem() { Text = at.name, Value = at.application_type_id.ToString() });
-
-        //    ViewBag.application_types = items;
-        //}
-
-        public String checkTime(string working_time)
+        public String CheckTime(string working_time)
         {
             if (working_time.Equals(""))
             {
@@ -270,18 +257,13 @@ namespace FitnesSkopjeWebApp.Controllers
             //vrakja vo 24h format
             var currentHour = DateTime.Now.Hour;
 
-            //var currentTimeZone = TimeZone.CurrentTimeZone;
-            //var CEST = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
-            //var CSETime = TimeZoneInfo.ConvertTimeFromUtc(currentTimeZone.ToUniversalTime, CEST);
-
-
-            if (currentHour >= openingHour && 
+            if (currentHour >= openingHour &&
                 currentHour <= closingHour)
             {
-                 return "Теретаната е отворена!";
+                return "Теретаната е отворена!";
             }
             else
-                 return "Теретаната не е отворена!";
+                return "Теретаната не е отворена!";
 
         }
 

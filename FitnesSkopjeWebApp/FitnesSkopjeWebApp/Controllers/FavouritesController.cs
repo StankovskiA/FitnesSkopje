@@ -55,7 +55,7 @@ namespace FitnesSkopjeWebApp.Controllers
             return View(favourite);
         }
         
-        //visok
+        //visok samo post ni treba
         // GET: Favourites/Create
         public ActionResult Create()
         {

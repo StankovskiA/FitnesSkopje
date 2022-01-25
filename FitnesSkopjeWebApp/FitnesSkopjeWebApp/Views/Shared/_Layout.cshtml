@@ -39,9 +39,14 @@
                     {
                         <li>@Html.ActionLink("Омилени теретани", "apiFavourites", "Favourites")</li>
                         <li>@Html.ActionLink("Прегледи", "apiReviews", "Reviews")</li>
+                        <li>@Html.ActionLink("Контактирајте не", "Contact", "Home")</li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Корисници", "Index", "Users")</li>
                     }
 
-                    <li>@Html.ActionLink("Контактирајте не", "Contact", "Home")</li>
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
