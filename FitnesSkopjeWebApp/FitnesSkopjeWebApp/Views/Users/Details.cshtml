@@ -3,13 +3,13 @@
 @{
     ViewBag.Title = "Details";
 }
-
-<h2>Details</h2>
-
+<br />
+<br />
+<h2>Детали</h2>
+<hr />
 <div>
-    <h4>User</h4>
-    <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal table-container">
+        <br />
         <dt>
             @Html.DisplayNameFor(model => model.firstName)
         </dt>
@@ -42,17 +42,22 @@
             @Html.DisplayFor(model => model.phoneNumber)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.roleId)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.roleId)
-        </dd>
-
+        </dd>*@
+        <br />
+        <a href="@Url.Action("Edit","Users", new { id = Model.id })" class="btn btn-default" style="margin-left: 15%">Измени</a>
+        <br />
+        <br />
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div>
+    <a href="@Url.Action("Index","Users")" class="btn btn-primary right-float">Назад</a>
+</div>
+<br />
+<br />

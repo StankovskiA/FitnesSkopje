@@ -5,13 +5,12 @@
 }
 <br />
 <br />
-<h2>Избриши</h2>
+<h2>Избриши преглед</h2>
 <hr />
-<h3>Дали сте сигурни дека сакате да го избришете вашиот коментар?</h3>
-<br />
 <div>
-    <dl class="dl-horizontal">
-
+    <dl class="dl-horizontal table-container">
+        <h3 style="padding-top: 3%; margin-left: 4%">Дали сте сигурни дека сакате да го избришете вашиот коментар?</h3>
+        <br />
         <dt>
             @Html.DisplayNameFor(model => model.gym.Name)
         </dt>
@@ -36,13 +35,17 @@
             @Html.DisplayFor(model => model.comment)
         </dd>
         <br />
+            <input type="submit" value="Избриши" class="btn btn-danger"  style="margin-left: 8%" />
+        <br />
+        <br />
     </dl>
     <div class="form-actions no-color">
-        <input type="submit" value="Избриши" id="deleteReview" class="btn btn-danger" />
-        <a class="btn btn-primary" href="javascript:history.back()">Назад</a>
+        
+        <a class="btn btn-primary right-float" href="javascript:history.back()">Назад</a>
     </div>
 </div>     
-
+<br />
+<br />
     
 @section Scripts{
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>

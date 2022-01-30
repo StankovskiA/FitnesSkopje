@@ -8,7 +8,7 @@
 
 @using (Html.BeginForm(Model.ControllerAction, Model.ControllerName, FormMethod.Post, new { autocomplete = "on" }))
 {
-    <div class="card vehicles-search" id="mewmew">
+    <div class="card vehicles-search">
         @*<div class="card-header">
                 Пребарај
             </div>*@
@@ -31,13 +31,15 @@
 
                 </div>
             </div>
-            <div class="card-footer d-flex text-reset justify-content-end">
+            <div class="card-footer d-flex text-reset justify-content-end right-float">
                 @*<input type="button" value="Избриши филтри" onclick="ClearSearchValues();" class="btn btn-default btn-light clearsearch mr10" />*@
-                <a href="@Url.Action("Index","Gyms")" onclick="ClearSearchValues();" class="btn btn-default btn-light clearsearch mr10">Избриши филтри</a>
-                <input type="submit" value="Прикажи" class="btn btn-default btn-primary" />
+                <a href="@Url.Action("Index","Gyms")" onclick="ClearSearchValues();" class="btn btn-pink clearsearch mr10">Избриши</a>
+                <input type="submit" value="Прикажи" class="btn btn-primary" />
             </div>
         </div>
     </div>
+    <br />
+    <br />
 
     @section Scripts {
         <script src="~/Scripts/jquery-ui.js"></script>
@@ -49,13 +51,6 @@
             $(".clearinput").val("");
             $(".clearsel").val("-1");
         }
-
-        //autocomplete
-        $(document).ready(function () {
-        $('#txtSearch').autocomplete({
-            source: '@Url.Action("GetGyms")'
-        });
-        })
         </script>
     }
 

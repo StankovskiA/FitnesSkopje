@@ -8,9 +8,9 @@
 <h2>Омилени теретани</h2>
 <hr />
 
-<div class="table-container" id="tableContainerFavorites">
+<div class="table-container">
     <div>
-        <table id="tablefav" class="table">
+        <table class="table">
             <thead>
                 <tr>
                     <th>
@@ -26,8 +26,6 @@
 
 @section Scripts{
     <script>
-
-
         fetch('/api/Favourites')
             .then(function (response) {
                 return response.json();
@@ -55,8 +53,6 @@
                 tr.appendChild(tdDelete);
                 mainContainer.appendChild(tr);
             }
-
-
         }
     </script>
 }

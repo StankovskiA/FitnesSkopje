@@ -3,55 +3,70 @@
 @{
     ViewBag.Title = "Index";
 }
+<br />
+<br />
+<h2>Сите корисници</h2>
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.firstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.lastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.phoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.roleId)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.firstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.phoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.roleId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
-
-</table>
+<hr />
+<a class="btn btn-pink" href="@Url.Action("Create","Users")">Додади нов корисник</a>
+<br />
+<br />
+<div class="table-container">
+    <div style="width: 167%">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayName("Име")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Презиме")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Е-маил")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Телефонски број")
+                    </th>
+                    @*<th>
+                @Html.DisplayNameFor(model => model.roleId)
+            </th>*@
+                    <th>
+                        @Html.DisplayName("Опции")
+                    </th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.firstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.lastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.phoneNumber)
+                    </td>
+                    @*<td>
+                    @Html.DisplayFor(modelItem => item.roleId)
+                </td>*@
+                <td>
+                    <a href="@Url.Action("Edit", "Users", new { id = item.id })" style="margin-right:5px">
+                        <img width="20" height="20" src="@Url.Content("~/Images/edit.png")" title="Измени" />
+                    </a>
+                    <a href="@Url.Action("Details", "Users", new { id = item.id })" style="margin-right:5px">
+                        <img width="20" height="20" src="@Url.Content("~/Images/details.png")" title="Детали" />
+                    </a>
+                    <a href="@Url.Action("Delete", "Users", new { id = item.id })">
+                        <img width="20" height="20" src="@Url.Content("~/Images/delete.png")" title="Избриши" />
+                    </a>
+                </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

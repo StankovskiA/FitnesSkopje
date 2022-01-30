@@ -1,19 +1,37 @@
-﻿<table class="table" style="text-align:center">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayName("Име на теретана")
-            </th>
-            <th>
-                @Html.DisplayName("Оценка")
-            </th>
-            <th>
-                @Html.DisplayName("Коментар")
-            </th>
-        </tr>
-    </thead>
-    <tbody id="body"></tbody>
-</table>
+﻿<br />
+<br />
+<h2>Moи прегледи</h2>
+<hr />
+
+<div class="table-container">
+    <div style="width: 167%">
+        <table class="table" >
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayName("Име на теретана")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Оценка")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Коментар")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Опции")
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="body"></tbody>
+        </table>
+    </div>
+</div>
+
+<div>
+    <a href="@Url.Action("Index","Gyms")" class="btn btn-primary right-float">Назад</a>
+</div>
+<br />
+<br />
 
 @section Scripts{
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>

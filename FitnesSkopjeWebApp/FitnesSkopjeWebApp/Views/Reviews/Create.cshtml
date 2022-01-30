@@ -1,21 +1,25 @@
 ﻿@model FitnesSkopjeWebApp.Models.Review
 
 @{
-ViewBag.Title = "Нов преглед";
+    ViewBag.Title = "Нов преглед";
 }
+<br />
+<br />
 
+<h2>Остави коментар</h2>
+<hr />
 <link href="~/Content/Style.css" rel="stylesheet" />
 
 @using (Ajax.BeginForm("", "api/CreateReview", null, new AjaxOptions { HttpMethod = "POST" }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <hr />
+    <div class="form-horizontal table-container">
         <input type="hidden" name="gymId" id="gym_Id" value="@ViewBag.GymId" />
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+        <br />
         <div class="form-group">
             @Html.Label("Оценка", new { @class = "control-label col-md-2" })
 
@@ -46,16 +50,16 @@ ViewBag.Title = "Нов преглед";
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" id="submitted" value="Додади преглед" class="btn btn-default" />
-
-                <a href="@Url.Action("Details","Gyms",new { id = ViewBag.GymId })" class="btn btn-primary">Назад</a>
+                <input type="submit" id="submitted" value="Додади преглед" class="btn btn-pink" />
                 <a></a>
             </div>
         </div>
+        <br />
     </div>
 }
-
-
+<br />
+<a href="@Url.Action("Details","Gyms",new { id = ViewBag.GymId })" class="btn btn-primary right-float">Назад</a>
+<br /><br>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="https://kit.fontawesome.com/535a82fc04.js" crossorigin="anonymous"></script>
@@ -92,7 +96,7 @@ ViewBag.Title = "Нов преглед";
                 /*  result.textContent = `${num}/5`;*/
                 $("#idRating").val(parseInt(num))
                 console.log($("#idRating").val())
-                
+
             }
 
             var review = new Object();

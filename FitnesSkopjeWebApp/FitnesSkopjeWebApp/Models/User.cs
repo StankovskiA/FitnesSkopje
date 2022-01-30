@@ -11,12 +11,21 @@ namespace FitnesSkopjeWebApp.Models
 
         [Key]
         public int id { get; set; }
+
+        [Display(Name = "Име")]
         public string firstName { get; set; }
+
+        [Display(Name = "Презиме")]
         public string lastName { get; set; }
-        
+
+        [Display(Name = "Е-маил")]
         [EmailAddress]
         public string email { get; set; }
+
+        [Display(Name = "Адреса")]
         public string address { get; set; }
+
+        [Display(Name = "Телефонски број")]
         public string phoneNumber { get; set; }
         public string roleId { get; set; } 
 

@@ -4,13 +4,15 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<br />
+<br />
+<h2>Избриши корисник</h2>
+<hr />
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>User</h4>
-    <hr />
-    <dl class="dl-horizontal">
+
+    <dl class="dl-horizontal table-container">
+        <h3 style="padding-top: 3%; margin-left: 4%">Дали сте сигурни дека сакате да го избришете овoj корисник?</h3>
         <dt>
             @Html.DisplayNameFor(model => model.firstName)
         </dt>
@@ -43,22 +45,25 @@
             @Html.DisplayFor(model => model.phoneNumber)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.roleId)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.roleId)
-        </dd>
-
+        </dd>*@
+        <br />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <a href="@Url.Action("Index","Users")" class="btn btn-danger" style="margin-left: 15%">Избриши</a>
+        }
+        <br />
     </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
 </div>
+
+<div>
+    <a href="@Url.Action("Index","Users")" class="btn btn-primary right-float">Назад</a>
+</div>
+<br />
+<br />
