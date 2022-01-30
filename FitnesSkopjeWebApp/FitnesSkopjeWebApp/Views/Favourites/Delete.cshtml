@@ -7,21 +7,10 @@
 <br />
 <h2>Избриши</h2>
 <hr />
-<h3>Дали сте сигурни дека сакате да ја избришете оваа теретана од омилени теретани?</h3>
-
 <div>
-    <br />
-    <dl class="dl-horizontal">
-        
-        <dt>
-            @Html.DisplayNameFor(model => model.userId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.userId)
-        </dd>
-        
-
+    <dl class="dl-horizontal table-container">
+        <h3 style="padding-top: 3%; margin-left: 4%">Дали сте сигурни дека сакате да ја избришете оваа теретана од омилени теретани?</h3>
+        <br />
         <dt>
             @Html.DisplayNameFor(model => model.gymName)
         </dt>
@@ -30,16 +19,26 @@
             @Html.DisplayFor(model => model.gymName)
         </dd>
         <br />
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
+       
+              
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-            <div class="form-actions no-color">
-                <input type="submit" value="Избриши" class="btn btn-danger" />
-                <a class="btn btn-primary" href="javascript:history.back()">Назад</a>
-            </div>
-        }
+                <div class="form-actions no-color">
+                    <input type="submit" value="Избриши" class="btn btn-danger" style="margin-left: 8%" />
 
+                </div>
+            }
+        
+              <br />
+        <br />
     </dl>
+    <div class="form-actions no-color">
 
+        <a class="btn btn-primary right-float" href="javascript:history.back()">Назад</a>
+    </div>
 </div>
+<br />
+<br />
+
