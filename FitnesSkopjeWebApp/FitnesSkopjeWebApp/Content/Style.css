@@ -4,6 +4,242 @@
     height: 6%;
 }
 
+.teg {
+    width: 50%;
+    height: 50%;
+    inset-inline: auto;
+}
+
+.logo {
+    width: 90%;
+    height: 90%;
+    margin-top: 2%;
+}
+
+.header {
+    cursor: pointer;
+    margin-left: 1.5%;
+    margin-top: -4.8%;
+}
+
+.card {
+    margin-left: 80%;
+    margin-top: 3%;
+}
+
+.filtercontainer .filtercontent {
+    display: none;
+    padding: 5px;
+}
+
+.stylehome {
+    font-size: 140%;
+    text-align: center;
+    color: rgba(41,61,144,1);
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.naslov {
+    font-size: 220%;
+}
+
+.jumbotron {
+    flex: 50%;
+    width: 130%;
+    height: 130%;
+    background-color: white;
+    position: relative;
+    margin-top: 10%;
+}
+
+.pic1 {
+    flex: 50%;
+    max-height: 90%;
+    max-width: 90%;
+    position: relative;
+    margin-top: 8%;
+}
+
+.container2in1 {
+    display: flex;
+    position: relative;
+}
+
+.navbar-inverse {
+    border: 1px solid rgba(255,255,255,.0);
+    background-color: lightgray;
+}
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: rgba(162, 9, 89, 1);
+    }
+
+h4, .h4 {
+    font-family: 'Times New Roman';
+}
+
+.table {
+    max-width: 60%;
+    max-height: 60%;
+    align-self: center;
+    padding: 6%;
+    border-collapse: unset;
+}
+
+    .table thead {
+        background-color: grey;
+    }
+
+h2 {
+    color: rgba(41,61,144,1);
+}
+
+.table tbody {
+    background-color: whitesmoke;
+}
+
+th {
+    text-align: center;
+}
+
+th {
+    border-bottom: 1px solid groove;
+    border-block-color: gray;
+    border-radius: 15px 15px 15px 15px;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+    color: rgba(41,61,144,1);
+}
+
+.btn-default {
+    color: white;
+    background-color: rgb(89 152 26 / 0.89);
+    border-color: rgb(89 152 26 / 0.89);
+}
+
+.btn-primary {
+    background-color: rgba(41,61,144,7);
+}
+
+    .btn-primary:hover {
+        background-color: rgb(35 52 122);
+    }
+
+td {
+    color: rgba(41,61,144,1);
+    border-radius: 10px 10px 10px 10px;
+}
+
+#tableRevDetails {
+    background-color: #e4e4e4;
+    width: 102%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.8%;
+}
+
+.table-container {
+    background-color: lightgray;
+    border-radius: 15px 15px 15px 15px;
+    width: 101%;
+    height: 100%;
+}
+
+.registration {
+    padding: 5%;
+    align-self: center;
+    padding-left: 30%;
+}
+
+#gyms tbody tr td:first-child:hover {
+    color: rgb(37 95 215);
+    cursor: pointer;
+}
+
+#txtLogin {
+    padding-left: 17%;
+}
+
+#containerDetails {
+    background-color: red;
+}
+
+#details.dl-horizontal {
+    background-color: #e4e4e4;
+    height: 140%;
+    width: 102%;
+    border-radius: 15px 15px 15px 15px;
+    padding-bottom: 10%;
+    padding-left: 14%;
+    padding-top: 8%;
+}
+
+#detailsLeft {
+    float: left;
+    width: 50%;
+}
+
+    #detailsLeft dt, #details dt:last-of-type {
+        text-align: left;
+    }
+
+#map {
+    border: 1px solid black;
+}
+
+.rating {
+    width: 180px;
+}
+
+.rating__star {
+    cursor: pointer;
+    color: #dabd18b2;
+}
+
+.rating__result {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(-10px) translateX(-5px);
+    z-index: -9;
+    font: 3em Arial, Helvetica, sans-serif;
+    color: #ebebeb8e;
+    pointer-events: none;
+}
+
+div.col-sm-4.filtercontent {
+    position: absolute;
+    z-index: 1;
+    /*background-color: rgb(211 211 211 / 0.90);*/
+    background-color: white;
+    border-radius: 15px 15px 15px 15px;
+    margin-left: 1%;
+    margin-top: -1.2%;
+    border: solid 5px;
+    border-color: rgb(211 211 211 / 0.90);
+}
+
+tbody td p {
+    color: lightgray;
+}
+
+.right-float {
+    float: right;
+    margin-right: -0.9%;
+}
+
+
+
+
+/*#navigation {
+    background-color: lightgray;
+    width: 100%;
+    height: 6%;
+}
+
 .teg{
     width: 50%;
     height: 50%;
@@ -102,9 +338,9 @@ table{
 }
 
 h2{
-    color: rgba(41,61,144,1);
+    color: rgba(41,61,144,1);*/
     /*font-weight: bold;*/
-}
+/*}
 
 .table tbody {
     background-color: whitesmoke;
@@ -351,17 +587,17 @@ td {
     font: 3em Arial, Helvetica, sans-serif;
     color: #ebebeb8e;
     pointer-events: none;
-}
+}*/
 
 /*div.col-sm-4.filtercontent:before {
     display: none;
 }*/
 
-div.col-sm-4.filtercontent {
+/*div.col-sm-4.filtercontent {
     position: absolute;
-    z-index: 1;
+    z-index: 1;*/
     /*background-color: rgb(211 211 211 / 0.90);*/
-    background-color: white;
+    /*background-color: white;
     border-radius: 15px 15px 15px 15px;
     margin-left: 1%;
     margin-top: -1.2%;
@@ -373,4 +609,4 @@ div.col-sm-4.filtercontent {
 
 tbody td p {
     color: lightgray;
-}
+}*/
