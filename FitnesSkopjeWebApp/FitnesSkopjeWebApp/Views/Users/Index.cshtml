@@ -13,7 +13,7 @@
 <br />
 <div class="table-container">
     <div style="width: 167%">
-        <table class="table">
+        <table class="table" style="text-align: center">
             <thead>
                 <tr>
                     <th>
@@ -28,9 +28,7 @@
                     <th>
                         @Html.DisplayName("Телефонски број")
                     </th>
-                    @*<th>
-                @Html.DisplayNameFor(model => model.roleId)
-            </th>*@
+                                 
                     <th>
                         @Html.DisplayName("Опции")
                     </th>
@@ -51,9 +49,6 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.phoneNumber)
                     </td>
-                    @*<td>
-                    @Html.DisplayFor(modelItem => item.roleId)
-                </td>*@
                 <td>
                     <a href="@Url.Action("Edit", "Users", new { id = item.id })" style="margin-right:5px">
                         <img width="20" height="20" src="@Url.Content("~/Images/edit.png")" title="Измени" />
