@@ -3,22 +3,24 @@
 @{
     ViewBag.Title = "Delete";
 }
-<br /><br />
+<br />
+<br />
 <h2>Избриши</h2>
 <hr />
 <h3>Дали сте сигурни дека сакате да ја избришете оваа теретана од омилени теретани?</h3>
 
 <div>
-    @*<h4>Омилени теретани</h4>*@
     <br />
     <dl class="dl-horizontal">
-        @*<dt>
+        
+        <dt>
             @Html.DisplayNameFor(model => model.userId)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.userId)
-        </dd>*@
+        </dd>
+        
 
         <dt>
             @Html.DisplayNameFor(model => model.gymName)
