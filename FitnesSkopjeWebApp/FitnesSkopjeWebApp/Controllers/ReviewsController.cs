@@ -15,26 +15,12 @@ namespace FitnesSkopjeWebApp.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Reviews
-        //visok?
-        public ActionResult Index()
-        {
-            return View(db.Reviews.ToList());
-        }
-
         [Authorize]
         public ActionResult apiReviews()
         {
             return View();
         }
 
-        [Authorize]
-        public ActionResult UserReviews()
-        {
-            string curentUserEmail = User.Identity.Name;
-
-            return View(db.Reviews.Where(u => u.user.email.Equals(curentUserEmail)).ToList());
-        }
 
         // GET: Reviews/Details/5
         public ActionResult Details(int? id)
@@ -58,32 +44,7 @@ namespace FitnesSkopjeWebApp.Controllers
             return View();
         }
 
-        // POST: Reviews/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,userId,gymId,rating,comment")] Review review)
-        {
-            if (ModelState.IsValid)
-            {
-
-                var rating = Request.Form["hiddenRatingNumber"];
-                var userEmail = User.Identity.Name;
-                var gymId = Request.Form["gymId"];
-                db.Reviews.Add(new Review()
-                {
-                    userId=db.AppUsers.Where(t=>t.email==userEmail).FirstOrDefault().id,
-                    gymId=int.Parse(gymId),
-                    rating=int.Parse(rating),
-                    comment=review.comment
-                });
-                db.SaveChanges();
-                return RedirectToAction("Details","Gyms",new { id = review.gymId });
-            }
-
-            return View(review);
-        }
+      
 
         // GET: Reviews/Edit/5
         public ActionResult Edit(int? id)
@@ -100,21 +61,7 @@ namespace FitnesSkopjeWebApp.Controllers
             return View(review);
         }
 
-        // POST: Reviews/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,userId,gymId,rating,comment")] Review review)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(review).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("UserReviews");
-            }
-            return View(review);
-        }
+     
 
         // GET: Reviews/Delete/5
         public ActionResult Delete(int? id)
@@ -131,16 +78,7 @@ namespace FitnesSkopjeWebApp.Controllers
             return View(review);
         }
 
-        // POST: Reviews/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Review review = db.Reviews.Find(id);
-            db.Reviews.Remove(review);
-            db.SaveChanges();
-            return RedirectToAction("UserReviews");
-        }
+      
 
         protected override void Dispose(bool disposing)
         {

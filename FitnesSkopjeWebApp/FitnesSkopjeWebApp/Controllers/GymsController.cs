@@ -39,7 +39,7 @@ namespace FitnesSkopjeWebApp.Controllers
         {
             var gymTypeId = Request.Form["checkboxListItem"];
             var lstApps = new List<Gym>();
-
+           
             if (gymTypeId != null)
             {
 
@@ -70,7 +70,6 @@ namespace FitnesSkopjeWebApp.Controllers
             return View((lstApps, db.Favourites.ToList(), search));
         }
 
-        //Json for autocomplete
         public JsonResult GetGyms(string term)
         {
             List<String> gyms;
@@ -246,15 +245,14 @@ namespace FitnesSkopjeWebApp.Controllers
             {
                 return "Теретаната не е отворена!";
             }
-            //08:00-22:00 
+          
             var parts = working_time.Split('-');
 
-            //08:00
+          
             int openingHour = Int32.Parse(parts[0].Split(':')[0]);
-            //22:00
+
             int closingHour = Int32.Parse(parts[1].Split(':')[0]);
 
-            //vrakja vo 24h format
             var currentHour = DateTime.Now.Hour;
 
             if (currentHour >= openingHour &&
@@ -267,7 +265,7 @@ namespace FitnesSkopjeWebApp.Controllers
 
         }
 
-
+      
         protected override void Dispose(bool disposing)
         {
             if (disposing)

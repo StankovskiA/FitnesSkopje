@@ -18,7 +18,7 @@ namespace FitnesSkopjeWebApp.Models
         public string email { get; set; }
         public string address { get; set; }
         public string phoneNumber { get; set; }
-        public string roleId { get; set; } //AspNetRoles
+        public string roleId { get; set; } 
 
         [Display(Name = "Корисничко име")]
         public string username { get; set; }

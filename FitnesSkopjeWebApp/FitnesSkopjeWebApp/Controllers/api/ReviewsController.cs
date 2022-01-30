@@ -31,20 +31,6 @@ namespace FitnesSkopjeWebApp.Controllers.api
                     select new TableJoinResult {gym=g,review=r});
         }
 
-        // GET: api/Reviews/5
-        [ResponseType(typeof(Review))]
-        public IHttpActionResult GetReview(int id)
-        {
-            Review review = db.Reviews.Find(id);
-            if (review == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(review);
-        }
-
-
         // UPDATE: api/Reviews
         [ResponseType(typeof(Review))]
         public IHttpActionResult PostReview(int? id,Review review)
@@ -115,8 +101,8 @@ namespace FitnesSkopjeWebApp.Controllers.api
         }
         
 
-            // DELETE: api/Reviews/5
-            [ResponseType(typeof(Review))]
+        // DELETE: api/Reviews/5
+        [ResponseType(typeof(Review))]
         public IHttpActionResult DeleteReview(int id)
         {
             Review review = db.Reviews.Find(id);
@@ -142,7 +128,7 @@ namespace FitnesSkopjeWebApp.Controllers.api
 
         private bool ReviewExists(int id)
         {
-            return db.Reviews.Count(e => e.id == id) > 0;
+            return db.Reviews.Count(e => e.id == id) > 0;            
         }
     }
 }

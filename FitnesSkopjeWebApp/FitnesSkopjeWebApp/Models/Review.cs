@@ -13,9 +13,7 @@ namespace FitnesSkopjeWebApp.Models
 
         [Key]
         public int id { get; set; }
-        //fk
         public int userId { get; set; }
-        //fk
         public int gymId { get; set; }
 
         [Display(Name = "Оценка")]
