@@ -1,0 +1,238 @@
+﻿@model (List<FitnesSkopjeWebApp.Models.Gym> gyms, List<FitnesSkopjeWebApp.Models.Favourite> favourites, FitnesSkopjeWebApp.ViewModels.SearchApplicationModels search)
+
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+
+<style>
+    .item {
+        cursor: pointer;
+    }
+
+    a {
+        display: inline;
+    }
+</style>
+
+<link href="~/Content/Style.css" rel="stylesheet" />
+
+
+@Html.Partial("~/Views/Search/_SearchApplication.cshtml", Model.search)
+
+
+@if (Model.gyms.Count > 0)
+{
+
+
+    <div class="row">
+        <div class="filtercontainer">
+            <div class="header btn btn-primary">
+                <div class="filterbutton">Прикажи филтри</div>
+            </div>
+            <div class="col-sm-4 filtercontent">
+                @using (Html.BeginForm("Index", "Gyms", FormMethod.Post, new { id = "checkboxForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <h4 style="margin-left: 8%; font-size: 150%">Филтер по дејности</h4>
+                    <ul>
+                        @foreach (var item in ViewBag.gymTypes)
+                        {
+                            if (item.Id == ViewBag.SelectedCheckboxItem)
+                            {
+                                <li style="list-style:none"><input type="radio" value="@item.Id" name="checkboxListItem" checked /><span style="padding-left:3px">@item.Type</span></li>
+                            }
+                            else
+                            {
+                                <li style="list-style:none"><input type="radio" value="@item.Id" name="checkboxListItem" /><span style="padding-left:3px">@item.Type</span></li>
+                            }
+                        }
+                    </ul>
+                    <input style="margin-left: 8%" type="submit" class="btn btn-pink clearsearch mr10" value="Избриши филтри" />
+                    <br /><label style="display: none"></label>
+                }
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <br />
+            <br />
+            <div class="table-container">
+                <table id="gyms" class="table" style="text-align: center">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.gyms.First().Name)
+                            </th>
+                            <th>
+                                Локација
+                            </th>
+                            @if (User.IsInRole("User"))
+                            {
+                                <th>
+                                    Додај во омилени
+                                </th>
+                            }
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <th>
+                                    Акции
+                                </th>
+                            }
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model.gyms)
+                        {
+                            <tr onclick="Redirect(@item.Id)">
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                    <p>Кликни за детали</p>
+                                </td>
+                                
+                                <td id="gymMap">
+                                    <div style="text-align:center" class="item" data-gym-latitude="@item.Latitude" data-gym-longitude="@item.Longitude">
+                                        Мапа <p>Погледни ја тука</p>
+                                        <iframe style="display:none" class="map" width="160" height="160" src="https://maps.google.com/maps?q=@item.Latitude,@item.Longitude&hl=es;z=17&amp;output=embed"></iframe>
+                                    </div>
+
+                                </td>
+
+                                @if (User.IsInRole("User"))
+                                {
+                                    <td style="text-align:center">
+                                        @using (Html.BeginForm("Create", "Favourites", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="gymId" id="gym_Id" value="@item.Id" />
+                                            <input type="hidden" name="gymName" id="gym_Name" value="@item.Name" />
+
+                                            if (Model.favourites.Where(a => a.gymId == item.Id && a.userId == ViewBag.userId).FirstOrDefault() == null)
+                                            {
+                                                <button type="submit" class="btn btn-link"> <img width="28" height="25" src="@Url.Content("~/Images/empty.png")" /></button>
+                                            }
+                                            if (Model.favourites.Where(a => a.gymId == item.Id && a.userId == ViewBag.userId).FirstOrDefault() != null)
+                                            {
+                                                <button type="submit" class="btn btn-link"> <img width="28" height="25" src="@Url.Content("~/Images/full.png")" /></button>
+                                            }
+                                        }
+                                    </td>
+                                }
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <td class="row">
+                                        <div class="col-md-4 col-md-offset-2">
+                                            <a href="@Url.Action("Edit", "Gyms", new { id = item.Id })">
+                                                <img width="20" height="20" src="@Url.Content("~/Images/edit.png")" />
+                                            </a>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <a href="@Url.Action("Delete", "Gyms", new { id = item.Id })">
+                                                <img width="20" height="20" src="@Url.Content("~/Images/delete.png")" />
+                                            </a>
+                                        </div>
+
+                                    </td>
+                                }
+                            </tr>
+                        }
+
+                    </tbody>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td class="row">
+                                    <a class="btn btn-primary right-float" href="@Url.Action("Create","Gyms")">Додади нова</a>
+                                </td>
+                            </tr>
+
+                        </tfoot>
+                    }
+                    </table>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <p>Не постои теретана со избраните параметри!S</p>
+}
+
+@section Scripts{
+    <script src="~/Scripts/pagination.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $(".header").click(function () {
+
+
+                $header = $(this);
+                
+                $filtercontent = $header.next();
+                
+                $filtercontent.slideToggle(500, function () {
+                    
+                    $header.text(function () {
+                        
+                        return $filtercontent.is(":visible") ? "Затвори филтри" : "Прикажи филтри";
+                    });
+                });
+
+            });
+
+            $(".item").mouseover(function () {
+                $(this).children(".map").show();
+            }).mouseout(function () {
+                $(this).children(".map").hide();
+            });
+
+
+            $("#gyms").DataTable({
+                pageLength: 5,
+                lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
+                "paging": true,
+                "ordering": false,
+                "info": false,
+                "searching": false,
+                "bLengthChange": false,
+                "pagingType": "full_numbers"
+            });
+
+
+            $("input:radio").on("click", function () {
+                if ($(this).is(":checked")) {
+                    $("#checkboxForm").submit()
+                }
+            })
+
+            $("#clearFilterButton").on("click", function () {
+                $('input[name="checkboxListItem"]').prop('checked', false);
+            })
+
+        });
+
+        function Redirect(itemId) {
+            location.pathname = "Gyms/Details/" + itemId
+        };
+       
+
+        $(function () {
+            $(document).tooltip();
+        });
+    </script>
+
+    <style>
+        tbody tr:hover {
+            background-color: lightblue;
+        }
+    </style>
+
+}

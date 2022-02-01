@@ -1,0 +1,78 @@
+﻿<br />
+<br />
+<h2>Moи прегледи</h2>
+<hr />
+
+<div class="table-container">
+    <div style="width: 167%">
+        <table class="table" style="text-align: center">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayName("Име на теретана")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Оценка")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Коментар")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Опции")
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="body"></tbody>
+        </table>
+    </div>
+</div>
+
+<div>
+    <a href="@Url.Action("Index","Gyms")" class="btn btn-primary right-float">Назад</a>
+</div>
+<br />
+<br />
+
+@section Scripts{
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $.ajax({
+                type: "GET",
+                url: "/api/Reviews",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    $("#body").empty();
+                    console.log(response);
+                    var ListValue = "";
+                    var i;
+                    for (i = 0; i < response.length; ++i) {
+                        ListValue = `
+                        <tr>
+                            <td>${response[i].gym.Name}</td>
+                            <td>${response[i].review.rating}</td>
+                            <td>${response[i].review.comment}</td>
+                            <td>
+                             <a href="@Url.Action("Edit", "Reviews")/${response[i].review.id}" style="margin-right:5px">
+                                <img width="20" height="20" src="@Url.Content("~/Images/edit.png")" title="Измени" />
+                            </a>
+                            <a href="@Url.Action("Details", "Reviews")/${response[i].review.id}" style="margin-right:5px">
+                                <img width="20" height="20" src="@Url.Content("~/Images/details.png")" title="Детали"/>
+                            </a>
+                            <a href="@Url.Action("Delete", "Reviews")/${response[i].review.id}">
+                                <img width="20" height="20" src="@Url.Content("~/Images/delete.png")" title="Избриши" />
+                            </a>
+                            </td>
+                        </tr>
+                        `;
+                        $("#body").append(ListValue);
+                    }
+
+                }
+            });
+        });
+    </script>
+}

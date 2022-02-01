@@ -1,0 +1,233 @@
+﻿@model(FitnesSkopjeWebApp.Models.Gym gym, List<FitnesSkopjeWebApp.Models.Review> reviews, String isOpened)
+
+@{
+    ViewBag.Title = "Details";
+}
+<br />
+<br />
+<h2>@ViewBag.GymName</h2>
+
+<link href="~/Content/Style.css" rel="stylesheet" />
+
+<div onload="distance()">
+    <hr />
+    <dl class="dl-horizontal" id="details">
+        <div id="detailsLeft">
+        <dt>
+            @Html.DisplayNameFor(model => model.gym.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gym.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gym.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gym.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gym.Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gym.Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gym.workingTimeWeek)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gym.workingTimeWeek)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.gym.workingTimeSunday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gym.workingTimeSunday)
+        </dd>
+        <dt>
+            Растојание
+        </dt>
+        <dd id="showDist">
+
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.gym.Areas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gym.Areas)
+        </dd>
+        <dt>
+            @*-*@
+        </dt>
+        <dd>
+            @if (Model.isOpened.Length == 22)
+            {
+                <p class="isOpen" style="color:forestgreen">@Model.isOpened </p>
+            }
+            else
+            {
+                <p class="isOpen" style="color:orangered"> @Model.isOpened </p>
+            }
+
+        </dd>
+</div>
+
+<dd>
+    <div id="map" style="width: 300px; height: 300px;"></div>
+</dd>
+        </dl>
+
+
+<p>
+    @if (ViewBag.IsReviewed == null)
+    {
+        <a class="btn btn-primary" href="@Url.Action("Create","Reviews",new { id=Model.gym.Id})">Додади преглед</a>
+    }
+    @if (ViewBag.IsReviewed != null)
+    {
+        <a class="btn btn-primary" href="@Url.Action("Edit","Reviews",new { id=ViewBag.gymReview })">Промени постоечки преглед</a>
+    }
+</p>
+
+<div class="table-container" id="tableRevDetails">
+
+    @if (Model.reviews.Count() > 0)
+    {
+
+        <table class="table" style="text-align:center">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.reviews.First().user.username)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.gym.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.reviews.First().rating)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.reviews.First().comment)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.reviews)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.user.username)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.gym.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.rating)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.comment)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+<br />
+@if (User.IsInRole("Admin"))
+{
+<p class="right-float">
+    <a href="@Url.Action("Edit","Gyms", new { id = Model.gym.Id })" class="btn btn-pink">Промени</a>
+    <a href="@Url.Action("Index","Gyms")" class="btn btn-primary">Назад</a>
+</p>
+}
+<br /><br />
+
+
+@section Scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+    <script>
+    /*Pocetok za mapa*/
+    var latitude =@Model.gym.Latitude;
+    var longitute =@Model.gym.Longitude;
+    var map = L.map('map').setView([latitude, longitute], 16);
+
+    var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+        maxZoom: 18,
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1
+    }).addTo(map);
+
+        var marker = L.marker([41.990900, 21.439920]).addTo(map)
+            .bindPopup('<b>@Model.gym.Name</b><br />').openPopup();
+
+    var circle = L.circle([41.990900, 21.439920], {
+        color: '#4F729D',
+        fillColor: '#247DCA',
+        fillOpacity: 0.5,
+        radius: 50
+    }).addTo(map);
+
+        function blink_text() {
+            $('.isOpen').fadeOut(500);
+            $('.isOpen').fadeIn(500);
+        }
+        setInterval(blink_text, 1000);
+
+    function onMapClick(e) {
+        popup
+            .setLatLng(e.latlng)
+            .setContent('You clicked the map at ' + e.latlng.toString())
+            .openOn(map);
+    }
+
+        map.on('click', onMapClick);
+        /*Kraj za mapa*/
+
+        /*Pocetok za distance*/
+        function distance(lon1, lat1, lon2, lat2) {
+            var R = 6371; 
+            var dLat = (lat2 - lat1).toRad();  
+            var dLon = (lon2 - lon1).toRad();
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            var d = R * c; 
+            return d;
+        }
+
+        /** Converts numeric degrees to radians */
+        if (typeof (Number.prototype.toRad) === "undefined") {
+            Number.prototype.toRad = function () {
+                return this * Math.PI / 180;
+            }
+        }
+
+        window.navigator.geolocation.getCurrentPosition(function (pos) {
+            console.log(pos);
+            console.log(
+                distance(pos.coords.longitude, pos.coords.latitude, @Model.gym.Longitude, @Model.gym.Latitude)
+            );
+            document.getElementById("showDist").innerHTML = "≈" + distance(pos.coords.longitude, pos.coords.latitude, @Model.gym.Longitude, @Model.gym.Latitude).toFixed(2) + " км";
+        });
+        /*Kraj za distance*/
+
+    </script>
+}

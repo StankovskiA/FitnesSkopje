@@ -1,0 +1,69 @@
+﻿@model FitnesSkopjeWebApp.Models.Review
+
+@{
+    ViewBag.Title = "ИЗбриши преглед";
+}
+<br />
+<br />
+<h2>Избриши преглед</h2>
+<hr />
+<div>
+    <dl class="dl-horizontal table-container">
+        <h3 style="padding-top: 3%; margin-left: 4%">Дали сте сигурни дека сакате да го избришете вашиот коментар?</h3>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.gym.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gym.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comment)
+        </dd>
+        <br />
+            <input type="submit" value="Избриши" class="btn btn-danger"  style="margin-left: 8%" />
+        <br />
+        <br />
+    </dl>
+    <div class="form-actions no-color">
+        
+        <a class="btn btn-primary right-float" href="javascript:history.back()">Назад</a>
+    </div>
+</div>     
+<br />
+<br />
+    
+@section Scripts{
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#deleteReview").on("click", function () {
+                $.ajax({
+                    type: "DELETE",
+                    url: "/api/Reviews/" +@Model.id,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        window.location.href ='/reviews/apiReviews'
+                        console.log(response);
+                    }
+                })
+            })
+        });
+    </script>
+}

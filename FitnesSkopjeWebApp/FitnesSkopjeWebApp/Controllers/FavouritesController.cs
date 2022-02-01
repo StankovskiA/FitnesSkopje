@@ -42,7 +42,7 @@ namespace FitnesSkopjeWebApp.Controllers
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44359/api/");
+                client.BaseAddress = new Uri("http://13.91.22.144/api/");
 
                 var postTask = client.PostAsJsonAsync<Favourite>("Favourites", new Favourite { userId = userIdd, gymId = gymIdd, gymName = gymNamee });
                 postTask.Wait();
@@ -82,7 +82,7 @@ namespace FitnesSkopjeWebApp.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44359/api/");
+                client.BaseAddress = new Uri("http://13.91.22.144/api/");
 
                 var deleteTask = client.DeleteAsync("Favourites/" + id.ToString());
                 deleteTask.Wait();

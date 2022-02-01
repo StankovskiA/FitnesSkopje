@@ -1,0 +1,9 @@
+services:
+  fitnesskopjewebapp:
+    build:
+      context: C:\Users\zafir\OneDrive\Desktop\Software design and architecture\FitnesSkopje\FitnesSkopjeWebApp\FitnesSkopjeWebApp
+      dockerfile: Dockerfile
+    image: fitnesskopjewebapp
+    ports:
+    - target: 80
+version: '3.4'

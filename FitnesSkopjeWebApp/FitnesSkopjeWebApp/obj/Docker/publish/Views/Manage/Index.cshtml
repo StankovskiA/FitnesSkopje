@@ -1,0 +1,27 @@
+﻿@model FitnesSkopjeWebApp.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+<br /><br />
+<h2>Поставки за профил</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+
+<div>
+    <hr />
+
+    <dl class="dl-horizontal table-container" style="padding: 3%">
+        <dt>Лозинка:</dt>
+        <dd>
+
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("Променете лозинка тука", "ChangePassword")
+            }
+            else
+            {
+                @Html.ActionLink("Create", "SetPassword")
+            }
+        </dd>
+    </dl>
+</div>

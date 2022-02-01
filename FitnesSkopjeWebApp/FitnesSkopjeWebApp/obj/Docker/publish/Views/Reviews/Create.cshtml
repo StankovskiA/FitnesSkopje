@@ -1,0 +1,126 @@
+﻿@model FitnesSkopjeWebApp.Models.Review
+
+@{
+    ViewBag.Title = "Нов преглед";
+}
+<br />
+<br />
+
+<h2>Остави коментар</h2>
+<hr />
+<link href="~/Content/Style.css" rel="stylesheet" />
+
+@using (Ajax.BeginForm("", "api/CreateReview", null, new AjaxOptions { HttpMethod = "POST" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal table-container">
+        <input type="hidden" name="gymId" id="gym_Id" value="@ViewBag.GymId" />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <br />
+        <div class="form-group">
+            @Html.Label("Оценка", new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+
+                <input id="idRating" type="hidden" name="hiddenRatingNumber" />
+
+                @*Dzvezdicki za rejting ->*@
+                <div class="rating">
+                    <i class="rating__star far fa-star"></i>
+                    <i class="rating__star far fa-star"></i>
+                    <i class="rating__star far fa-star"></i>
+                    <i class="rating__star far fa-star"></i>
+                    <i class="rating__star far fa-star"></i>
+                </div>
+                <div class="rating__result"></div>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.comment, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.comment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.comment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" id="submitted" value="Додади преглед" class="btn btn-pink" />
+                <a></a>
+            </div>
+        </div>
+        <br />
+    </div>
+}
+<br />
+<a href="@Url.Action("Details","Gyms",new { id = ViewBag.GymId })" class="btn btn-primary right-float">Назад</a>
+<br /><br>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://kit.fontawesome.com/535a82fc04.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const ratingStars = [...document.getElementsByClassName("rating__star")];
+            const ratingResult = document.querySelector(".rating__result");
+
+            printRatingResult(ratingResult);
+
+            function executeRating(stars, result) {
+                const starClassActive = "rating__star fas fa-star";
+                const starClassInactive = "rating__star far fa-star";
+                const starsLength = stars.length;
+                let i;
+                stars.map((star) => {
+                    star.onclick = () => {
+                        i = stars.indexOf(star);
+                        if (star.className === starClassInactive) {
+                            printRatingResult(result, i + 1);
+                            for (i; i >= 0; --i) stars[i].className = starClassActive;
+                        } else {
+                            printRatingResult(result, i);
+                            for (i; i < starsLength; ++i) stars[i].className = starClassInactive;
+                        }
+                    };
+                });
+            }
+
+
+            function printRatingResult(result, num = 0) {
+                /*  result.textContent = `${num}/5`;*/
+                $("#idRating").val(parseInt(num))
+                console.log($("#idRating").val())
+
+            }
+
+            var review = new Object();
+            review.gymId = $("#gym_Id").val();
+            review.comment = $("#comment").val();
+
+            $("#submitted").on("click", function () {
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://localhost:44359/api/CreateReview',
+                    contentType: 'application/json; charset=UTF-8',
+                    dataType: 'json',
+                    data: sendObj,
+                    success: function (response, statusText, xhr, data) {
+                        console.log(response)
+                        console.log(data)
+
+                    }
+                })
+
+            })
+
+            executeRating(ratingStars, ratingResult);
+        })
+
+    </script>
+}

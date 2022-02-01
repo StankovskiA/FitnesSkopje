@@ -1,0 +1,69 @@
+﻿@model FitnesSkopjeWebApp.Models.User
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<br />
+<br />
+<h2>Избриши корисник</h2>
+<hr />
+
+<div>
+
+    <dl class="dl-horizontal table-container">
+        <h3 style="padding-top: 3%; margin-left: 4%">Дали сте сигурни дека сакате да го избришете овoj корисник?</h3>
+        <dt>
+            @Html.DisplayNameFor(model => model.firstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.firstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phoneNumber)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.roleId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.roleId)
+        </dd>*@
+        <br />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <a href="@Url.Action("Index","Users")" class="btn btn-danger" style="margin-left: 15%">Избриши</a>
+        }
+        <br />
+    </dl>
+</div>
+
+<div>
+    <a href="@Url.Action("Index","Users")" class="btn btn-primary right-float">Назад</a>
+</div>
+<br />
+<br />

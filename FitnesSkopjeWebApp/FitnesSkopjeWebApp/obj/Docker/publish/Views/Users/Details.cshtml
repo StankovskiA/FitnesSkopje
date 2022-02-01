@@ -1,0 +1,63 @@
+﻿@model FitnesSkopjeWebApp.Models.User
+
+@{
+    ViewBag.Title = "Details";
+}
+<br />
+<br />
+<h2>Детали</h2>
+<hr />
+<div>
+    <dl class="dl-horizontal table-container">
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.firstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.firstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phoneNumber)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.roleId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.roleId)
+        </dd>*@
+        <br />
+        <a href="@Url.Action("Edit","Users", new { id = Model.id })" class="btn btn-default" style="margin-left: 15%">Измени</a>
+        <br />
+        <br />
+    </dl>
+</div>
+
+<div>
+    <a href="@Url.Action("Index","Users")" class="btn btn-primary right-float">Назад</a>
+</div>
+<br />
+<br />

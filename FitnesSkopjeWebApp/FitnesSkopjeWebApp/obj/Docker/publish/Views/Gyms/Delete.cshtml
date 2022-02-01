@@ -1,0 +1,82 @@
+﻿@model FitnesSkopjeWebApp.Models.Gym
+
+@{
+    ViewBag.Title = "Delete";
+}
+<br />
+<br />
+<h2>Избриши теретана</h2>
+<hr />
+
+<div>
+
+    <dl class="dl-horizontal table-container">
+        <h3 style="padding-top: 3%; margin-left: 4%">Дали сте сигурни дека сакате да ја избришете оваа теретана?</h3>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.workingTimeWeek)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.workingTimeWeek)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.workingTimeSunday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.workingTimeSunday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Areas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Areas)
+        </dd>
+        <br />
+        <input type="submit" value="Избриши" class="btn btn-danger" style="margin-left: 15%" />
+        <br />
+        <br />
+    </dl>
+
+    @*@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            
+        </div>
+        <br />
+    }*@
+
+</div>
+<div>
+    <a href="@Url.Action("Index","Gyms")" class="btn btn-primary right-float">Назад</a>
+</div>
+<br />
+<br />

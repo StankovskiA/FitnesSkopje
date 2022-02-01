@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  fitnesskopjewebapp:
+    container_name: FitnesSkopjeWebApp
+    build:
+      args:
+        source: obj/Docker/publish/
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "FitnesSkopjeWebApp"
+    volumes:
+      - :C:\remote_debugger:ro
+    entrypoint: cmd /c "start /B C:\\ServiceMonitor.exe w3svc & C:\\remote_debugger\\x64\\msvsmon.exe /noauth /anyuser /silent /nostatus /noclrwarn /nosecuritywarn /nofirewallwarn /nowowwarn /timeout:2147483646"
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "C:\\inetpub\\wwwroot\\bin\\FitnesSkopjeWebApp.dll"
+      com.microsoft.visualstudio.debuggee.workingdirectory: "C:\\app"
+      com.microsoft.visual-studio.project-name: "FitnesSkopjeWebApp"

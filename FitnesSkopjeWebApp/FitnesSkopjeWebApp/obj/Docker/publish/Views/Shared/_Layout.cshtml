@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - FitnesSkopje</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/themes/base/css")
+
+    <link href="~/Content/Style.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="navigation" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+    
+                <div>
+                    <a href='@Url.Action("Index", "Home")'>
+                        <img class="logo" src="~/Images/logo1-_transp_.png" />
+                    </a>
+                </div>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                    {
+                    <li>@Html.ActionLink("Теретани", "Index", "Gyms")</li>
+                    }      
+
+                    @if (User.IsInRole("User"))
+                    {
+                        <li>@Html.ActionLink("Омилени теретани", "apiFavourites", "Favourites")</li>
+                        <li>@Html.ActionLink("Прегледи", "apiReviews", "Reviews")</li>
+                        <li>@Html.ActionLink("Контактирајте нè", "Contact", "Home")</li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Корисници", "Index", "Users")</li>
+                    }
+
+
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - FitnesSkopje</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script>
+        $(document).ready(function () { $("input").attr("autocomplete", "off"); });
+    </script>
+</body>
+</html>
